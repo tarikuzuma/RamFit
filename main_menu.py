@@ -1,4 +1,5 @@
 import settings
+import create_profile
 
 while True:
     #Initialize main Menu
@@ -15,8 +16,7 @@ while True:
         pass
     elif choice == 2:
         #Initialize Profile Menu
-        print ("Profile2")
-        pass
+        create_profile.main()
     elif choice == 3:
         #Calls Settings
         settings.main()
