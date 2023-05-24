@@ -48,4 +48,6 @@ def main():
     person.save_json("profile.json")  # The JSON file will be saved inside the "profiles" folder
     person.load_json("profiles/profile.json")  # Load the JSON file from the "profiles" folder
 
+    print ("")
     person.print_info()
+    print ("")

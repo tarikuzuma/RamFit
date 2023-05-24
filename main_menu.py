@@ -1,5 +1,6 @@
 import settings
 import create_profile
+import read_profile
 
 while True:
     #Initialize main Menu
@@ -12,8 +13,8 @@ while True:
     choice = int(input("Choose an option: "))
     if choice == 1:
         #Initialize Profile Menu
-        print ("Profile1")
-        pass
+        read_profile.main()
+        
     elif choice == 2:
         #Initialize Profile Menu
         create_profile.main()
