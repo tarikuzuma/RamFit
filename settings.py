@@ -9,9 +9,27 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+import json
 
 #Named ui_settings_2 because it's a duplicate of an old class that I didn't delete in bin
 class Ui_settings_2(object):
+    def edit_theme(self):
+        #reads content of Theme
+        with open("settings/theme.json", 'r') as f:
+            json_object = json.load(f) 
+            theme = json_object['theme']
+
+            #if condition to see if theme is dark or light, and then converts it to its oppostie
+            if theme == "light":
+                json_object["theme"] = "dark"
+            elif theme == "dark":
+                json_object["theme"] = "light"
+            
+            # Write the updated data back to the JSON file
+            with open("settings/theme.json", 'w') as f:
+                json.dump(json_object, f)
+            
+
     def open_main(self):
         settings_2.close()
 
@@ -24,6 +42,10 @@ class Ui_settings_2(object):
         self.theme_chager.setEnabled(True)
         self.theme_chager.setGeometry(QtCore.QRect(60, 140, 301, 91))
         self.theme_chager.setObjectName("theme_chager")
+
+        #When CLicked, changes the theme of the applciation.
+        self.theme_chager.clicked.connect(self.edit_theme)
+
         self.settings = QtWidgets.QLabel(self.centralwidget)
         self.settings.setGeometry(QtCore.QRect(120, 40, 171, 61))
         font = QtGui.QFont()
