@@ -9,10 +9,13 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from confirmation import Ui_confirm
 import json
 
 #Named ui_settings_2 because it's a duplicate of an old class that I didn't delete in bin
 class Ui_settings_2(object):
+
+    #edit content of json file "theme"
     def edit_theme(self):
         #reads content of Theme
         with open("settings/theme.json", 'r') as f:
@@ -28,8 +31,17 @@ class Ui_settings_2(object):
             # Write the updated data back to the JSON file
             with open("settings/theme.json", 'w') as f:
                 json.dump(json_object, f)
-            
 
+    #method to delete all profile data
+    def delete_content(self):
+        #open window delete content
+        self.window = QtWidgets.QMainWindow()
+        self.ui = Ui_confirm()
+        self.ui.setupUi(self.window)
+        self.window.show()
+        #settings_2.hide()
+        
+    #method to close settings and open main
     def open_main(self):
         settings_2.close()
 
@@ -56,6 +68,10 @@ class Ui_settings_2(object):
         self.delete_data.setEnabled(True)
         self.delete_data.setGeometry(QtCore.QRect(60, 270, 301, 91))
         self.delete_data.setObjectName("delete_data")
+
+        #When Clicked, a pop-up will appear that will ask for confirmation.
+        self.delete_data.clicked.connect(self.delete_content)
+
         self.about_us = QtWidgets.QPushButton(self.centralwidget)
         self.about_us.setEnabled(True)
         self.about_us.setGeometry(QtCore.QRect(60, 400, 301, 91))
