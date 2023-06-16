@@ -10,8 +10,15 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from settings import Ui_settings_2
+from create_profile import Ui_createProfile
 
 class Ui_MainWindow(object):
+    def open_create_profile(self):
+        self.window = QtWidgets.QMainWindow()
+        self.ui = Ui_createProfile()
+        self.ui.setupUi(self.window)
+        self.window.show()
+        
     def open_settings(self):
         self.window = QtWidgets.QMainWindow()
         self.ui = Ui_settings_2() #calls Ui_settings from another class
@@ -41,12 +48,17 @@ class Ui_MainWindow(object):
         self.main_menu.setGeometry(QtCore.QRect(130, 100, 151, 61))
         font = QtGui.QFont()
         font.setPointSize(28)
+
+        #Button to create profile
         self.main_menu.setFont(font)
         self.main_menu.setObjectName("main_menu")
         self.test1_button_2 = QtWidgets.QPushButton(self.centralwidget)
         self.test1_button_2.setEnabled(True)
         self.test1_button_2.setGeometry(QtCore.QRect(60, 360, 301, 91))
         self.test1_button_2.setObjectName("test1_button_2")
+
+        #When Clicked, a new window will pop-up.
+        self.test1_button_2.clicked.connect(self.open_create_profile)
 
         #Button for Settings
         self.settings_button = QtWidgets.QPushButton(self.centralwidget)
