@@ -11,25 +11,24 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from confirmation_create import Ui_profile_created
 
-class Ui_createProfile(object):
 
-    #Opens confirmation window
+class Ui_createProfile(object):
+    # Opens confirmation window
     def confirm(self):
         self.window = QtWidgets.QMainWindow()
-        self.ui = Ui_profile_created()  # Corrected line
+        self.ui = Ui_profile_created()
         self.ui.setupUi(self.window)
         self.window.show()
 
-    #Method to check if a field in regsitration is missing
-    #The method iterates over each field in the fields list and checks if the widget is None.
-    #If anything in the form is invalid or missing, returns true. otherwise false
+    # Method to check if a field in registration is missing
     def isMissing(self):
         fields = [
             {'name': 'Name', 'widget': self.box_name},
             {'name': 'Age', 'widget': self.box_age},
             {'name': 'Gender', 'widget': None},
             {'name': 'Feet', 'widget': self.box_feet},
-            {'name': 'Inches', 'widget': self.box_inches}
+            {'name': 'Inches', 'widget': self.box_inches},
+            {'name': 'Weight', 'widget': self.box_weight}  # Added weight field
         ]
 
         for field in fields:
@@ -41,68 +40,62 @@ class Ui_createProfile(object):
 
         return False
 
-    #Event when Submit button is clicked
-    def show_line (self):
+    # Event when Submit button is clicked
+    def show_line(self):
         try:
-            #nested function to convert ft to cm
+            # Nested function to convert ft to cm
             def convert_to_cm(feet, inches):
                 total_inches = feet * 12 + inches
                 cm = total_inches * 2.54
                 return cm
-            
-            #If missing requirements, print MISSING VALUE else print VALID
+
             if self.isMissing():
                 print("MISSING VALUE")
-                
             else:
-                print ("VALID")
+                print("VALID")
 
-            #Prints Name and Age
             print(self.box_name.text())
             print(self.box_age.value())
 
-            #If Male radio is toggled, register as Male
             if self.rad_male.isChecked():
                 print("Male")
-            #If Female radio is toggled, register as Female
             elif self.rad_female.isChecked():
-                print ("Female")
+                print("Female")
 
-            #Saves feet and inches as a string then converts it into an int.
-            #I did this to maintain the aestethic of the editLine thing
+            #Used textboxes because of the aestethic.
+            #converts string into an int variable
             feet = int(self.box_feet.text())
             inches = int(self.box_inches.text())
             result = convert_to_cm(feet, inches)
-            print (result)
+            print(result)
 
-            self.confirm() #opens confirmation window
+            #Converts String Weight into a float
+            weight = float(self.box_weight.text())  # Added weight field
+            print(weight)
+
+            self.confirm()
 
         except:
-            #print label that says misinput of values in form.
             error_label = QtWidgets.QLabel(self.centralwidget)
-            error_label.setGeometry(QtCore.QRect(60, 650, 300, 30))  # Adjust the width to fit the entire message
+            error_label.setGeometry(QtCore.QRect(60, 650, 300, 30))
             font = QtGui.QFont("Arial", 12)
             font.setPointSize(10)
-            font.setBold(True)  # Set the font to bold
+            font.setBold(True)
             error_label.setFont(font)
             error_label.setStyleSheet("color: red")
             error_label.setText("Missing Requirements or Invalid Input")
-            error_label.adjustSize()  # Adjust the label size to fit the text
+            error_label.adjustSize()
             error_label.show()
 
-            #Clears all values in form due to invalid inputs.
             print("int values only")
             self.clear_all()
 
-    #Clears user inputs. DOES NOT clear Gender
-    def clear_all (self):
-        #Name and Age Clear
+    def clear_all(self):
         self.box_name.clear()
         self.box_age.clear()
-
-        #Height Clear
         self.box_feet.clear()
         self.box_inches.clear()
+        self.box_weight.clear()  # Added weight field
 
     def setupUi(self, createProfile):
         createProfile.setObjectName("createProfile")
@@ -117,28 +110,27 @@ class Ui_createProfile(object):
         self.btn_create.setFont(font)
         self.btn_create.setObjectName("btn_create")
 
-        #When Cliked, triggers confirmation event.
+        # When Clicked, triggers the confirmation event.
         self.btn_create.clicked.connect(self.show_line)
 
-        #Lambda expression on when clicked, gender = male
-        self.rad_male = QtWidgets.QRadioButton(self.centralwidget, clicked = lambda: self.show_line)
+        # Lambda expression on when clicked, gender = male
+        self.rad_male = QtWidgets.QRadioButton(self.centralwidget, clicked=lambda: self.show_line)
         self.rad_male.setGeometry(QtCore.QRect(152, 290, 95, 20))
         font = QtGui.QFont()
         font.setPointSize(10)
         self.rad_male.setFont(font)
         self.rad_male.setObjectName("rad_male")
 
-        #Lambda expression on when clicked, gender = female
-        self.rad_female = QtWidgets.QRadioButton(self.centralwidget, clicked = lambda: self.show_line)
+        # Lambda expression on when clicked, gender = female
+        self.rad_female = QtWidgets.QRadioButton(self.centralwidget, clicked=lambda: self.show_line)
         self.rad_female.setGeometry(QtCore.QRect(152, 350, 95, 20))
         font = QtGui.QFont()
         font.setPointSize(10)
         self.rad_female.setFont(font)
         self.rad_female.setObjectName("rad_female")
 
-
-        #groups radio buttons female and male into one. 
-        #Uses the object "button_group"
+        # groups radio buttons female and male into one.
+        # Uses the object "button_group"
         self.button_group = QtWidgets.QButtonGroup()
         self.button_group.addButton(self.rad_male)
         self.button_group.addButton(self.rad_female)
@@ -193,7 +185,20 @@ class Ui_createProfile(object):
         self.label_sex.setFont(font)
         self.label_sex.setObjectName("label_sex")
 
-        
+        # Weight Label
+        self.label_weight = QtWidgets.QLabel(self.centralwidget)
+        self.label_weight.setGeometry(QtCore.QRect(80, 510, 60, 22))
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.label_weight.setFont(font)
+        self.label_weight.setObjectName("label_weight")
+
+        self.box_weight = QtWidgets.QLineEdit(self.centralwidget)
+        self.box_weight.setGeometry(QtCore.QRect(150, 510, 71, 22))
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.box_weight.setFont(font)
+        self.box_weight.setObjectName("box_weight")
 
         self.btn_clear = QtWidgets.QPushButton(self.centralwidget)
         self.btn_clear.setGeometry(QtCore.QRect(90, 590, 93, 28))
@@ -202,11 +207,11 @@ class Ui_createProfile(object):
         self.btn_clear.setFont(font)
         self.btn_clear.setObjectName("btn_clear")
 
-        #Instance when button clear is clicked
+        # Instance when the button clear is clicked
         self.btn_clear.clicked.connect(self.clear_all)
 
         self.label_height = QtWidgets.QLabel(self.centralwidget)
-        self.label_height.setGeometry(QtCore.QRect(80, 410, 55, 51))
+        self.label_height.setGeometry(QtCore.QRect(80, 415, 55, 51))
         font = QtGui.QFont()
         font.setPointSize(10)
         self.label_height.setFont(font)
@@ -231,6 +236,7 @@ class Ui_createProfile(object):
         self.rad_female.setText(_translate("createProfile", "Female"))
         self.btn_clear.setText(_translate("createProfile", "Clear"))
         self.label_height.setText(_translate("createProfile", "Height:"))
+        self.label_weight.setText(_translate("createProfile", "Weight:"))
 
 
 if __name__ == "__main__":
