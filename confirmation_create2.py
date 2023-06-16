@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'confirmation_create.ui'
+# Form implementation generated from reading ui file 'confirmation_create2.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.9
 #
@@ -11,22 +11,23 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
-class Ui_profile_created(object):
+class Ui_profile_createdpy(object):
 
-    #Closes the Window
+    #Closes the window
     def confirmation(self, conf_v):
         conf_v.close()
-        
+
     def setupUi(self, profile_createdpy):
         profile_createdpy.setObjectName("profile_createdpy")
         profile_createdpy.resize(412, 168)
         self.centralwidget = QtWidgets.QWidget(profile_createdpy)
         self.centralwidget.setObjectName("centralwidget")
         self.label = QtWidgets.QLabel(self.centralwidget)
-        self.label.setGeometry(QtCore.QRect(100, 40, 212, 33))
+        self.label.setGeometry(QtCore.QRect(50, 40, 321, 33))
         font = QtGui.QFont()
         font.setPointSize(16)
         font.setBold(True)
+        font.setUnderline(True)
         font.setWeight(75)
         self.label.setFont(font)
         self.label.setObjectName("label")
@@ -47,15 +48,15 @@ class Ui_profile_created(object):
     def retranslateUi(self, profile_createdpy):
         _translate = QtCore.QCoreApplication.translate
         profile_createdpy.setWindowTitle(_translate("profile_createdpy", "MainWindow"))
-        self.label.setText(_translate("profile_createdpy", "Profile Created!"))
-        self.confirm.setText(_translate("profile_createdpy", "Cool!"))
+        self.label.setText(_translate("profile_createdpy", "No. of Profiles Reached"))
+        self.confirm.setText(_translate("profile_createdpy", "Sad :("))
 
 
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
     profile_createdpy = QtWidgets.QMainWindow()
-    ui = Ui_profile_created()
+    ui = Ui_profile_createdpy()
     ui.setupUi(profile_createdpy)
     profile_createdpy.show()
     sys.exit(app.exec_())

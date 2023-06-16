@@ -10,6 +10,7 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from confirmation_create import Ui_profile_created
+from confirmation_create2 import Ui_profile_createdpy
 import json
 from pathlib import Path
 
@@ -19,6 +20,12 @@ class Ui_createProfile(object):
     def confirm(self):
         self.window = QtWidgets.QMainWindow()
         self.ui = Ui_profile_created()
+        self.ui.setupUi(self.window)
+        self.window.show()
+
+    def confirm2(self):
+        self.window = QtWidgets.QMainWindow()
+        self.ui = Ui_profile_createdpy()
         self.ui.setupUi(self.window)
         self.window.show()
 
@@ -57,6 +64,7 @@ class Ui_createProfile(object):
                 if file_path.exists():
                     if counter == 4:
                         print("Limit reached")
+                        self.confirm2()
                         return
                     else:
                         return create_json_file(data, directory, base_file_name, counter + 1)
@@ -108,8 +116,14 @@ class Ui_createProfile(object):
             weight = float(self.box_weight.text())  # Added weight field
             print(weight)
 
-            self.confirm() #Pops up window for 
-            
+            self.confirm() #Pops up window for confi
+
+            ###THE NEXT FF. Lines is about JSON dictionaries.
+
+            # Specify the file path where the JSON file should be saved
+            base_file_name = "mydata"
+            directory = "profiles"
+
             #Dictionary for json:
             mydict = {
                 "status": "None",
@@ -125,11 +139,6 @@ class Ui_createProfile(object):
                 }
             }
             
-
-            # Specify the file path where the JSON file should be saved
-            base_file_name = "mydata"
-            directory = "profiles"
-
             # Write the JSON string to the file
             create_json_file(mydict, directory, base_file_name)
 
@@ -150,7 +159,8 @@ class Ui_createProfile(object):
             #Prints the error in terminal and clears all input.
             print("int values only")
             self.clear_all()
-
+    
+    #Method to clear all content from boxes
     def clear_all(self):
         self.box_name.clear()
         self.box_age.clear()
