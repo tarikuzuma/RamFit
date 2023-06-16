@@ -66,7 +66,7 @@ class Ui_createProfile(object):
             print (result)
 
         except:
-            #print label that says ERROR with red message and bold
+            #print label that says misinput of values in form.
             error_label = QtWidgets.QLabel(self.centralwidget)
             error_label.setGeometry(QtCore.QRect(60, 650, 300, 30))  # Adjust the width to fit the entire message
             font = QtGui.QFont("Arial", 12)
@@ -78,6 +78,7 @@ class Ui_createProfile(object):
             error_label.adjustSize()  # Adjust the label size to fit the text
             error_label.show()
 
+            #Clears all values in form due to invalid inputs.
             print("int values only")
             self.clear_all()
 
