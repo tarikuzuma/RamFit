@@ -14,7 +14,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_confirm(object):
     #Method for reject instance
     def handle_no(self, conf_v):
-        conf_v.hide()  # Hide the confirmation window
+        conf_v.close()  # Hide the confirmation window
         
     def handle_yes(self):
         # Deletes Json profiles

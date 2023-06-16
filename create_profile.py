@@ -9,9 +9,17 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-
+from confirmation_create import Ui_profile_created
 
 class Ui_createProfile(object):
+
+    #Opens confirmation window
+    def confirm(self):
+        self.window = QtWidgets.QMainWindow()
+        self.ui = Ui_profile_created()  # Corrected line
+        self.ui.setupUi(self.window)
+        self.window.show()
+
     #Method to check if a field in regsitration is missing
     #The method iterates over each field in the fields list and checks if the widget is None.
     #If anything in the form is invalid or missing, returns true. otherwise false
@@ -42,10 +50,12 @@ class Ui_createProfile(object):
                 cm = total_inches * 2.54
                 return cm
             
+            #If missing requirements, print MISSING VALUE else print VALID
             if self.isMissing():
                 print("MISSING VALUE")
+                
             else:
-                print ("VALID.")
+                print ("VALID")
 
             #Prints Name and Age
             print(self.box_name.text())
@@ -64,6 +74,8 @@ class Ui_createProfile(object):
             inches = int(self.box_inches.text())
             result = convert_to_cm(feet, inches)
             print (result)
+
+            self.confirm() #opens confirmation window
 
         except:
             #print label that says misinput of values in form.
