@@ -41,7 +41,7 @@ class Ui_settings_2(object):
         self.window.show()
         #settings_2.hide()
         
-    #method to close settings and open main
+    #method to close settings and open main (BUGGED)
     def open_main(self):
         settings_2.close()
 
