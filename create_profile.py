@@ -10,7 +10,7 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from confirmation_create import Ui_profile_created
-
+import json
 
 class Ui_createProfile(object):
     # Opens confirmation window
@@ -25,7 +25,7 @@ class Ui_createProfile(object):
         fields = [
             {'name': 'Name', 'widget': self.box_name},
             {'name': 'Age', 'widget': self.box_age},
-            {'name': 'Gender', 'widget': None},
+            {'name': 'sex', 'widget': None},
             {'name': 'Feet', 'widget': self.box_feet},
             {'name': 'Inches', 'widget': self.box_inches},
             {'name': 'Weight', 'widget': self.box_weight}  # Added weight field
@@ -54,28 +54,60 @@ class Ui_createProfile(object):
             else:
                 print("VALID")
 
-            print(self.box_name.text())
-            print(self.box_age.value())
+            name = self.box_name.text()
+            print(name)
 
+            age = self.box_age.value()
+            print(age)
+
+            sex = ""
             if self.rad_male.isChecked():
+                sex = "M"
                 print("Male")
             elif self.rad_female.isChecked():
+                sex ="F"
                 print("Female")
 
             #Used textboxes because of the aestethic.
             #converts string into an int variable
+            #converts feet to cm.
             feet = int(self.box_feet.text())
             inches = int(self.box_inches.text())
-            result = convert_to_cm(feet, inches)
+            result = convert_to_cm(feet, inches) #result is height.
             print(result)
 
             #Converts String Weight into a float
             weight = float(self.box_weight.text())  # Added weight field
             print(weight)
 
-            self.confirm()
+            self.confirm() #Pops up window for 
+            
+            #Dictionary for json:
+            mydict = {
+                "status": "None",
+                "info": {
+                    "name": name,
+                    "age": age,
+                    "sex": sex,
+                    "height": result,
+                    "weight": weight
+                },
+                "workout_data": {
+
+                }
+            }
+            
+            json_string = json.dumps(mydict, indent=4)
+
+            # Specify the file path where the JSON file should be saved
+            file_path = "profiles/mydata.json"
+
+            # Write the JSON string to the file
+            with open(file_path, 'w') as f:
+                f.write(json_string)
 
         except:
+            #Except if error, prints out a red message.
             error_label = QtWidgets.QLabel(self.centralwidget)
             error_label.setGeometry(QtCore.QRect(60, 650, 300, 30))
             font = QtGui.QFont("Arial", 12)
@@ -87,6 +119,7 @@ class Ui_createProfile(object):
             error_label.adjustSize()
             error_label.show()
 
+            #Prints the error in terminal and clears all input.
             print("int values only")
             self.clear_all()
 
@@ -113,7 +146,7 @@ class Ui_createProfile(object):
         # When Clicked, triggers the confirmation event.
         self.btn_create.clicked.connect(self.show_line)
 
-        # Lambda expression on when clicked, gender = male
+        # Lambda expression on when clicked, sex = male
         self.rad_male = QtWidgets.QRadioButton(self.centralwidget, clicked=lambda: self.show_line)
         self.rad_male.setGeometry(QtCore.QRect(152, 290, 95, 20))
         font = QtGui.QFont()
@@ -121,7 +154,7 @@ class Ui_createProfile(object):
         self.rad_male.setFont(font)
         self.rad_male.setObjectName("rad_male")
 
-        # Lambda expression on when clicked, gender = female
+        # Lambda expression on when clicked, sex = female
         self.rad_female = QtWidgets.QRadioButton(self.centralwidget, clicked=lambda: self.show_line)
         self.rad_female.setGeometry(QtCore.QRect(152, 350, 95, 20))
         font = QtGui.QFont()
