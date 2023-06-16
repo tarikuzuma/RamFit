@@ -11,6 +11,8 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from confirmation_create import Ui_profile_created
 import json
+from pathlib import Path
+
 
 class Ui_createProfile(object):
     # Opens confirmation window
@@ -43,6 +45,32 @@ class Ui_createProfile(object):
     # Event when Submit button is clicked
     def show_line(self):
         try:
+            #Code to cehck if json file reaches 4 max profiles.
+            def create_json_file(data, directory, base_file_name, counter=1):
+                # Create a Path object for the directory
+                path = Path(directory)
+                
+                # Check if the file already exists and the limit is not reached
+                file_name = base_file_name if counter == 1 else f"{base_file_name}_{counter}"
+                file_path = path / f"{file_name}.json"
+                
+                if file_path.exists():
+                    if counter == 4:
+                        print("Limit reached")
+                        return
+                    else:
+                        return create_json_file(data, directory, base_file_name, counter + 1)
+                
+                # Convert data to JSON string
+                json_string = json.dumps(data, indent=4)
+                
+                # Write the JSON string to the file
+                with open(file_path, 'w') as f:
+                    f.write(json_string)
+                
+                print(f"File '{file_name}.json' created successfully.")
+                return
+
             # Nested function to convert ft to cm
             def convert_to_cm(feet, inches):
                 total_inches = feet * 12 + inches
@@ -97,14 +125,14 @@ class Ui_createProfile(object):
                 }
             }
             
-            json_string = json.dumps(mydict, indent=4)
 
             # Specify the file path where the JSON file should be saved
-            file_path = "profiles/mydata.json"
+            base_file_name = "mydata"
+            directory = "profiles"
 
             # Write the JSON string to the file
-            with open(file_path, 'w') as f:
-                f.write(json_string)
+            create_json_file(mydict, directory, base_file_name)
+
 
         except:
             #Except if error, prints out a red message.

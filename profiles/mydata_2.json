@@ -1,0 +1,11 @@
+{
+    "status": "None",
+    "info": {
+        "name": "Lorem Ipsum",
+        "age": 19,
+        "sex": "M",
+        "height": 167.64000000000001,
+        "weight": 56.0
+    },
+    "workout_data": {}
+}
