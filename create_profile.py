@@ -12,15 +12,75 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 
 class Ui_createProfile(object):
+    #Method to check if a field in regsitration is missing
+    #The method iterates over each field in the fields list and checks if the widget is None.
+    #If anything in the form is invalid or missing, returns true. otherwise false
+    def isMissing(self):
+        fields = [
+            {'name': 'Name', 'widget': self.box_name},
+            {'name': 'Age', 'widget': self.box_age},
+            {'name': 'Gender', 'widget': None},
+            {'name': 'Feet', 'widget': self.box_feet},
+            {'name': 'Inches', 'widget': self.box_inches}
+        ]
+
+        for field in fields:
+            if field['widget'] is None:
+                if not self.rad_male.isChecked() and not self.rad_female.isChecked():
+                    return True
+            elif field['widget'].text().strip() == '':
+                return True
+
+        return False
 
     #Event when Submit button is clicked
     def show_line (self):
-        if self.rad_male.isChecked():
-            print("Male")
-        elif self.rad_female.isChecked():
-            print ("Female")
-        print(self.box_name.text())
-        
+        try:
+            #nested function to convert ft to cm
+            def convert_to_cm(feet, inches):
+                total_inches = feet * 12 + inches
+                cm = total_inches * 2.54
+                return cm
+            
+            if self.isMissing():
+                print("MISSING VALUE")
+            else:
+                print ("VALID.")
+
+            #Prints Name and Age
+            print(self.box_name.text())
+            print(self.box_age.value())
+
+            #If Male radio is toggled, register as Male
+            if self.rad_male.isChecked():
+                print("Male")
+            #If Female radio is toggled, register as Female
+            elif self.rad_female.isChecked():
+                print ("Female")
+
+            #Saves feet and inches as a string then converts it into an int.
+            #I did this to maintain the aestethic of the editLine thing
+            feet = int(self.box_feet.text())
+            inches = int(self.box_inches.text())
+            result = convert_to_cm(feet, inches)
+            print (result)
+
+        except:
+            #print label that says ERROR with red message and bold
+            error_label = QtWidgets.QLabel(self.centralwidget)
+            error_label.setGeometry(QtCore.QRect(60, 650, 300, 30))  # Adjust the width to fit the entire message
+            font = QtGui.QFont("Arial", 12)
+            font.setPointSize(10)
+            font.setBold(True)  # Set the font to bold
+            error_label.setFont(font)
+            error_label.setStyleSheet("color: red")
+            error_label.setText("Missing Requirements or Invalid Input")
+            error_label.adjustSize()  # Adjust the label size to fit the text
+            error_label.show()
+
+            print("int values only")
+            self.clear_all()
+
     #Clears user inputs. DOES NOT clear Gender
     def clear_all (self):
         #Name and Age Clear
@@ -29,7 +89,7 @@ class Ui_createProfile(object):
 
         #Height Clear
         self.box_feet.clear()
-        self.box_inces.clear()
+        self.box_inches.clear()
 
     def setupUi(self, createProfile):
         createProfile.setObjectName("createProfile")
@@ -64,7 +124,7 @@ class Ui_createProfile(object):
         self.rad_female.setObjectName("rad_female")
 
 
-        #groups radio buttons female and mail into one. 
+        #groups radio buttons female and male into one. 
         #Uses the object "button_group"
         self.button_group = QtWidgets.QButtonGroup()
         self.button_group.addButton(self.rad_male)
@@ -78,12 +138,12 @@ class Ui_createProfile(object):
         self.box_feet.setFont(font)
         self.box_feet.setObjectName("box_feet")
 
-        self.box_inces = QtWidgets.QLineEdit(self.centralwidget)
-        self.box_inces.setGeometry(QtCore.QRect(220, 430, 71, 22))
+        self.box_inches = QtWidgets.QLineEdit(self.centralwidget)
+        self.box_inches.setGeometry(QtCore.QRect(220, 430, 71, 22))
         font = QtGui.QFont()
         font.setPointSize(10)
-        self.box_inces.setFont(font)
-        self.box_inces.setObjectName("box_inces")
+        self.box_inches.setFont(font)
+        self.box_inches.setObjectName("box_inches")
 
         self.box_name = QtWidgets.QLineEdit(self.centralwidget)
         self.box_name.setGeometry(QtCore.QRect(152, 84, 137, 22))
@@ -92,7 +152,7 @@ class Ui_createProfile(object):
         self.box_name.setFont(font)
         self.box_name.setObjectName("box_name")
 
-        self.box_age = QtWidgets.QLineEdit(self.centralwidget)
+        self.box_age = QtWidgets.QSpinBox(self.centralwidget)
         self.box_age.setGeometry(QtCore.QRect(152, 187, 137, 22))
         font = QtGui.QFont()
         font.setPointSize(10)
