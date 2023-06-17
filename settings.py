@@ -12,39 +12,11 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from confirmation import Ui_confirm
 import json
 
+#Settings class
 #Named ui_settings_2 because it's a duplicate of an old class that I didn't delete in bin
 class Ui_settings_2(object):
 
-    #edit content of json file "theme"
-    def edit_theme(self):
-        #reads content of Theme
-        with open("settings/theme.json", 'r') as f:
-            json_object = json.load(f) 
-            theme = json_object['theme']
-
-            #if condition to see if theme is dark or light, and then converts it to its oppostie
-            if theme == "light":
-                json_object["theme"] = "dark"
-            elif theme == "dark":
-                json_object["theme"] = "light"
-            
-            # Write the updated data back to the JSON file
-            with open("settings/theme.json", 'w') as f:
-                json.dump(json_object, f)
-
-    #method to delete all profile data
-    def delete_content(self):
-        #open window delete content
-        self.window = QtWidgets.QMainWindow()
-        self.ui = Ui_confirm()
-        self.ui.setupUi(self.window)
-        self.window.show()
-        #settings_2.hide()
-        
-    #method to close settings and open main (BUGGED)
-    def open_main(self):
-        settings_2.close()
-
+    #Initialize UI.
     def setupUi(self, settings_2):
         settings_2.setObjectName("settings_2")
         settings_2.resize(412, 732)
@@ -105,6 +77,35 @@ class Ui_settings_2(object):
         self.about_us.setText(_translate("settings_2", "About Us"))
         self.back_main.setText(_translate("settings_2", "Back to Main"))
 
+    #Edits the content of json file "theme"
+    def edit_theme(self):
+        #reads content of Theme
+        with open("settings/theme.json", 'r') as f:
+            json_object = json.load(f) 
+            theme = json_object['theme']
+
+            #if condition to see if theme is dark or light, and then converts it to its oppostie
+            if theme == "light":
+                json_object["theme"] = "dark"
+            elif theme == "dark":
+                json_object["theme"] = "light"
+            
+            # Write the updated data back to the JSON file
+            with open("settings/theme.json", 'w') as f:
+                json.dump(json_object, f)
+
+    #Method to delete all profile data
+    def delete_content(self):
+        #open window delete content
+        self.window = QtWidgets.QMainWindow()
+        self.ui = Ui_confirm()
+        self.ui.setupUi(self.window)
+        self.window.show()
+        #settings_2.hide()
+        
+    #Method to close settings and open main (BUGGED)
+    def open_main(self):
+        settings_2.close()
 
 if __name__ == "__main__":
     import sys

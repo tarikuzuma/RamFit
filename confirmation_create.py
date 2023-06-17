@@ -10,13 +10,10 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
-
+#Class that creates Instance that tells user that profile has been created
 class Ui_profile_created(object):
-
-    #Closes the Window
-    def confirmation(self, conf_v):
-        conf_v.close()
-        
+    
+    #Initialize UI
     def setupUi(self, profile_createdpy):
         profile_createdpy.setObjectName("profile_createdpy")
         profile_createdpy.resize(412, 168)
@@ -50,6 +47,9 @@ class Ui_profile_created(object):
         self.label.setText(_translate("profile_createdpy", "Profile Created!"))
         self.confirm.setText(_translate("profile_createdpy", "Cool!"))
 
+    #Closes the Window
+    def confirmation(self, conf_v):
+        conf_v.close()  
 
 if __name__ == "__main__":
     import sys

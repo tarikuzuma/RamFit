@@ -12,20 +12,10 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from settings import Ui_settings_2
 from create_profile import Ui_createProfile
 
+#Initailizes Main Menu Screen for application.
 class Ui_MainWindow(object):
-    def open_create_profile(self):
-        self.window = QtWidgets.QMainWindow()
-        self.ui = Ui_createProfile()
-        self.ui.setupUi(self.window)
-        self.window.show()
-        
-    def open_settings(self):
-        self.window = QtWidgets.QMainWindow()
-        self.ui = Ui_settings_2() #calls Ui_settings from another class
-        self.ui.setupUi(self.window) #draws window
-        #MainWindow.hide() #Hides Window
-        self.window.show() #shows window
 
+    #Create UI.
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
 
@@ -91,6 +81,21 @@ class Ui_MainWindow(object):
         self.main_menu.setText(_translate("MainWindow", "RamFit"))
         self.test1_button_2.setText(_translate("MainWindow", "Create Profile"))
         self.settings_button.setText(_translate("MainWindow", "Settings"))
+
+    #Opens create_profile.py
+    def open_create_profile(self):
+        self.window = QtWidgets.QMainWindow()
+        self.ui = Ui_createProfile()
+        self.ui.setupUi(self.window)
+        self.window.show()
+
+    #Opens settings.py
+    def open_settings(self):
+        self.window = QtWidgets.QMainWindow()
+        self.ui = Ui_settings_2() #calls Ui_settings from another class
+        self.ui.setupUi(self.window) #draws window
+        #MainWindow.hide() #Hides Window
+        self.window.show() #shows window
 
 
 if __name__ == "__main__":

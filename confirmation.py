@@ -10,16 +10,10 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
-
+#Class that creates the Instance for Confirmation
 class Ui_confirm(object):
-    #Method for reject instance
-    def handle_no(self, conf_v):
-        conf_v.close()  # Hide the confirmation window
-        
-    def handle_yes(self):
-        # Deletes Json profiles
-        pass
 
+    #Initialize UI
     def setupUi(self, confirmation):
         confirmation.setObjectName("confirmation")
         confirmation.resize(412, 168)
@@ -59,6 +53,14 @@ class Ui_confirm(object):
         self.warning.setText(_translate("confirmation", "Are you sure you want to delete all data?"))
         self.yes.setText(_translate("confirmation", "Yes!"))
         self.no.setText(_translate("confirmation", "NO!"))
+
+    #Method for reject instance
+    def handle_no(self, conf_v):
+        conf_v.close()  # Hide the confirmation window
+        
+    def handle_yes(self):
+        # Deletes Json profiles
+        pass
 
 
 if __name__ == "__main__":
