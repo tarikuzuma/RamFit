@@ -259,7 +259,8 @@ class Ui_createProfile(object):
             weight = float(self.box_weight.text())  # Added weight field
             print(weight)
 
-            self.confirm() #Pops up window for confi
+            QtWidgets.QMessageBox.information(None, 'Success', 'Profile Created!')
+            #self.confirm() #Pops up window for confi
 
             ###THE NEXT FF. Lines is about JSON dictionaries.
 
