@@ -1,0 +1,11 @@
+{
+    "status": "None",
+    "info": {
+        "name": "Christina",
+        "age": 23,
+        "sex": "F",
+        "height": 152.4,
+        "weight": 49.0
+    },
+    "workout_data": {}
+}

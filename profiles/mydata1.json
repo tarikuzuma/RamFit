@@ -1,0 +1,11 @@
+{
+    "status": "None",
+    "info": {
+        "name": "John Doe",
+        "age": 99,
+        "sex": "M",
+        "height": 175.26,
+        "weight": 70.0
+    },
+    "workout_data": {}
+}

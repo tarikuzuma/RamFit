@@ -199,11 +199,11 @@ class Ui_createProfile(object):
             def create_json_file(data, directory, base_file_name, counter=1):
                 # Create a Path object for the directory
                 path = Path(directory)
-                
+
                 # Check if the file already exists and the limit is not reached
-                file_name = base_file_name if counter == 1 else f"{base_file_name}_{counter}"
+                file_name = f"{base_file_name}{counter}"
                 file_path = path / f"{file_name}.json"
-                
+
                 if file_path.exists():
                     if counter == 4:
                         print("Limit reached")
@@ -211,14 +211,14 @@ class Ui_createProfile(object):
                         return
                     else:
                         return create_json_file(data, directory, base_file_name, counter + 1)
-                
+
                 # Convert data to JSON string
                 json_string = json.dumps(data, indent=4)
-                
+
                 # Write the JSON string to the file
                 with open(file_path, 'w') as f:
                     f.write(json_string)
-                
+
                 print(f"File '{file_name}.json' created successfully.")
                 return
 

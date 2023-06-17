@@ -1,14 +1,28 @@
-def convert_to_cm(feet, inches):
-    total_inches = feet * 12 + inches
-    cm = total_inches * 2.54
-    return cm
+import json
 
-# Get input from the user
-feet = int(input("Enter the feet value: "))
-inches = int(input("Enter the inches value: "))
+name_numbers = {}
 
-# Convert to centimeters
-result = convert_to_cm(feet, inches)
+for i in range(1, 5):
+    file_path = f"profiles/mydata{i}.json"
 
-# Display the result
-print("The equivalent length is", result, "cm.")
+    try:
+        with open(file_path, 'r') as f:
+            json_object = json.load(f)
+            name = json_object['info']['name']
+            print("Name:", name)
+
+            name_numbers[f"name_number{i}"] = name  # Store name in the dictionary
+
+    except FileNotFoundError:
+        print(f"File {file_path} not found. Continuing to the next file.")
+        continue
+
+# Print all name_numbers
+for i in range(1, 5):
+    var_name = f"name_number{i}"
+    value = name_numbers.get(var_name)
+    if value is not None:
+        print(f"{var_name}: {value}")
+    else:
+        value = None
+        print(f"{var_name} is not defined. Therefore: {value}")
