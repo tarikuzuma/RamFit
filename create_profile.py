@@ -148,7 +148,7 @@ class Ui_createProfile(object):
 
     def retranslateUi(self, createProfile):
         _translate = QtCore.QCoreApplication.translate
-        createProfile.setWindowTitle(_translate("createProfile", "MainWindow"))
+        createProfile.setWindowTitle(_translate("createProfile", "Create Profile"))
         self.btn_create.setText(_translate("createProfile", "Create"))
         self.rad_male.setText(_translate("createProfile", "Male"))
         self.label_name.setText(_translate("createProfile", "Name:"))

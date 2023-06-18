@@ -43,7 +43,7 @@ class Ui_profile_created(object):
 
     def retranslateUi(self, profile_createdpy):
         _translate = QtCore.QCoreApplication.translate
-        profile_createdpy.setWindowTitle(_translate("profile_createdpy", "MainWindow"))
+        profile_createdpy.setWindowTitle(_translate("profile_createdpy", "Created"))
         self.label.setText(_translate("profile_createdpy", "Profile Created!"))
         self.confirm.setText(_translate("profile_createdpy", "Cool!"))
 

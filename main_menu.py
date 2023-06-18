@@ -76,7 +76,7 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "Main Menu"))
         self.test1_button.setText(_translate("MainWindow", "Choose Profile"))
         self.main_menu.setText(_translate("MainWindow", "RamFit"))
         self.test1_button_2.setText(_translate("MainWindow", "Create Profile"))

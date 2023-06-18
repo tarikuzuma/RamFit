@@ -70,7 +70,7 @@ class Ui_settings_2(object):
 
     def retranslateUi(self, settings_2):
         _translate = QtCore.QCoreApplication.translate
-        settings_2.setWindowTitle(_translate("settings_2", "MainWindow"))
+        settings_2.setWindowTitle(_translate("settings_2", "Settings"))
         self.theme_chager.setText(_translate("settings_2", "Change Light and Dark Mode"))
         self.settings.setText(_translate("settings_2", "Settings"))
         self.delete_data.setText(_translate("settings_2", "Delete All Data"))

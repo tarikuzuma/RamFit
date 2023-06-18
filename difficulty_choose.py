@@ -60,7 +60,7 @@ class Ui_difficulty_choose(object):
 
     def retranslateUi(self, difficulty_choose):
         _translate = QtCore.QCoreApplication.translate
-        difficulty_choose.setWindowTitle(_translate("difficulty_choose", "MainWindow"))
+        difficulty_choose.setWindowTitle(_translate("difficulty_choose", "Choose Difficulty"))
         self.easy_button.setText(_translate("difficulty_choose", "Beginner"))
         self.intermediate_button.setText(_translate("difficulty_choose", "Intermediate"))
         self.advanced_button.setText(_translate("difficulty_choose", "Advanced"))

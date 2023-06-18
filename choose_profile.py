@@ -77,7 +77,7 @@ class Ui_choose_profile(object):
 
     def retranslateUi(self, choose_profile):
         _translate = QtCore.QCoreApplication.translate
-        choose_profile.setWindowTitle(_translate("choose_profile", "MainWindow"))
+        choose_profile.setWindowTitle(_translate("choose_profile", "Choose Profile"))
         self.pushButton.setText(_translate("choose_profile", "profile1"))
         self.pushButton_2.setText(_translate("choose_profile", "profile2"))
         self.pushButton_3.setText(_translate("choose_profile", "profile3"))
