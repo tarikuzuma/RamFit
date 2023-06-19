@@ -154,6 +154,8 @@ cython_debug/
 
 # RamFit custom files to be ignored
 #*.ui
+test.py
+dummy.py
 
 # PyCharm
 #  JetBrains specific template is maintained in a separate JetBrains.gitignore that can
