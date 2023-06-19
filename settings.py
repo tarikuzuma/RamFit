@@ -12,7 +12,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from confirmation import Ui_confirm
 import json
 
-#Settings class
+#Settings class for defaults modification and profile deletions.
 #Named ui_settings_2 because it's a duplicate of an old class that I didn't delete in bin
 class Ui_settings_2(object):
 

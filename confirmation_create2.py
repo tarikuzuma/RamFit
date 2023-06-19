@@ -10,7 +10,7 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
-
+#Class that warns the user that number of max profiels reached.
 class Ui_profile_createdpy(object):
 
     #Closes the window

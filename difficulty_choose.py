@@ -11,6 +11,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from program_choose import Ui_program_choose
 
+#A class where the user can chosoe their difficulty. Indeoendent to "program_choose"
 class Ui_difficulty_choose(object):
     def setupUi(self, difficulty_choose):
         difficulty_choose.setObjectName("difficulty_choose")
