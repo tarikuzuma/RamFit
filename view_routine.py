@@ -11,7 +11,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 #Class that views routine of intensity and program
-class Ui_MainWindow(object):
+class Ui_view_routine(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.setWindowModality(QtCore.Qt.WindowModal)
@@ -64,7 +64,7 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "View Routine"))
         self.main_label.setText(_translate("MainWindow", "Workout"))
         self.proceed.setText(_translate("MainWindow", "Let\'s Go!"))
         self.back_button.setText(_translate("MainWindow", "Back"))
@@ -74,7 +74,7 @@ if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
-    ui = Ui_MainWindow()
+    ui = Ui_view_routine()
     ui.setupUi(MainWindow)
     MainWindow.show()
     sys.exit(app.exec_())
