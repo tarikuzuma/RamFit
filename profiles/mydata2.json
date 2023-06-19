@@ -1,0 +1,11 @@
+{
+    "status": "None",
+    "info": {
+        "name": "rawr",
+        "age": 41,
+        "sex": "M",
+        "height": 162.56,
+        "weight": 365.0
+    },
+    "workout_data": {}
+}
