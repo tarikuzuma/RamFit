@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>difficulty_choose</class>
- <widget class="QMainWindow" name="difficulty_choose">
+ <class>program_choose</class>
+ <widget class="QMainWindow" name="program_choose">
   <property name="geometry">
    <rect>
     <x>0</x>

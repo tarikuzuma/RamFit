@@ -10,12 +10,21 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
+#Sxreen will not open unless choose a difficulty first
+class Ui_program_choose(object):
+    def setupUi(self, program_choose, difficulty):
+        #Stores the difficulty level from difficulty_choose.py!
 
-class Ui_difficulty_choose(object):
-    def setupUi(self, difficulty_choose):
-        difficulty_choose.setObjectName("difficulty_choose")
-        difficulty_choose.resize(412, 732)
-        self.centralwidget = QtWidgets.QWidget(difficulty_choose)
+        '''
+        The line self.difficulty = difficulty stores the selected difficulty value in 
+        the Ui_program_choose class's self.difficulty attribute from difficulty_choose.py
+        The difficulty value is now accessible in the program_choose.py module.
+        '''
+        self.difficulty = difficulty
+
+        program_choose.setObjectName("program_choose")
+        program_choose.resize(412, 732)
+        self.centralwidget = QtWidgets.QWidget(program_choose)
         self.centralwidget.setObjectName("centralwidget")
         self.arms_button = QtWidgets.QPushButton(self.centralwidget)
         self.arms_button.setGeometry(QtCore.QRect(80, 80, 251, 81))
@@ -28,6 +37,9 @@ class Ui_difficulty_choose(object):
         self.arms_button.setIconSize(QtCore.QSize(16, 16))
         self.arms_button.setAutoRepeatDelay(300)
         self.arms_button.setObjectName("arms_button")
+
+        self.arms_button.clicked.connect(lambda:self.program("arms"))
+
         self.legs_button = QtWidgets.QPushButton(self.centralwidget)
         self.legs_button.setGeometry(QtCore.QRect(80, 240, 251, 81))
         font = QtGui.QFont()
@@ -39,6 +51,9 @@ class Ui_difficulty_choose(object):
         self.legs_button.setIconSize(QtCore.QSize(16, 16))
         self.legs_button.setAutoRepeatDelay(300)
         self.legs_button.setObjectName("legs_button")
+
+        self.legs_button.clicked.connect(lambda:self.program("legs"))
+
         self.core_button = QtWidgets.QPushButton(self.centralwidget)
         self.core_button.setGeometry(QtCore.QRect(80, 400, 251, 81))
         font = QtGui.QFont()
@@ -50,6 +65,9 @@ class Ui_difficulty_choose(object):
         self.core_button.setIconSize(QtCore.QSize(16, 16))
         self.core_button.setAutoRepeatDelay(300)
         self.core_button.setObjectName("core_button")
+
+        self.core_button.clicked.connect(lambda:self.program("core"))
+
         self.cardio_button = QtWidgets.QPushButton(self.centralwidget)
         self.cardio_button.setGeometry(QtCore.QRect(80, 560, 251, 81))
         font = QtGui.QFont()
@@ -61,28 +79,34 @@ class Ui_difficulty_choose(object):
         self.cardio_button.setIconSize(QtCore.QSize(16, 16))
         self.cardio_button.setAutoRepeatDelay(300)
         self.cardio_button.setObjectName("cardio_button")
-        difficulty_choose.setCentralWidget(self.centralwidget)
-        self.statusbar = QtWidgets.QStatusBar(difficulty_choose)
+
+        self.cardio_button.clicked.connect(lambda:self.program("cardio"))
+
+        program_choose.setCentralWidget(self.centralwidget)
+        self.statusbar = QtWidgets.QStatusBar(program_choose)
         self.statusbar.setObjectName("statusbar")
-        difficulty_choose.setStatusBar(self.statusbar)
+        program_choose.setStatusBar(self.statusbar)
 
-        self.retranslateUi(difficulty_choose)
-        QtCore.QMetaObject.connectSlotsByName(difficulty_choose)
+        self.retranslateUi(program_choose)
+        QtCore.QMetaObject.connectSlotsByName(program_choose)
 
-    def retranslateUi(self, difficulty_choose):
+    def retranslateUi(self, program_choose):
         _translate = QtCore.QCoreApplication.translate
-        difficulty_choose.setWindowTitle(_translate("difficulty_choose", "Choose a Program"))
-        self.arms_button.setText(_translate("difficulty_choose", "Arms"))
-        self.legs_button.setText(_translate("difficulty_choose", "Legs"))
-        self.core_button.setText(_translate("difficulty_choose", "Core"))
-        self.cardio_button.setText(_translate("difficulty_choose", "Cardio"))
+        program_choose.setWindowTitle(_translate("program_choose", "Choose a Program"))
+        self.arms_button.setText(_translate("program_choose", "Arms"))
+        self.legs_button.setText(_translate("program_choose", "Legs"))
+        self.core_button.setText(_translate("program_choose", "Core"))
+        self.cardio_button.setText(_translate("program_choose", "Cardio"))
+
+    def program(self, program):
+        print(self.difficulty, program)  # Print the difficulty and program
 
 
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
-    difficulty_choose = QtWidgets.QMainWindow()
-    ui = Ui_difficulty_choose()
-    ui.setupUi(difficulty_choose)
-    difficulty_choose.show()
+    program_choose = QtWidgets.QMainWindow()
+    ui = Ui_program_choose()
+    ui.setupUi(program_choose)
+    program_choose.show()
     sys.exit(app.exec_())
