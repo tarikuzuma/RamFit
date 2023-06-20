@@ -9,7 +9,6 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from difficulty_choose import Ui_difficulty_choose
 
 
 class Ui_view_routine(object):
@@ -80,12 +79,16 @@ class Ui_view_routine(object):
     def printBoth(self):
         print("Hello World: ", self.difficulty, self.program)
     
+    
     def cancel(self):
+        print("Go back to profile pick.")
+        '''
         self.window = QtWidgets.QMainWindow()
         self.ui= Ui_difficulty_choose()
         self.ui.setupUi(self.window)
         self.window.show()
         self.win.close()
+        '''
 
     def retranslateUi(self, view_routine):
         _translate = QtCore.QCoreApplication.translate
