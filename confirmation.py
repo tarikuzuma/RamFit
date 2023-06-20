@@ -61,11 +61,13 @@ class Ui_confirm(object):
 
     #Method for reject instance
     def handle_no(self, conf_v):
+        print("User did not want to delete data")
         conf_v.close()  # Hide the confirmation window
     
     #Method, when clicked, deletes all items in profile.
     def handle_yes(self, conf_v):
 
+        print("Deleting all profiles.")
         folder_path = 'profiles'
         files = os.listdir(folder_path)
 

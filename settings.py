@@ -18,6 +18,9 @@ class Ui_settings_2(object):
 
     #Initialize UI.
     def setupUi(self, settings_2):
+
+        self.win = settings_2
+
         settings_2.setObjectName("settings_2")
         settings_2.resize(412, 732)
         self.centralwidget = QtWidgets.QWidget(settings_2)
@@ -79,17 +82,20 @@ class Ui_settings_2(object):
 
     #Edits the content of json file "theme"
     def edit_theme(self):
-        #reads content of Theme
+        #Reads content of theme.json
         with open("settings/theme.json", 'r') as f:
             json_object = json.load(f) 
             theme = json_object['theme']
+
+            #Print what theme it is now
+            print ("Theme is now ", theme)
 
             #if condition to see if theme is dark or light, and then converts it to its oppostie
             if theme == "light":
                 json_object["theme"] = "dark"
             elif theme == "dark":
                 json_object["theme"] = "light"
-            
+
             # Write the updated data back to the JSON file
             with open("settings/theme.json", 'w') as f:
                 json.dump(json_object, f)
@@ -97,15 +103,16 @@ class Ui_settings_2(object):
     #Method to delete all profile data
     def delete_content(self):
         #open window delete content
+        print("Delete all profiles?")
         self.window = QtWidgets.QMainWindow()
         self.ui = Ui_confirm()
         self.ui.setupUi(self.window)
         self.window.show()
         #settings_2.hide()
         
-    #Method to close settings and open main (BUGGED)
+    #Method to close settings
     def open_main(self):
-        settings_2.close()
+        self.win.close()
 
 if __name__ == "__main__":
     import sys

@@ -11,6 +11,8 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from settings import Ui_settings_2
 from create_profile import Ui_createProfile
+from choose_profile import Ui_choose_profile
+import json
 
 #Initailizes Main Menu Screen for application.
 class Ui_MainWindow(object):
@@ -34,6 +36,9 @@ class Ui_MainWindow(object):
         self.test1_button.setEnabled(True)
         self.test1_button.setGeometry(QtCore.QRect(60, 220, 301, 91))
         self.test1_button.setObjectName("test1_button")
+
+        self.test1_button.clicked.connect(self.open_choose_profile)
+
         self.main_menu = QtWidgets.QLabel(self.centralwidget)
         self.main_menu.setGeometry(QtCore.QRect(130, 100, 151, 61))
         font = QtGui.QFont()
@@ -81,6 +86,31 @@ class Ui_MainWindow(object):
         self.main_menu.setText(_translate("MainWindow", "RamFit"))
         self.test1_button_2.setText(_translate("MainWindow", "Create Profile"))
         self.settings_button.setText(_translate("MainWindow", "Settings"))
+
+    #Opens choose_profile.py
+    def open_choose_profile(self):
+        self.window = QtWidgets.QMainWindow()
+        self.ui = Ui_choose_profile()
+        self.ui.setupUi(self.window)
+
+        print ("Deactivating all profiles...")
+
+        #Turns every profile status to "None" or "Not Editable" once clicked
+        for i in range(1,5):
+            try:
+                file_path = f"profiles/mydata{i}.json"
+                with open(file_path, 'r') as f:
+                    json_object = json.load(f)
+                    theme = json_object['status']
+
+                    json_object['status'] = 'None'
+
+                    with open(file_path, 'w') as f:
+                        json.dump(json_object, f, indent = 4)
+            except FileNotFoundError:
+                continue
+
+        self.window.show()
 
     #Opens create_profile.py
     def open_create_profile(self):
