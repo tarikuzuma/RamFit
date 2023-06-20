@@ -86,7 +86,7 @@ class Ui_difficulty_choose(object):
 
     def intensity(self, difficulty):
         self.difficulty = difficulty  # Store the difficulty level
-        print(self.difficulty)
+        print(self.difficulty) #prints Difficulty (for debugging)
 
         #Open program_choose.py
         self.window = QtWidgets.QMainWindow()

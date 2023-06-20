@@ -23,6 +23,9 @@ class Ui_program_choose(object):
         '''
         self.difficulty = difficulty
 
+        #I found out that it's easier to close window by parsing it
+        self.win = program_choose
+
         program_choose.setObjectName("program_choose")
         program_choose.resize(412, 732)
         self.centralwidget = QtWidgets.QWidget(program_choose)
@@ -100,16 +103,17 @@ class Ui_program_choose(object):
         self.cardio_button.setText(_translate("program_choose", "Cardio"))
 
     def program(self, program):
-        print(self.difficulty, program)  # Print the difficulty and program
+        self.program = program
+        print(self.difficulty, program)  #Print the difficulty and program
         
         #Opens view_routine.py
         self.window = QtWidgets.QMainWindow()
         self.ui = Ui_view_routine()
-        self.ui.setupUi(self.window)
+        self.ui.setupUi(self.window, self.program, self.difficulty)
         self.window.show()
         
         #Closes window of program_choose.py
-        #program_choose.close()
+        self.win.close()
 
 if __name__ == "__main__":
     import sys

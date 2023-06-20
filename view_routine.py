@@ -9,15 +9,23 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-import json
+from difficulty_choose import Ui_difficulty_choose
 
-#Class that views routine of intensity and program
+
 class Ui_view_routine(object):
-    def setupUi(self, MainWindow):
-        MainWindow.setObjectName("MainWindow")
-        MainWindow.setWindowModality(QtCore.Qt.WindowModal)
-        MainWindow.resize(412, 732)
-        self.centralwidget = QtWidgets.QWidget(MainWindow)
+    def setupUi(self, view_routine, difficulty, program):
+        
+        #Gets data of difficulty and program
+        self.difficulty = difficulty
+        self.program = program
+
+        #Assigns view_routine to Ui_view_routine class
+        self.win = view_routine
+
+        view_routine.setObjectName("view_routine")
+        view_routine.setWindowModality(QtCore.Qt.WindowModal)
+        view_routine.resize(412, 732)
+        self.centralwidget = QtWidgets.QWidget(view_routine)
         self.centralwidget.setObjectName("centralwidget")
         self.line = QtWidgets.QFrame(self.centralwidget)
         self.line.setGeometry(QtCore.QRect(-10, 60, 431, 16))
@@ -34,10 +42,6 @@ class Ui_view_routine(object):
         self.listView = QtWidgets.QListView(self.centralwidget)
         self.listView.setGeometry(QtCore.QRect(0, 60, 412, 561))
         self.listView.setObjectName("listView")
-
-        self.list = QtGui.QStandardItemModel(self.listView)
-        self.populate_list
-
         self.line_2 = QtWidgets.QFrame(self.centralwidget)
         self.line_2.setGeometry(QtCore.QRect(0, 680, 421, 16))
         self.line_2.setFrameShape(QtWidgets.QFrame.HLine)
@@ -52,6 +56,9 @@ class Ui_view_routine(object):
         font.setWeight(75)
         self.proceed.setFont(font)
         self.proceed.setObjectName("proceed")
+
+        self.proceed.clicked.connect(self.printBoth)
+
         self.back_button = QtWidgets.QPushButton(self.centralwidget)
         self.back_button.setGeometry(QtCore.QRect(10, 650, 141, 31))
         font = QtGui.QFont()
@@ -59,41 +66,40 @@ class Ui_view_routine(object):
         font.setPointSize(10)
         self.back_button.setFont(font)
         self.back_button.setObjectName("back_button")
-        MainWindow.setCentralWidget(self.centralwidget)
-        self.statusbar = QtWidgets.QStatusBar(MainWindow)
+
+        self.back_button.clicked.connect(self.cancel)
+
+        view_routine.setCentralWidget(self.centralwidget)
+        self.statusbar = QtWidgets.QStatusBar(view_routine)
         self.statusbar.setObjectName("statusbar")
-        MainWindow.setStatusBar(self.statusbar)
+        view_routine.setStatusBar(self.statusbar)
 
-        #Create List Data by calling the populate_lsit method
-        self.model = QtGui.QStandardItemModel(self.listView)  #Create the model
-        self.populate_list()  #Populate the list
+        self.retranslateUi(view_routine)
+        QtCore.QMetaObject.connectSlotsByName(view_routine)
 
-        #Views list
-        self.listView.setModel(self.model) 
+    def printBoth(self):
+        print("Hello World: ", self.difficulty, self.program)
+    
+    def cancel(self):
+        self.window = QtWidgets.QMainWindow()
+        self.ui= Ui_difficulty_choose()
+        self.ui.setupUi(self.window)
+        self.window.show()
+        self.win.close()
 
-    def retranslateUi(self, MainWindow):
+    def retranslateUi(self, view_routine):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "View Routine"))
-        self.main_label.setText(_translate("MainWindow", "Workout"))
-        self.proceed.setText(_translate("MainWindow", "Let\'s Go!"))
-        self.back_button.setText(_translate("MainWindow", "Back"))
-
-    #Method to put workout within the list depending on the JSON file data per workout
-    def populate_list(self):
-        workouts = ["Item 1", "Item 2", "Item 3", "Item 4", "Item 5"]
-
-        #Runs a for loop to then append item
-        #FOr every item in workouts list, run the loop:
-        for workout in workouts:
-            workout = QtGui.QStandardItem(workout)
-            self.model.appendRow(workout) #Appends workout data to the listview
+        view_routine.setWindowTitle(_translate("view_routine", "MainWindow"))
+        self.main_label.setText(_translate("view_routine", "Workout"))
+        self.proceed.setText(_translate("view_routine", "Let\'s Go!"))
+        self.back_button.setText(_translate("view_routine", "Back"))
 
 
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
-    MainWindow = QtWidgets.QMainWindow()
+    view_routine = QtWidgets.QMainWindow()
     ui = Ui_view_routine()
-    ui.setupUi(MainWindow)
-    MainWindow.show()
+    ui.setupUi(view_routine)
+    view_routine.show()
     sys.exit(app.exec_())
