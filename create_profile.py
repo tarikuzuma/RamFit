@@ -19,6 +19,9 @@ class Ui_createProfile(object):
 
     #Initialize UI
     def setupUi(self, createProfile):
+
+        self.win = createProfile
+
         createProfile.setObjectName("createProfile")
         createProfile.resize(412, 732)
         self.centralwidget = QtWidgets.QWidget(createProfile)
@@ -33,6 +36,16 @@ class Ui_createProfile(object):
 
         # When Clicked, triggers the confirmation event.
         self.btn_create.clicked.connect(self.show_line)
+
+        self.btn_back = QtWidgets.QPushButton(self.centralwidget)
+        self.btn_back.setGeometry(QtCore.QRect(150, 650, 120, 28))
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.btn_back.setFont(font)
+        self.btn_back.setObjectName("btn_back")
+
+        # When clicked, triggers the instance close_window
+        self.btn_back.clicked.connect(self.close_window)
 
         # Lambda expression on when clicked, sex = male
         self.rad_male = QtWidgets.QRadioButton(self.centralwidget, clicked=lambda: self.show_line)
@@ -158,6 +171,7 @@ class Ui_createProfile(object):
         self.btn_clear.setText(_translate("createProfile", "Clear"))
         self.label_height.setText(_translate("createProfile", "Height:"))
         self.label_weight.setText(_translate("createProfile", "Weight:"))
+        self.btn_back.setText(_translate("createProfile", "Back to Main"))
         
     # Opens confirmation window
     def confirm(self):
@@ -171,6 +185,10 @@ class Ui_createProfile(object):
         self.ui = Ui_profile_createdpy()
         self.ui.setupUi(self.window)
         self.window.show()
+
+    # Closes window
+    def close_window(self):
+        self.win.close()
 
     # Method to check if a field in registration is missing
     def isMissing(self):
