@@ -88,10 +88,14 @@ class Ui_difficulty_choose(object):
         self.difficulty = difficulty  # Store the difficulty level
         print(self.difficulty)
 
+        #Open program_choose.py
         self.window = QtWidgets.QMainWindow()
         self.ui = Ui_program_choose()
         self.ui.setupUi(self.window, self.difficulty)  #Passes the difficulty to program_choose.py
         self.window.show()
+
+        #Closes window of difficulty_choose.py
+        difficulty_choose.close()
 
 if __name__ == "__main__":
     import sys

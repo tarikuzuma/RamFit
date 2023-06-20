@@ -9,8 +9,9 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from view_routine import Ui_view_routine
 
-#Sxreen will not open unless choose a difficulty first
+#Screen will not open unless choose a difficulty first
 class Ui_program_choose(object):
     def setupUi(self, program_choose, difficulty):
         #Stores the difficulty level from difficulty_choose.py!
@@ -100,7 +101,15 @@ class Ui_program_choose(object):
 
     def program(self, program):
         print(self.difficulty, program)  # Print the difficulty and program
-
+        
+        #Opens view_routine.py
+        self.window = QtWidgets.QMainWindow()
+        self.ui = Ui_view_routine()
+        self.ui.setupUi(self.window)
+        self.window.show()
+        
+        #Closes window of program_choose.py
+        #program_choose.close()
 
 if __name__ == "__main__":
     import sys

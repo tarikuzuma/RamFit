@@ -9,6 +9,7 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+import json
 
 #Class that views routine of intensity and program
 class Ui_view_routine(object):
@@ -33,6 +34,10 @@ class Ui_view_routine(object):
         self.listView = QtWidgets.QListView(self.centralwidget)
         self.listView.setGeometry(QtCore.QRect(0, 60, 412, 561))
         self.listView.setObjectName("listView")
+
+        self.list = QtGui.QStandardItemModel(self.listView)
+        self.populate_list
+
         self.line_2 = QtWidgets.QFrame(self.centralwidget)
         self.line_2.setGeometry(QtCore.QRect(0, 680, 421, 16))
         self.line_2.setFrameShape(QtWidgets.QFrame.HLine)
@@ -59,8 +64,12 @@ class Ui_view_routine(object):
         self.statusbar.setObjectName("statusbar")
         MainWindow.setStatusBar(self.statusbar)
 
-        self.retranslateUi(MainWindow)
-        QtCore.QMetaObject.connectSlotsByName(MainWindow)
+        #Create List Data by calling the populate_lsit method
+        self.model = QtGui.QStandardItemModel(self.listView)  #Create the model
+        self.populate_list()  #Populate the list
+
+        #Views list
+        self.listView.setModel(self.model) 
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
@@ -68,6 +77,16 @@ class Ui_view_routine(object):
         self.main_label.setText(_translate("MainWindow", "Workout"))
         self.proceed.setText(_translate("MainWindow", "Let\'s Go!"))
         self.back_button.setText(_translate("MainWindow", "Back"))
+
+    #Method to put workout within the list depending on the JSON file data per workout
+    def populate_list(self):
+        workouts = ["Item 1", "Item 2", "Item 3", "Item 4", "Item 5"]
+
+        #Runs a for loop to then append item
+        #FOr every item in workouts list, run the loop:
+        for workout in workouts:
+            workout = QtGui.QStandardItem(workout)
+            self.model.appendRow(workout) #Appends workout data to the listview
 
 
 if __name__ == "__main__":
