@@ -81,14 +81,9 @@ class Ui_view_routine(object):
     
     
     def cancel(self):
-        print("Go back to profile pick.")
-        '''
-        self.window = QtWidgets.QMainWindow()
-        self.ui= Ui_difficulty_choose()
-        self.ui.setupUi(self.window)
-        self.window.show()
+        print("\nGoing back to main menu...\n")
         self.win.close()
-        '''
+        
 
     def retranslateUi(self, view_routine):
         _translate = QtCore.QCoreApplication.translate

@@ -66,7 +66,6 @@ class Ui_confirm(object):
     
     #Method, when clicked, deletes all items in profile.
     def handle_yes(self, conf_v):
-
         print("Deleting all profiles.")
         folder_path = 'profiles'
         files = os.listdir(folder_path)
@@ -75,16 +74,22 @@ class Ui_confirm(object):
         if len(files) == 0:
             print ("Empty Directory.")
             QtWidgets.QMessageBox.information(None, 'Empty', "There were no profiles in folder.")
+            conf_v.close()  # Hide the confirmation window
 
         #Deletes files in path
+        deleted = False  #Flag variable, initially sets 'deleted' as false
         for f in files:
             file_path = os.path.join(folder_path, f)
-            print (f, " has been deleted")
-            QtWidgets.QMessageBox.information(None, 'Deleted', "All Profiles have been deleted.")
+            print(f, " has been deleted")
+            deleted = True  #Set the flag to True ONCE at least one file is deleted. Will remain 'True'
             os.remove(file_path)
 
-        conf_v.close()  # Hide the confirmation window
-        
+        #Show Message Box that stuff is deleted.
+        if deleted:
+            QtWidgets.QMessageBox.information(None, 'Deleted', "All Profiles have been deleted.")
+
+        conf_v.close()  #Hide the confirmation window
+            
 
 
 if __name__ == "__main__":

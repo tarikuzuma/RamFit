@@ -13,10 +13,6 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 #Class that warns the user that number of max profiels reached.
 class Ui_profile_createdpy(object):
 
-    #Closes the window
-    def confirmation(self, conf_v):
-        conf_v.close()
-
     def setupUi(self, profile_createdpy):
         profile_createdpy.setObjectName("profile_createdpy")
         profile_createdpy.resize(412, 168)
@@ -51,6 +47,10 @@ class Ui_profile_createdpy(object):
         self.label.setText(_translate("profile_createdpy", "No. of Profiles Reached"))
         self.confirm.setText(_translate("profile_createdpy", "Sad :("))
 
+    #Closes the window
+    def confirmation(self, conf_v):
+        print("\nMax no. of profiles reached.\n")
+        conf_v.close()
 
 if __name__ == "__main__":
     import sys

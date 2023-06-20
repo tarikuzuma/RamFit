@@ -9,10 +9,14 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from difficulty_choose import Ui_difficulty_choose
 import json
 
 class Ui_choose_profile(object):
     def setupUi(self, choose_profile):
+
+        self.win = choose_profile
+
         choose_profile.setObjectName("choose_profile")
         choose_profile.resize(412, 732)
         font = QtGui.QFont()
@@ -174,12 +178,37 @@ class Ui_choose_profile(object):
             elif button_address == 4:
                 self.edit_status(4)
                 print(f"{index} is now in active-editing mode.")
+            
+            print("")
+            self.window = QtWidgets.QMainWindow()
+            self.ui = Ui_difficulty_choose()
+            self.ui.setupUi(self.window)
+            self.window.show()
+            self.win.close()
 
         #Except if error, print message in terminal.
         except FileNotFoundError:
             print("File does not exist.")
+
+#Will only conduct if opened in file. (For Debugging)
 if __name__ == "__main__":
     import sys
+
+    print ("\nDeactivating Profiles...\n")
+    for i in range(1,5):
+        try:
+            file_path = f"profiles/mydata{i}.json"
+            with open(file_path, 'r') as f:
+                json_object = json.load(f)
+                theme = json_object['status']
+
+                json_object['status'] = 'None'
+
+                with open(file_path, 'w') as f:
+                    json.dump(json_object, f, indent = 4)
+        except FileNotFoundError:
+            continue
+
     app = QtWidgets.QApplication(sys.argv)
     choose_profile = QtWidgets.QMainWindow()
     ui = Ui_choose_profile()

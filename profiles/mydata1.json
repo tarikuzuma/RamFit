@@ -1,11 +1,11 @@
 {
-    "status": "None",
+    "status": "active",
     "info": {
-        "name": "John Doe",
-        "age": 99,
+        "name": "John",
+        "age": 18,
         "sex": "M",
-        "height": 175.26,
-        "weight": 70.0
+        "height": 167.64000000000001,
+        "weight": 56.0
     },
     "workout_data": {}
 }

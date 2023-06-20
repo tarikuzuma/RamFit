@@ -14,6 +14,10 @@ from program_choose import Ui_program_choose
 #A class where the user can chosoe their difficulty. Indeoendent to "program_choose"
 class Ui_difficulty_choose(object):
     def setupUi(self, difficulty_choose):
+        
+        #Parses difficulty_choose.py into the class
+        self.win = difficulty_choose
+
         difficulty_choose.setObjectName("difficulty_choose")
         difficulty_choose.resize(412, 732)
         self.centralwidget = QtWidgets.QWidget(difficulty_choose)
@@ -95,7 +99,7 @@ class Ui_difficulty_choose(object):
         self.window.show()
 
         #Closes window of difficulty_choose.py
-        difficulty_choose.close()
+        self.win.close()
 
 if __name__ == "__main__":
     import sys

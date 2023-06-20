@@ -114,6 +114,7 @@ class Ui_MainWindow(object):
 
     #Opens create_profile.py
     def open_create_profile(self):
+        print("User Creating Profile...")
         self.window = QtWidgets.QMainWindow()
         self.ui = Ui_createProfile()
         self.ui.setupUi(self.window)
@@ -121,6 +122,7 @@ class Ui_MainWindow(object):
 
     #Opens settings.py
     def open_settings(self):
+        print("Opening Settings...")
         self.window = QtWidgets.QMainWindow()
         self.ui = Ui_settings_2() #calls Ui_settings from another class
         self.ui.setupUi(self.window) #draws window
@@ -130,6 +132,7 @@ class Ui_MainWindow(object):
 
 if __name__ == "__main__":
     import sys
+    print("\033[92m \n-Welcome to Ramfit!-\n \033[0m") #Turns the print statement into green using ANSI Sequence
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
     ui = Ui_MainWindow()

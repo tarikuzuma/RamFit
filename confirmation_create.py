@@ -49,6 +49,7 @@ class Ui_profile_created(object):
 
     #Closes the Window
     def confirmation(self, conf_v):
+        print ("\nProfile Created!!\n")
         conf_v.close()  
 
 if __name__ == "__main__":

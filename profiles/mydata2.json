@@ -1,11 +1,11 @@
 {
     "status": "None",
     "info": {
-        "name": "rawr",
-        "age": 41,
+        "name": "Chris",
+        "age": 21,
         "sex": "M",
-        "height": 162.56,
-        "weight": 365.0
+        "height": 175.26,
+        "weight": 80.0
     },
     "workout_data": {}
 }

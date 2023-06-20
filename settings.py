@@ -112,6 +112,7 @@ class Ui_settings_2(object):
         
     #Method to close settings
     def open_main(self):
+        print ("Going back to main menu")
         self.win.close()
 
 if __name__ == "__main__":
