@@ -9,10 +9,10 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-
+import json
 
 class Ui_view_routine(object):
-    def setupUi(self, view_routine, difficulty, program):
+    def setupUi(self, view_routine, program, difficulty):
         
         #Gets data of difficulty and program
         self.difficulty = difficulty
@@ -76,9 +76,41 @@ class Ui_view_routine(object):
         self.retranslateUi(view_routine)
         QtCore.QMetaObject.connectSlotsByName(view_routine)
 
+    #Debugging purposes. Check if difficulty and program is readable.
+    def read_program(self):
+        filepath = None #Flag Case. File path of JSON. Example: "program_files/beginner/arms.json"
+        workout_type = None #Flag Case. Type of workout. Example: "beginner_arms"
+        if self.difficulty == 1 and self.program =="arms":
+            print("Beginners, arms day")
+            workout_type = "beginner_arms"
+            filepath = "program_files/beginner/arms.json"
+        else:
+            print("Unreadable")
+            return
+
+        print ("File path: ", filepath, " : ", workout_type)
+
+        try:
+            with open(filepath, "r") as f:
+                json_object = json.load(f)
+                print ("\n",json_object,"\n")
+                workout = json_object[workout_type]
+
+                # Print the name of each exercise in the workout
+                for exercise in workout:
+                    exercise_name = exercise["name"]
+                    print(exercise_name)
+
+        except FileNotFoundError:
+            print("File not found:", filepath)
+
+        except json.JSONDecodeError:
+            print("Invalid JSON format in file:", filepath)
+
+    #Debugging purposes: Check if Button works. Check if dififculty and program is recorded
     def printBoth(self):
+        self.read_program()
         print("Hello World: ", self.difficulty, self.program)
-    
     
     def cancel(self):
         print("\nGoing back to main menu...\n")

@@ -87,14 +87,14 @@ class Ui_settings_2(object):
             json_object = json.load(f) 
             theme = json_object['theme']
 
-            #Print what theme it is now
-            print ("Theme is now ", theme)
-
             #if condition to see if theme is dark or light, and then converts it to its oppostie
             if theme == "light":
                 json_object["theme"] = "dark"
             elif theme == "dark":
                 json_object["theme"] = "light"
+
+            #Print what theme it is now
+            print ("Theme is now ", json_object['theme'])
 
             # Write the updated data back to the JSON file
             with open("settings/theme.json", 'w') as f:

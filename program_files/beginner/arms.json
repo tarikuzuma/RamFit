@@ -1,5 +1,5 @@
 {
-    "arms_beginner":[
+    "beginner_arms":[
         {
             "name":"NameTest",
             "reps":"RepTest",
@@ -32,3 +32,4 @@
         }
     ]
 }
+
