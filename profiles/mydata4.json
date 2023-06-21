@@ -1,0 +1,11 @@
+{
+    "status": "active",
+    "info": {
+        "name": "Johnzus",
+        "age": 45,
+        "sex": "M",
+        "height": 185.42000000000002,
+        "weight": 300.0
+    },
+    "workout_data": {}
+}

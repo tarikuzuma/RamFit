@@ -1,3 +1,4 @@
+
 # -*- coding: utf-8 -*-
 
 # Form implementation generated from reading ui file 'view_routine.ui'
@@ -38,9 +39,18 @@ class Ui_view_routine(object):
         font.setPointSize(10)
         self.main_label.setFont(font)
         self.main_label.setObjectName("main_label")
-        self.listView = QtWidgets.QListView(self.centralwidget)
-        self.listView.setGeometry(QtCore.QRect(0, 60, 412, 561))
-        self.listView.setObjectName("listView")
+
+        # Create a QListWidget
+        self.list_widget = QtWidgets.QListWidget(self.centralwidget)
+        self.list_widget.setGeometry(QtCore.QRect(0, 60, 412, 561))
+
+        try:
+            self.list_widget.addItems([self.read_program()])
+        except:
+            self.list_widget.addItems(['Error', 'No', 'File', 'Read'])
+
+        self.list_widget.setObjectName("list_widget")
+
         self.line_2 = QtWidgets.QFrame(self.centralwidget)
         self.line_2.setGeometry(QtCore.QRect(0, 680, 421, 16))
         self.line_2.setFrameShape(QtWidgets.QFrame.HLine)
@@ -76,36 +86,50 @@ class Ui_view_routine(object):
         self.retranslateUi(view_routine)
         QtCore.QMetaObject.connectSlotsByName(view_routine)
 
-    #Debugging purposes. Check if difficulty and program is readable.
+    #Method to store the name of each workout in a program_JSON file and add it to list_widget
     def read_program(self):
+
+        #Stores 'names' data in list workout_names
+        workout_names = []
         filepath = None #Flag Case. File path of JSON. Example: "program_files/beginner/arms.json"
         workout_type = None #Flag Case. Type of workout. Example: "beginner_arms"
+        
         if self.difficulty == 1 and self.program =="arms":
             print("Beginners, arms day")
-            workout_type = "beginner_arms"
-            filepath = "program_files/beginner/arms.json"
+            workout_type = f"beginner_{self.program}"
+            filepath = f"program_files/beginner/{self.program}.json"
+        elif self.difficulty == 1 and self.program =="legs":
+            print("Beginners, legs day")
+            workout_type = f"beginner_{self.program}"
+            filepath = f"program_files/beginner/{self.program}.json"
         else:
             print("Unreadable")
             return
 
-        print ("File path: ", filepath, " : ", workout_type)
+        print ("File path: ", filepath, "\nKey:", workout_type)
 
         try:
             with open(filepath, "r") as f:
                 json_object = json.load(f)
-                print ("\n",json_object,"\n")
+                #print ("\n",json_object,"\n") #Debug to read what JSON read.
                 workout = json_object[workout_type]
 
-                # Print the name of each exercise in the workout
+                #Print the name of each exercise in the workout
                 for exercise in workout:
                     exercise_name = exercise["name"]
-                    print(exercise_name)
+                    workout_names.append(exercise_name) #Appends exercises_name to workout_names list
 
         except FileNotFoundError:
             print("File not found:", filepath)
 
         except json.JSONDecodeError:
             print("Invalid JSON format in file:", filepath)
+
+        
+        #Adds list of names into list_widget
+        print ("Workouts include: ", *workout_names, sep=", ")
+        self.list_widget.addItems([*workout_names])
+    
 
     #Debugging purposes: Check if Button works. Check if dififculty and program is recorded
     def printBoth(self):

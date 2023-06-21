@@ -38,7 +38,7 @@ class Ui_createProfile(object):
         self.btn_create.clicked.connect(self.show_line)
 
         self.btn_back = QtWidgets.QPushButton(self.centralwidget)
-        self.btn_back.setGeometry(QtCore.QRect(150, 650, 120, 28))
+        self.btn_back.setGeometry(QtCore.QRect(150, 640, 120, 28))
         font = QtGui.QFont()
         font.setPointSize(10)
         self.btn_back.setFont(font)
@@ -249,7 +249,7 @@ class Ui_createProfile(object):
             if self.isMissing():
                 print("MISSING VALUE")
             else:
-                print("VALID")
+                print("Valid Perhaps")
 
             name = self.box_name.text()
             print(name)
@@ -308,7 +308,7 @@ class Ui_createProfile(object):
         except:
             #Except if error, prints out a red message.
             error_label = QtWidgets.QLabel(self.centralwidget)
-            error_label.setGeometry(QtCore.QRect(60, 650, 300, 30))
+            error_label.setGeometry(QtCore.QRect(60, 670, 300, 30))
             font = QtGui.QFont("Arial", 12)
             font.setPointSize(10)
             font.setBold(True)

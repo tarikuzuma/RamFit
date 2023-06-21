@@ -1,53 +1,111 @@
-from PyQt5 import QtCore, QtGui, QtWidgets
+import sys
+from PyQt5.QtWidgets import QInputDialog, QApplication, QWidget,  QGridLayout, QListWidget,  QPushButton
+from PyQt5.QtGui import QIcon
+import json
 
-class CustomModel(QtCore.QAbstractListModel):
-    def __init__(self, data, parent=None):
-        super(CustomModel, self).__init__(parent)
-        self.data = data
+class MainWindow(QWidget):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
 
-    def rowCount(self, parent=QtCore.QModelIndex()):
-        return len(self.data)
+        self.setWindowTitle('My Wish List')
+        self.setWindowIcon(QIcon('./assets/wishlist.png'))
+        self.setGeometry(100, 100, 400, 100)
 
-    def data(self, index, role):
-        if not index.isValid():
-            return None
+        layout = QGridLayout(self)
+        self.setLayout(layout)
 
-        if role == QtCore.Qt.DisplayRole:
-            return self.data[index.row()].text
-        elif role == QtCore.Qt.DecorationRole:
-            return self.data[index.row()].image
+        self.list_widget = QListWidget(self)
+        self.list_widget.addItems([self.read_program()])
+        layout.addWidget(self.list_widget, 0, 0, 4, 1)
 
-        return None
+        # create buttons
+        add_button = QPushButton('Add')
+        add_button.clicked.connect(self.add)
 
-class ListItem:
-    def __init__(self, text, image):
-        self.text = text
-        self.image = image
+        insert_button = QPushButton('Insert')
+        insert_button.clicked.connect(self.insert)
 
-class MainWindow(QtWidgets.QMainWindow):
-    def __init__(self):
-        super(MainWindow, self).__init__()
+        remove_button = QPushButton('Remove')
+        remove_button.clicked.connect(self.remove)
 
-        self.list_view = QtWidgets.QListView(self)
-        self.setCentralWidget(self.list_view)
+        clear_button = QPushButton('Clear')
+        clear_button.clicked.connect(self.clear)
+        
+        read_button = QPushButton('Read')
+        read_button.clicked.connect(self.read_program)
 
-        items = [
-            ListItem("Item 1", QtGui.QIcon("image1.png")),
-            ListItem("Item 2", QtGui.QIcon("image2.png")),
-            ListItem("Item 3", QtGui.QIcon("image3.png")),
-        ]
+        layout.addWidget(add_button, 0, 1)
+        layout.addWidget(insert_button, 1, 1)
+        layout.addWidget(remove_button, 2, 1)
+        layout.addWidget(clear_button, 3, 1)
+        layout.addWidget(read_button, 4, 1)
 
-        model = CustomModel(items)
-        self.list_view.setModel(model)
+        # show the window
+        self.show()
 
-        delegate = QtWidgets.QStyledItemDelegate(self.list_view)
-        self.list_view.setItemDelegate(delegate)
+    def add(self):
+        text, ok = QInputDialog.getText(self, 'Add a New Wish', 'New Wish:')
+        if ok and text:
+            self.list_widget.addItem(text)
 
-        self.setWindowTitle("ListView with Images")
+    def insert(self):
+        text, ok = QInputDialog.getText(self, 'Insert a New Wish', 'New Wish:')
+        if ok and text:
+            current_row = self.list_widget.currentRow()
+            self.list_widget.insertItem(current_row+1, text)
 
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
+    def remove(self):
+        current_row = self.list_widget.currentRow()
+        if current_row >= 0:
+            current_item = self.list_widget.takeItem(current_row)
+            del current_item
+
+    def clear(self):
+        self.list_widget.clear()
+
+   #Debugging purposes. Check if difficulty and program is readable.
+    def read_program(self):
+
+        #List workout_names into the ListView
+        workout_names = []
+        filepath = None #Flag Case. File path of JSON. Example: "program_files/beginner/arms.json"
+        workout_type = None #Flag Case. Type of workout. Example: "beginner_arms"
+
+        difficulty = 1
+        program = "arms"
+
+        if difficulty == 1 and program =="arms":
+            print("Beginners, arms day")
+            workout_type = "beginner_arms"
+            filepath = "program_files/beginner/arms.json"
+        else:
+            print("Unreadable")
+            return
+
+        print ("File path: ", filepath, " : ", workout_type)
+
+        try:
+            with open(filepath, "r") as f:
+                json_object = json.load(f)
+                #print ("\n",json_object,"\n") #To read what json read.
+                workout = json_object[workout_type]
+
+                #Print the name of each exercise in the workout
+                for exercise in workout:
+                    exercise_name = exercise["name"]
+                    workout_names.append(exercise_name) #Appends exercises_name to workout_names list
+
+        except FileNotFoundError:
+            print("File not found:", filepath)
+
+        except json.JSONDecodeError:
+            print("Invalid JSON format in file:", filepath)
+
+        print (*workout_names)
+
+        self.list_widget.addItems([*workout_names])
+
+if __name__ == '__main__':
+    app = QApplication(sys.argv)
     window = MainWindow()
-    window.show()
-    sys.exit(app.exec_())
+    sys.exit(app.exec())
