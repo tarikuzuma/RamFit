@@ -1,36 +1,39 @@
-import json
+from PyQt5 import QtCore, QtGui, QtWidgets
 
-workout_names = []
+class TimerWindow(QtWidgets.QMainWindow):
+    def __init__(self):
+        super().__init__()
+        self.setWindowTitle("Timer")
+        self.resize(400, 100)
 
-def read_program(difficulty, program):
+        self.centralwidget = QtWidgets.QWidget(self)
+        self.setCentralWidget(self.centralwidget)
 
-    filepath = None #Flag Case. File path of JSON. Example: "program_files/beginner/arms.json"
-    workout_type = None #Flag Case. Type of workout. Example: "beginner_arms"
-    if difficulty == 1 and program =="arms":
-        workout_type = "beginner_arms"
-        filepath = "program_files/beginner/arms.json"
-    else:
-        print("Unreadable")
-        return
+        self.progress_bar = QtWidgets.QProgressBar(self.centralwidget)
+        self.progress_bar.setGeometry(QtCore.QRect(30, 30, 340, 30))
 
-    print ("File path: ", filepath, " : ", workout_type)
-    try:
-        with open(filepath, "r") as f:
-            json_object = json.load(f)
+        self.timer = QtCore.QTimer(self)
+        self.timer.setInterval(100)  # Update interval in milliseconds
+        self.timer.timeout.connect(self.update_progress)
 
-            print (json_object)
-            workout = json_object[workout_type]  #GAGOO WHU IS IT INVERTEDDD
+        self.total_time = 10000  # Total time in milliseconds
+        self.current_time = 0
 
-            #Print the name of each exercise in the workout
-            for exercise in workout:
-                exercise_name = exercise["name"]
-                workout_names.append(exercise_name)
+    def start_timer(self):
+        self.timer.start()
 
-    except FileNotFoundError:
-        print("File not found:", filepath)
+    def update_progress(self):
+        self.current_time += self.timer.interval()
+        progress = int((self.current_time / self.total_time) * 100)
+        self.progress_bar.setValue(progress)
 
-    except json.JSONDecodeError:
-        print("Invalid JSON format in file:", filepath)
+        if self.current_time >= self.total_time:
+            self.timer.stop()
 
-read_program(1, "arms")
-print(*workout_names)
+if __name__ == "__main__":
+    import sys
+    app = QtWidgets.QApplication(sys.argv)
+    window = TimerWindow()
+    window.show()
+    window.start_timer()
+    sys.exit(app.exec_())

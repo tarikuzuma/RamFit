@@ -102,6 +102,14 @@ class Ui_view_routine(object):
             print("Beginners, legs day")
             workout_type = f"beginner_{self.program}"
             filepath = f"program_files/beginner/{self.program}.json"
+        elif self.difficulty == 1 and self.program =="core":
+            print("Beginners, core day")
+            workout_type = f"beginner_{self.program}"
+            filepath = f"program_files/beginner/{self.program}.json"
+        elif self.difficulty == 1 and self.program =="cardio":
+            print("Beginners, cardio day")
+            workout_type = f"beginner_{self.program}"
+            filepath = f"program_files/beginner/{self.program}.json"
         else:
             print("Unreadable")
             return
