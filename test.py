@@ -9,12 +9,13 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+import json
 
 class Ui_main_workout(object):
     def setupUi(self, main_workout):
 
         self.win = main_workout
-        self.workout_finished = False
+        self.workout_finished = False #Set workout_finished to False
 
         main_workout.setObjectName("main_workout")
         main_workout.resize(412, 732)
@@ -101,6 +102,26 @@ class Ui_main_workout(object):
         self.reps.setText(_translate("main_workout", "Repetition"))
         self.completed.setText(_translate("main_workout", "Completed"))
 
+    def read_workout(self):
+        filepath = "program_files/beginner/arms.json" #Dependent on workout_routine's filepath
+        workout_type = "beginner_arms" #Dependent on workout_type of viewroutine
+        workout_names = []
+        reps = []
+        image = []
+        description = []
+        
+        with open(filepath, "r") as f:
+            json_object = json.load(f)
+            #print ("\n",json_object,"\n") #Debug to read what JSON read.
+            workout = json_object[workout_type]
+
+            #Print the name of each exercise in the workout
+            for exercise in workout:
+                exercise_name = exercise["name"]
+                workout_names.append(exercise_name) #Appends exercises_name to workout_names list
+
+        print (workout_names)
+
     #Method to clsoe window when workout is completed
     def workout_complete(self):
         self.win.close()
@@ -110,6 +131,12 @@ class Ui_main_workout(object):
         self.workout_finished = True #If workout_finished button is clicked, sets workout_finish to true
         self.win.close()
 
+    @staticmethod
+    def test():
+        """Test method"""
+        instance = Ui_main_workout
+        instance.read_workout()
+
     #Runs when class is called
     #Method to loop window open and close 10 times
     @staticmethod
@@ -118,7 +145,7 @@ class Ui_main_workout(object):
         app = QtWidgets.QApplication(sys.argv)
         ui = Ui_main_workout()
         
-
+        #Loops through opening window 10 times
         for _ in range(10):
             main_workout = QtWidgets.QMainWindow()
             ui.setupUi(main_workout)
@@ -129,7 +156,7 @@ class Ui_main_workout(object):
             if ui.workout_finished:
                 break
        
-        print("Done!")
+        print("Workout Session Done!")
         sys.exit()
 
 if __name__ == "__main__":

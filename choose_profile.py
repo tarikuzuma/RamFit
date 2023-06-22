@@ -190,10 +190,29 @@ class Ui_choose_profile(object):
         except FileNotFoundError:
             print("File does not exist.")
 
+    #Static Method to turn every profile status to "None" or "Not Editable" once clicked
+    @staticmethod
+    def reset_status():
+        for i in range(1,5):
+            try:
+                file_path = f"profiles/mydata{i}.json"
+                with open(file_path, 'r') as f:
+                    json_object = json.load(f)
+                    theme = json_object['status']
+
+                    json_object['status'] = 'None'
+
+                    with open(file_path, 'w') as f:
+                        json.dump(json_object, f, indent = 4)
+
+            except FileNotFoundError:
+                continue
+
 #Will only conduct if opened in file. (For Debugging)
 if __name__ == "__main__":
     import sys
 
+    #Deactivate profiels to non-editing status.
     print ("\nDeactivating Profiles...\n")
     for i in range(1,5):
         try:

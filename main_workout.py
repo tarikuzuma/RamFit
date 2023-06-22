@@ -118,7 +118,7 @@ class Ui_main_workout(object):
         app = QtWidgets.QApplication(sys.argv)
         ui = Ui_main_workout()
         
-
+        #Loops through opening window 10 times
         for _ in range(10):
             main_workout = QtWidgets.QMainWindow()
             ui.setupUi(main_workout)
@@ -129,7 +129,7 @@ class Ui_main_workout(object):
             if ui.workout_finished:
                 break
        
-        print("Done!")
+        print("Workout Sesison Done!")
         sys.exit()
 
 if __name__ == "__main__":
