@@ -118,9 +118,20 @@ class Ui_main_workout(object):
             #Print the name of each exercise in the workout
             for exercise in workout:
                 exercise_name = exercise["name"]
-                workout_names.append(exercise_name) #Appends exercises_name to workout_names list
+                exercise_reps = exercise["reps"]
+                exercise_image = exercise["image"]
+                exercise_description = exercise["description"]
+
+                #Appends exercises_name to workout_names list
+                workout_names.append(exercise_name) 
+                reps.append(exercise_reps)
+                image.append(exercise_image)
+                description.append(exercise_description)
 
         print (workout_names)
+        print(reps)
+        print(image)
+        print(description)
 
     #Method to clsoe window when workout is completed
     def workout_complete(self):
@@ -134,7 +145,7 @@ class Ui_main_workout(object):
     @staticmethod
     def test():
         """Test method"""
-        instance = Ui_main_workout
+        instance = Ui_main_workout()
         instance.read_workout()
 
     #Runs when class is called
@@ -161,4 +172,5 @@ class Ui_main_workout(object):
 
 if __name__ == "__main__":
     ui = Ui_main_workout()
+    Ui_main_workout.test()
     ui.run_window()
