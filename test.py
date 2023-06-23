@@ -16,6 +16,7 @@ class Ui_main_workout(object):
 
         self.win = main_workout
         self.workout_finished = False #Set workout_finished to False
+        self.dataIndex = 0
 
         main_workout.setObjectName("main_workout")
         main_workout.resize(412, 732)
@@ -103,7 +104,7 @@ class Ui_main_workout(object):
         self.reps.setText(_translate("main_workout", "Repetition"))
         self.completed.setText(_translate("main_workout", "Completed"))
 
-    '''
+
     def read_workout(self):
         filepath = "program_files/beginner/arms.json" #Dependent on workout_routine's filepath
         workout_type = "beginner_arms" #Dependent on workout_type of viewroutine
@@ -135,13 +136,11 @@ class Ui_main_workout(object):
         print(self.reps)
         print(self.image)
         print(self.description)
-    '''
+
     #Method to clsoe window when workout is completed
     def workout_complete(self):
-        '''
-        for val1, val2, val3, val4 in zip(self.workout_names, self.reps, self.image, self.description):
-            print("Value of indexes in list: ", val1, val2, val3, val4)
-            '''
+        self.dataIndex += 1
+        print(self.dataIndex)
         self.win.close()
 
     #Ultimately stops the workout session when button is clicked
@@ -158,36 +157,6 @@ class Ui_main_workout(object):
         app = QtWidgets.QApplication(sys.argv)
         ui = Ui_main_workout()
 
-        filepath = "program_files/beginner/arms.json" #Dependent on workout_routine's filepath
-        workout_type = "beginner_arms" #Dependent on workout_type of viewroutine
-        workout_names = []
-        reps = []
-        image = []
-        description = []
-
-        with open(filepath, "r") as f:
-            json_object = json.load(f)
-            #print ("\n",json_object,"\n") #Debug to read what JSON read.
-            workout = json_object[workout_type]
-
-            #Print the name of each exercise in the workout
-            for exercise in workout:
-                exercise_name = exercise["name"]
-                exercise_reps = exercise["reps"]
-                exercise_image = exercise["image"]
-                exercise_description = exercise["description"]
-
-                #Appends exercises_name to workout_names list
-                workout_names.append(exercise_name) 
-                reps.append(exercise_reps)
-                image.append(exercise_image)
-                description.append(exercise_description)
-
-        #For debugging to print value of lists  
-        print(workout_names)
-        print(reps)
-        print(image)
-        print(description)
         
         #Loops through opening window 10 times
         for i in range(10):

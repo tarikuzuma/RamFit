@@ -10,12 +10,9 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
+
 class Ui_main_workout(object):
     def setupUi(self, main_workout):
-
-        self.win = main_workout
-        self.workout_finished = False
-
         main_workout.setObjectName("main_workout")
         main_workout.resize(412, 732)
         self.centralwidget = QtWidgets.QWidget(main_workout)
@@ -47,9 +44,6 @@ class Ui_main_workout(object):
         font.setFamily("Poppins")
         self.finish_workout.setFont(font)
         self.finish_workout.setObjectName("finish_workout")
-
-        self.finish_workout.clicked.connect(self.workout_finish)
-
         self.graphicsView = QtWidgets.QGraphicsView(self.centralwidget)
         self.graphicsView.setGeometry(QtCore.QRect(10, 100, 391, 311))
         self.graphicsView.setObjectName("graphicsView")
@@ -73,9 +67,6 @@ class Ui_main_workout(object):
         font.setFamily("Poppins")
         self.completed.setFont(font)
         self.completed.setObjectName("completed")
-
-        self.completed.clicked.connect(self.workout_complete)
-
         self.description = QtWidgets.QPlainTextEdit(self.centralwidget)
         self.description.setGeometry(QtCore.QRect(20, 470, 381, 121))
         self.description.setObjectName("description")
@@ -101,37 +92,12 @@ class Ui_main_workout(object):
         self.reps.setText(_translate("main_workout", "Repetition"))
         self.completed.setText(_translate("main_workout", "Completed"))
 
-    #Method to clsoe window when workout is completed
-    def workout_complete(self):
-        self.win.close()
-
-    #Ultimately stops the workout session when button is clicked
-    def workout_finish(self):
-        self.workout_finished = True #If workout_finished button is clicked, sets workout_finish to true
-        self.win.close()
-
-    #Runs when class is called
-    #Method to loop window open and close 10 times
-    @staticmethod
-    def run_window():
-        import sys
-        app = QtWidgets.QApplication(sys.argv)
-        ui = Ui_main_workout()
-        
-        #Loops through opening window 10 times
-        for _ in range(10):
-            main_workout = QtWidgets.QMainWindow()
-            ui.setupUi(main_workout)
-            main_workout.show()
-            app.exec_()
-            
-            #If workout_finished is clicked, stop loop and ultimateley exit.
-            if ui.workout_finished:
-                break
-       
-        print("Workout Sesison Done!")
-        sys.exit()
 
 if __name__ == "__main__":
+    import sys
+    app = QtWidgets.QApplication(sys.argv)
+    main_workout = QtWidgets.QMainWindow()
     ui = Ui_main_workout()
-    ui.run_window()
+    ui.setupUi(main_workout)
+    main_workout.show()
+    sys.exit(app.exec_())
