@@ -92,24 +92,79 @@ class Ui_main_workout(object):
         self.retranslateUi(main_workout)
         QtCore.QMetaObject.connectSlotsByName(main_workout)
 
+    #NOTE: Change number, exercise_name, and reps depending on the address of the array or list. 
     def retranslateUi(self, main_workout):
         _translate = QtCore.QCoreApplication.translate
         main_workout.setWindowTitle(_translate("main_workout", "MainWindow"))
-        self.number.setText(_translate("main_workout", "10"))
+        self.number.setText(_translate("main_workout", "{}"))
         self.left.setText(_translate("main_workout", "Exercises Left"))
         self.finish_workout.setText(_translate("main_workout", "> Finish Workout"))
         self.exercise_name.setText(_translate("main_workout", "Exercise Name"))
         self.reps.setText(_translate("main_workout", "Repetition"))
         self.completed.setText(_translate("main_workout", "Completed"))
 
+    '''
     def read_workout(self):
+        filepath = "program_files/beginner/arms.json" #Dependent on workout_routine's filepath
+        workout_type = "beginner_arms" #Dependent on workout_type of viewroutine
+        self.workout_names = []
+        self.reps = []
+        self.image = []
+        self.description = []
+        
+        with open(filepath, "r") as f:
+            json_object = json.load(f)
+            #print ("\n",json_object,"\n") #Debug to read what JSON read.
+            workout = json_object[workout_type]
+
+            #Print the name of each exercise in the workout
+            for exercise in workout:
+                exercise_name = exercise["name"]
+                exercise_reps = exercise["reps"]
+                exercise_image = exercise["image"]
+                exercise_description = exercise["description"]
+
+                #Appends exercises_name to workout_names list
+                self.workout_names.append(exercise_name) 
+                self.reps.append(exercise_reps)
+                self.image.append(exercise_image)
+                self.description.append(exercise_description)
+
+        #For debugging to print value of lists  
+        print(self.workout_names)
+        print(self.reps)
+        print(self.image)
+        print(self.description)
+    '''
+    #Method to clsoe window when workout is completed
+    def workout_complete(self):
+        '''
+        for val1, val2, val3, val4 in zip(self.workout_names, self.reps, self.image, self.description):
+            print("Value of indexes in list: ", val1, val2, val3, val4)
+            '''
+        self.win.close()
+
+    #Ultimately stops the workout session when button is clicked
+    def workout_finish(self):
+        self.workout_finished = True #If workout_finished button is clicked, sets workout_finish to true
+        self.win.close()
+
+
+    #Runs when class is called
+    #Method to loop window open and close 10 times
+    @staticmethod
+    def run_window():
+        import sys
+        app = QtWidgets.QApplication(sys.argv)
+        ui = Ui_main_workout()
+
         filepath = "program_files/beginner/arms.json" #Dependent on workout_routine's filepath
         workout_type = "beginner_arms" #Dependent on workout_type of viewroutine
         workout_names = []
         reps = []
         image = []
         description = []
-        
+
         with open(filepath, "r") as f:
             json_object = json.load(f)
             #print ("\n",json_object,"\n") #Debug to read what JSON read.
@@ -128,36 +183,14 @@ class Ui_main_workout(object):
                 image.append(exercise_image)
                 description.append(exercise_description)
 
-        print (workout_names)
+        #For debugging to print value of lists  
+        print(workout_names)
         print(reps)
         print(image)
         print(description)
-
-    #Method to clsoe window when workout is completed
-    def workout_complete(self):
-        self.win.close()
-
-    #Ultimately stops the workout session when button is clicked
-    def workout_finish(self):
-        self.workout_finished = True #If workout_finished button is clicked, sets workout_finish to true
-        self.win.close()
-
-    @staticmethod
-    def test():
-        """Test method"""
-        instance = Ui_main_workout()
-        instance.read_workout()
-
-    #Runs when class is called
-    #Method to loop window open and close 10 times
-    @staticmethod
-    def run_window():
-        import sys
-        app = QtWidgets.QApplication(sys.argv)
-        ui = Ui_main_workout()
         
         #Loops through opening window 10 times
-        for _ in range(10):
+        for i in range(10):
             main_workout = QtWidgets.QMainWindow()
             ui.setupUi(main_workout)
             main_workout.show()
@@ -172,5 +205,4 @@ class Ui_main_workout(object):
 
 if __name__ == "__main__":
     ui = Ui_main_workout()
-    Ui_main_workout.test()
     ui.run_window()
