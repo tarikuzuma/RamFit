@@ -1,5 +1,5 @@
 {
-    "status": "active",
+    "status": "None",
     "info": {
         "name": "John Doe",
         "age": 19,
@@ -35,6 +35,62 @@
         {
             "2023-06-25": {
                 "Time": "01:33:48",
+                "Type": "beginner_core",
+                "Duration": "10 - 15 Minutes",
+                "Calories Burnt": "100 Calories"
+            }
+        },
+        {
+            "2023-06-25": {
+                "Time": "02:39:35",
+                "Type": "beginner_arms",
+                "Duration": "10 - 15 Minutes",
+                "Calories Burnt": "100 Calories"
+            }
+        },
+        {
+            "2023-06-25": {
+                "Time": "02:41:50",
+                "Type": "beginner_core",
+                "Duration": "10 - 15 Minutes",
+                "Calories Burnt": "100 Calories"
+            }
+        },
+        {
+            "2023-06-25": {
+                "Time": "02:44:26",
+                "Type": "beginner_cardio",
+                "Duration": "10 - 15 Minutes",
+                "Calories Burnt": "100 Calories"
+            }
+        },
+        {
+            "2023-06-25": {
+                "Time": "02:47:37",
+                "Type": "beginner_core",
+                "Duration": "10 - 15 Minutes",
+                "Calories Burnt": "100 Calories"
+            }
+        },
+        {
+            "2023-06-25": {
+                "Time": "02:48:53",
+                "Type": "beginner_legs",
+                "Duration": "10 - 15 Minutes",
+                "Calories Burnt": "100 Calories"
+            }
+        },
+        {
+            "2023-06-25": {
+                "Time": "02:49:42",
+                "Type": "beginner_arms",
+                "Duration": "10 - 15 Minutes",
+                "Calories Burnt": "100 Calories"
+            }
+        },
+        {
+            "2023-06-25": {
+                "Time": "02:52:15",
                 "Type": "beginner_core",
                 "Duration": "10 - 15 Minutes",
                 "Calories Burnt": "100 Calories"

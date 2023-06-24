@@ -1,11 +1,28 @@
 {
-    "status": "None",
+    "status": "active",
     "info": {
-        "name": "Chris",
-        "age": 21,
-        "sex": "M",
-        "height": 175.26,
-        "weight": 80.0
+        "name": "Jane Doe",
+        "age": 56,
+        "sex": "F",
+        "height": 144.78,
+        "weight": 40.0
     },
-    "workout_data": {}
+    "workout_data": [
+        {
+            "2023-06-25": {
+                "Time": "02:53:45",
+                "Type": "beginner_core",
+                "Duration": "10 - 15 Minutes",
+                "Calories Burnt": "100 Calories"
+            }
+        },
+        {
+            "2023-06-25": {
+                "Time": "02:57:33",
+                "Type": "beginner_arms",
+                "Duration": "10 - 15 Minutes",
+                "Calories Burnt": "100 Calories"
+            }
+        }
+    ]
 }

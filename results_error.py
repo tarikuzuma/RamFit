@@ -9,10 +9,14 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from workout_data import Ui_list_workout_data
 
 
 class Ui_results_error(object):
     def setupUi(self, results):
+
+        self.win = results
+
         results.setObjectName("results")
         results.resize(412, 732)
         self.centralwidget = QtWidgets.QWidget(results)
@@ -111,6 +115,9 @@ class Ui_results_error(object):
         font.setWeight(75)
         self.calendar_label.setFont(font)
         self.calendar_label.setObjectName("calendar_label")
+
+        self.calendarWidget.clicked.connect(self.calendar_click)
+
         self.weight_label = QtWidgets.QLabel(self.centralwidget)
         self.weight_label.setGeometry(QtCore.QRect(50, 580, 111, 20))
         font = QtGui.QFont()
@@ -153,6 +160,9 @@ class Ui_results_error(object):
         font.setPointSize(10)
         self.button_main.setFont(font)
         self.button_main.setObjectName("button_main")
+
+        self.button_main.clicked.connect(self.back_main)
+
         results.setCentralWidget(self.centralwidget)
         self.statusbar = QtWidgets.QStatusBar(results)
         self.statusbar.setObjectName("statusbar")
@@ -178,6 +188,15 @@ class Ui_results_error(object):
         self.weight_editable.setText(_translate("results", "Draft"))
         self.button_main.setText(_translate("results", "Back to Main"))
 
+    def calendar_click(self, date):
+        print('Calendar clicked:', date.toString())
+        self.window = QtWidgets.QMainWindow()
+        self.ui = Ui_list_workout_data()
+        self.ui.setupUi(self.window)
+        self.window.show()
+    
+    def back_main(self):
+        self.win.close()
 
 if __name__ == "__main__":
     import sys

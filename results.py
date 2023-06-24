@@ -9,7 +9,7 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from results_error import Ui_results_error
+from workout_data import Ui_list_workout_data
 from datetime import datetime
 import json
 import os
@@ -128,6 +128,9 @@ class Ui_results(object):
         font.setWeight(75)
         self.calendar_label.setFont(font)
         self.calendar_label.setObjectName("calendar_label")
+
+        self.calendarWidget.clicked.connect(self.calendar_click)
+
         self.weight_label = QtWidgets.QLabel(self.centralwidget)
         self.weight_label.setGeometry(QtCore.QRect(50, 580, 111, 20))
         font = QtGui.QFont()
@@ -228,7 +231,8 @@ class Ui_results(object):
         self.win.close()
         #self.add_workout_data()
         #self.edit_workout_data(self.filepath, self.workout_type)
-        
+
+
         
     #A more convenient way to read profiles. I forgot about return functions.
     #Finds profile with the status "active" and refers to it as editing mode.
@@ -286,6 +290,7 @@ class Ui_results(object):
 
     def edit_workout_data(self, filepath, workout_type):
         filename = f"profiles/{self.read_status()}"
+        self.filename = filename
         filepath = self.filepath
         workout_type = self.workout_type
 
@@ -310,7 +315,15 @@ class Ui_results(object):
             temp.append(new_data)
             data["workout_data"] = temp
 
-            self.write(data, filename)            
+            self.write(data, filename)         
+
+    def calendar_click(self, date):
+        print('Calendar clicked:', date.toString())
+        self.window = QtWidgets.QMainWindow()
+        self.ui = Ui_list_workout_data()
+        self.ui.setupUi(self.window, self.filename)
+        self.window.show()
+           
 
 if __name__ == "__main__":
     try:

@@ -141,7 +141,7 @@ class Ui_main_workout(object):
             print("\nForced Stop...\nWorkout Session Done!")
             self.window = QtWidgets.QMainWindow()
             self.ui = Ui_results()
-            self.ui.setupUi(self.window)
+            self.ui.setupUi(self.window, self.filepath,self.workout_type)
             self.window.show()
             #sys.exit() # FIXME: Is this the right behavior?
             self.win.close()
