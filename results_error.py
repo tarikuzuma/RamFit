@@ -9,23 +9,10 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from results_error import Ui_results_error
-import json
-import os
 
-class Ui_results(object):
+
+class Ui_results_error(object):
     def setupUi(self, results):
-
-        self.win = results
-        weight, height, bmi, category = self.edit_bmi()
-
-        weight_str = str(weight)
-        height_str = str(height)
-        bmi_str = f"= {str(bmi)}"
-        category_str = str(category)
-
-        name = self.read_name()
-
         results.setObjectName("results")
         results.resize(412, 732)
         self.centralwidget = QtWidgets.QWidget(results)
@@ -141,11 +128,8 @@ class Ui_results(object):
         font.setWeight(75)
         self.bmi_final.setFont(font)
         self.bmi_final.setObjectName("bmi_final")
-
-        self.bmi_final.setText(bmi_str + " / " + category_str)
-
         self.height_editable = QtWidgets.QLabel(self.centralwidget)
-        self.height_editable.setGeometry(QtCore.QRect(190, 550, 100, 16))
+        self.height_editable.setGeometry(QtCore.QRect(190, 550, 55, 16))
         font = QtGui.QFont()
         font.setPointSize(10)
         font.setBold(False)
@@ -153,9 +137,6 @@ class Ui_results(object):
         font.setWeight(50)
         self.height_editable.setFont(font)
         self.height_editable.setObjectName("height_editable")
-
-        self.height_editable.setText(height_str)
-
         self.weight_editable = QtWidgets.QLabel(self.centralwidget)
         self.weight_editable.setGeometry(QtCore.QRect(190, 580, 55, 16))
         font = QtGui.QFont()
@@ -165,9 +146,6 @@ class Ui_results(object):
         font.setWeight(50)
         self.weight_editable.setFont(font)
         self.weight_editable.setObjectName("weight_editable")
-
-        self.weight_editable.setText(weight_str)
-
         self.button_main = QtWidgets.QPushButton(self.centralwidget)
         self.button_main.setGeometry(QtCore.QRect(262, 660, 121, 28))
         font = QtGui.QFont()
@@ -175,22 +153,6 @@ class Ui_results(object):
         font.setPointSize(10)
         self.button_main.setFont(font)
         self.button_main.setObjectName("button_main")
-
-        self.button_main.clicked.connect(self.back_main)
-
-        self.greet = QtWidgets.QLabel(self.centralwidget)
-        self.greet.setGeometry(QtCore.QRect(50, 665, 200, 30))
-        font = QtGui.QFont()
-        font.setFamily("Poppins")
-        font.setPointSize(10)
-        font.setBold(True)
-        font.setItalic(True)
-        font.setUnderline(True)
-        self.greet.setFont(font)
-        self.greet.setObjectName("greet")
-
-        self.greet.setText(f"Helllo! {name}")
-
         results.setCentralWidget(self.centralwidget)
         self.statusbar = QtWidgets.QStatusBar(results)
         self.statusbar.setObjectName("statusbar")
@@ -211,94 +173,17 @@ class Ui_results(object):
         self.BMI_label.setText(_translate("results", "BMI:"))
         self.calendar_label.setText(_translate("results", "Calendar of Days Worked Out"))
         self.weight_label.setText(_translate("results", "Your Weight:"))
-        #self.bmi_final.setText(_translate("results", "= Index / Category"))
-        #self.height_editable.setText(_translate("results", "Draft"))
-        #self.weight_editable.setText(_translate("results", "Draft"))
+        self.bmi_final.setText(_translate("results", "= Index / Category"))
+        self.height_editable.setText(_translate("results", "Draft"))
+        self.weight_editable.setText(_translate("results", "Draft"))
         self.button_main.setText(_translate("results", "Back to Main"))
 
-    def back_main(self):
-        self.win.close()
-        #self.add_workout_data()
-        
-        
-    #A more convenient way to read profiles. I forgot about return functions.
-    #Finds profile with the status "active" and refers to it as editing mode.
-    def read_status(self):
-        file_path = "profiles"
-        active_profile = None
-        for file in os.listdir(file_path):
-            if file.endswith(".json"):
-                with open(os.path.join(file_path, file)) as f:
-                    profile = json.load(f)
-                    if profile["status"] == "active":
-                        active_profile = file
-        return active_profile #Return the profile with the active status
-    
-    def read_name(self):
-        profile = f"profiles/{self.read_status()}" #Gets the profile with active status
-        with open(profile, 'r') as f:
-            json_object = json.load(f)
-            name = json_object["info"]["name"]
-        return name
-    
-    #A method to edit BMI and get attributes from JSON
-    def edit_bmi(self):
-        profile = f"profiles/{self.read_status()}" #Gets the profile with active status
-
-        with open(profile, 'r') as f:
-            json_object = json.load(f)
-            weight = round(json_object["info"]["weight"], 2)
-            height = round(json_object["info"]["height"], 2)
-
-        #Get BMI with height in CM formula
-        bmi = round(weight / (height / 100)**2, 2)
-
-        #Get BMI category
-        category = None
-        if bmi < 18.5:
-            category = "Underweight"
-        elif bmi < 25:
-            category = "Normal"
-        elif bmi < 30:
-            category = "Overweight"
-        elif bmi < 35:
-            category =  "Obese I"
-        elif bmi < 40:
-            category = "Obese II"
-        else:
-            category = "Obese III"
-
-        return weight, height, bmi, category
-    
-    def add_workout_data(self):
-        profile_path = f"profiles/{self.read_status()}"
-
-        workout_data = {
-            "date": "2023-06-24",
-            "exercise": "Running",
-            "duration": 30,
-            "distance": 5
-        }
-
-        with open(profile_path, 'r+') as f:
-            profile = json.load(f)
-            if "workout_data" not in profile:
-                profile["workout_data"] = workout_data
-            else:
-                profile["workout_data"].update(workout_data)
-            f.seek(0)  # Move the file pointer to the beginning
-            json.dump(profile, f, indent=4)
-            f.truncate()  # Truncate the file to remove any remaining content
-            
 
 if __name__ == "__main__":
-    try:
-        import sys
-        app = QtWidgets.QApplication(sys.argv)
-        results = QtWidgets.QMainWindow()
-        ui = Ui_results()
-        ui.setupUi(results)
-        results.show()
-        sys.exit(app.exec_())
-    except FileNotFoundError:
-        print("No Files are Active.")
+    import sys
+    app = QtWidgets.QApplication(sys.argv)
+    results = QtWidgets.QMainWindow()
+    ui = Ui_results_error()
+    ui.setupUi(results)
+    results.show()
+    sys.exit(app.exec_())
