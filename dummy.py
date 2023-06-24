@@ -90,6 +90,7 @@ class Ui_main_workout(object):
         self.progressBar.setGeometry(QtCore.QRect(40, 610, 361, 23))
         self.progressBar.setProperty("value", 24)
         self.progressBar.setObjectName("progressBar")
+
         main_workout.setCentralWidget(self.centralwidget)
         self.statusbar = QtWidgets.QStatusBar(main_workout)
         self.statusbar.setObjectName("statusbar")

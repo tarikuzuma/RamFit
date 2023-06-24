@@ -43,13 +43,12 @@ class Ui_view_routine(object):
         # Create a QListWidget
         self.list_widget = QtWidgets.QListWidget(self.centralwidget)
         self.list_widget.setGeometry(QtCore.QRect(0, 60, 412, 561))
+        self.list_widget.setObjectName("list_widget")
 
         try:
             self.list_widget.addItems([self.read_program()])
         except:
             self.list_widget.addItems(['Error', 'No', 'File', 'Read'])
-
-        self.list_widget.setObjectName("list_widget")
 
         self.line_2 = QtWidgets.QFrame(self.centralwidget)
         self.line_2.setGeometry(QtCore.QRect(0, 680, 421, 16))
@@ -94,6 +93,7 @@ class Ui_view_routine(object):
         filepath = None #Flag Case. File path of JSON. Example: "program_files/beginner/arms.json"
         workout_type = None #Flag Case. Type of workout. Example: "beginner_arms"
         
+        #For Beginner difficulty
         if self.difficulty == 1 and self.program =="arms":
             print("Beginners, arms day")
             workout_type = f"beginner_{self.program}"
@@ -110,6 +110,43 @@ class Ui_view_routine(object):
             print("Beginners, cardio day")
             workout_type = f"beginner_{self.program}"
             filepath = f"program_files/beginner/{self.program}.json"
+
+        #For Intermediate Difficulty
+        elif self.difficulty == 2 and self.program =="arms":
+            print("Intermediate, arms day")
+            workout_type = f"intermediate_{self.program}"
+            filepath = f"program_files/intermediate/{self.program}.json"
+        elif self.difficulty == 2 and self.program =="legs":
+            print("Intermediate, legs day")
+            workout_type = f"intermediate_{self.program}"
+            filepath = f"program_files/intermediate/{self.program}.json"
+        elif self.difficulty == 2 and self.program =="core":
+            print("Intermediate, core day")
+            workout_type = f"intermediate_{self.program}"
+            filepath = f"program_files/intermediate/{self.program}.json"
+        elif self.difficulty == 2 and self.program =="cardio":
+            print("Intermediate, cardio day")
+            workout_type = f"intermediate_{self.program}"
+            filepath = f"program_files/intermediate/{self.program}.json"
+
+        #For Advanced Difficulty
+        elif self.difficulty == 3 and self.program == "arms":
+            print("Advanced, arms day")
+            workout_type = f"advanced_{self.program}"
+            filepath = f"program_files/advanced/{self.program}.json"
+        elif self.difficulty == 3 and self.program == "legs":
+            print("Advanced, legs day")
+            workout_type = f"advanced_{self.program}"
+            filepath = f"program_files/advanced/{self.program}.json"
+        elif self.difficulty == 3 and self.program == "core":
+            print("Advanced, core day")
+            workout_type = f"advanced_{self.program}"
+            filepath = f"program_files/advanced/{self.program}.json"
+        elif self.difficulty == 3 and self.program == "cardio":
+            print("Advanced, cardio day")
+            workout_type = f"advanced_{self.program}"
+            filepath = f"program_files/advanced/{self.program}.json"
+
         else:
             print("Unreadable")
             return
@@ -128,7 +165,12 @@ class Ui_view_routine(object):
                     workout_names.append(exercise_name) #Appends exercises_name to workout_names list
 
         except FileNotFoundError:
+            #Code to crash view_routine to display file error not found.
+            #Temporary Solution. If file not found, annd user presses "Let's Go," program will crash.
             print("File not found:", filepath)
+            print("It has either been deleted or data has not been created yet.")
+            x = 5/0
+            print(x)
 
         except json.JSONDecodeError:
             print("Invalid JSON format in file:", filepath)

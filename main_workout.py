@@ -9,10 +9,15 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-
+from PyQt5.QtGui import QPixmap
+import json
 
 class Ui_main_workout(object):
     def setupUi(self, main_workout):
+
+        self.win = main_workout
+        self.workout_finished = False
+
         main_workout.setObjectName("main_workout")
         main_workout.resize(412, 732)
         self.centralwidget = QtWidgets.QWidget(main_workout)
@@ -44,9 +49,13 @@ class Ui_main_workout(object):
         font.setFamily("Poppins")
         self.finish_workout.setFont(font)
         self.finish_workout.setObjectName("finish_workout")
+
+        self.finish_workout.clicked.connect(self.workout_finish)
+
         self.graphicsView = QtWidgets.QGraphicsView(self.centralwidget)
         self.graphicsView.setGeometry(QtCore.QRect(10, 100, 391, 311))
         self.graphicsView.setObjectName("graphicsView")
+
         self.exercise_name = QtWidgets.QLabel(self.centralwidget)
         self.exercise_name.setGeometry(QtCore.QRect(30, 430, 141, 31))
         font = QtGui.QFont()
@@ -67,9 +76,16 @@ class Ui_main_workout(object):
         font.setFamily("Poppins")
         self.completed.setFont(font)
         self.completed.setObjectName("completed")
+
+        self.completed.clicked.connect(self.workout_complete)
+
         self.description = QtWidgets.QPlainTextEdit(self.centralwidget)
         self.description.setGeometry(QtCore.QRect(20, 470, 381, 121))
         self.description.setObjectName("description")
+        font.setFamily("Poppins")
+        self.description.setFont(font)
+        #self.description.setPlainText("Hello Test") Old code to display value for description
+
         self.progressBar = QtWidgets.QProgressBar(self.centralwidget)
         self.progressBar.setGeometry(QtCore.QRect(40, 610, 361, 23))
         self.progressBar.setProperty("value", 24)
@@ -85,19 +101,124 @@ class Ui_main_workout(object):
     def retranslateUi(self, main_workout):
         _translate = QtCore.QCoreApplication.translate
         main_workout.setWindowTitle(_translate("main_workout", "MainWindow"))
-        self.number.setText(_translate("main_workout", "10"))
-        self.left.setText(_translate("main_workout", "Exercises Left"))
+        #self.number.setText(_translate("main_workout", "10")) #Old code to set the total number of exercises to default
+        #self.left.setText(_translate("main_workout", "Exercises Left")) #Old code to set exercises to left
         self.finish_workout.setText(_translate("main_workout", "> Finish Workout"))
-        self.exercise_name.setText(_translate("main_workout", "Exercise Name"))
-        self.reps.setText(_translate("main_workout", "Repetition"))
+        #self.exercise_name.setText(_translate("main_workout", "Exercise Name")) #Old code to set name to default
+        #self.reps.setText(_translate("main_workout", "Repetition")) #Old code to set reps to default
         self.completed.setText(_translate("main_workout", "Completed"))
 
+    def workout_complete(self):
+        self.win.close()
 
+    def workout_finish(self):
+        self.workout_finished = True
+        self.win.close()
+
+    #Method to read workout JSON. Accepts the arguments filepath and workout_type.
+    def read_workout(self, filepath, workout_type):
+        self.workout_names = []
+        self.workout_reps = []
+        self.workout_image = []
+        self.workout_description = []
+
+        with open(filepath, "r") as f:
+            json_object = json.load(f)
+            #print ("\n",json_object,"\n") #Debug to read what JSON read.
+            workout = json_object[workout_type]
+
+            #Equate into a variable certain dta afrom JSON.
+            for exercise in workout:
+                exercise_name = exercise["name"]
+                exercise_reps = exercise["reps"]
+                exercise_image = exercise["image"]
+                exercise_description = exercise["description"]
+
+                #Appends data gathered from JSON to ff. lists
+                self.workout_names.append(exercise_name) 
+                self.workout_reps.append(exercise_reps)
+                self.workout_image.append(exercise_image)
+                self.workout_description.append(exercise_description)
+
+    #This is where we're gonna put all of the interchangable data
+    #Method uses recursion to loop through window n times. Count is equal to the number of workouts.
+    def run_window(self, count=0):
+        import sys
+        app = QtWidgets.QApplication(sys.argv)
+ 
+        filepath = "program_files/beginner/arms.json" #Dependent on workout_routine's filepath
+        workout_type = "beginner_arms" #Dependent on workout_type of viewroutine
+        
+        #Calls read_workout
+        self.read_workout(filepath, workout_type)
+
+        '''
+        #For debugging purposes, prints the list.
+        print (self.workout_names)
+        print (self.workout_reps)
+        print (self.workout_image)
+        print (self.workout_description)
+        '''
+
+        #If the value of count is greater than the number of items in the workout_names list, then we stop the recursive loop.
+        #It is ASSUMED that the length of each list of data per key is the same as the length of the other lists.
+        #For example, the length of the `workout_names` list is the same as the length of the `workout_reps` list, the `workout_image` list, and so on.
+        #This is because the program assumes that each exercise in the workout session has the same amount of data associated with it.
+        #I used recursion to break down the program into smaller, easier-to-understand bits since I still struggle understanding the for loop syntax in python.
+        if count < len(self.workout_names): #Base Case
+            main_workout = QtWidgets.QMainWindow()
+            self.setupUi(main_workout)
+
+            #Block of code to deduct the number of exercises left depenigng on the length of list workout_names
+            number = len(self.workout_names) - count
+            number_string = str(number)
+
+            #See if iamge can be loaded or exist
+            try:
+                #Load the image file
+                image_path = self.workout_image[count]
+                pixmap = QPixmap(image_path)
+
+                #Set the loaded image as the background of the QGraphicsView
+                scene = QtWidgets.QGraphicsScene()
+                scene.addPixmap(pixmap)
+                self.graphicsView.setScene(scene)
+
+            except Exception as e:
+                print("Error loading image:", str(e))
+
+            #Sets value of labels
+            self.number.setText(number_string) #Change the number of exercises left each recursive loop by deducting with 1
+            self.exercise_name.setText(self.workout_names[count]) #Access exercise_name from self
+            self.reps.setText(self.workout_reps[count]) #Access workout_reps from self
+            self.description.setPlainText(self.workout_description[count]) #Access workout_description from self
+            
+            if number != 1:
+                self.left.setText("Exercises Left")
+            else:
+                self.left.setText("Exercise Left")
+
+            main_workout.show()
+
+            #Debugging, prints value of lists per index flagdown dependent to value of count
+            print (self.workout_names[count])
+            print (self.workout_reps[count])
+            print (self.workout_image[count])
+            print (self.workout_description[count])
+            
+            app.exec_()
+
+            if self.workout_finished: #Value will only be true when user clicks "Finish Workout."
+                print("\nForced Stop...\nWorkout Session Done!")
+                sys.exit()
+
+            self.run_window(count + 1) #Add +1 to count
+
+        else: #Recursive Step. If count condition has been sufficed, we stop the loop
+            print("Workout Session Done With Completion! Well Done.")
+            sys.exit()
+
+#On run, run_window()
 if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    main_workout = QtWidgets.QMainWindow()
     ui = Ui_main_workout()
-    ui.setupUi(main_workout)
-    main_workout.show()
-    sys.exit(app.exec_())
+    ui.run_window()
