@@ -10,6 +10,7 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from main_workout import Ui_main_workout
 import json
 
 class Ui_view_routine(object):
@@ -65,7 +66,7 @@ class Ui_view_routine(object):
         self.proceed.setFont(font)
         self.proceed.setObjectName("proceed")
 
-        self.proceed.clicked.connect(self.printBoth)
+        self.proceed.clicked.connect(self.proceed_workout)
 
         self.back_button = QtWidgets.QPushButton(self.centralwidget)
         self.back_button.setGeometry(QtCore.QRect(10, 650, 141, 31))
@@ -90,71 +91,36 @@ class Ui_view_routine(object):
 
         #Stores 'names' data in list workout_names
         workout_names = []
-        filepath = None #Flag Case. File path of JSON. Example: "program_files/beginner/arms.json"
+        self.filepath = None #Flag Case. File path of JSON. Example: "program_files/beginner/arms.json"
         workout_type = None #Flag Case. Type of workout. Example: "beginner_arms"
         
-        #For Beginner difficulty
-        if self.difficulty == 1 and self.program =="arms":
-            print("Beginners, arms day")
-            workout_type = f"beginner_{self.program}"
-            filepath = f"program_files/beginner/{self.program}.json"
-        elif self.difficulty == 1 and self.program =="legs":
-            print("Beginners, legs day")
-            workout_type = f"beginner_{self.program}"
-            filepath = f"program_files/beginner/{self.program}.json"
-        elif self.difficulty == 1 and self.program =="core":
-            print("Beginners, core day")
-            workout_type = f"beginner_{self.program}"
-            filepath = f"program_files/beginner/{self.program}.json"
-        elif self.difficulty == 1 and self.program =="cardio":
-            print("Beginners, cardio day")
-            workout_type = f"beginner_{self.program}"
-            filepath = f"program_files/beginner/{self.program}.json"
+        #Define the mapping between difficulty levels and workout types.
+        #I used a dictionary to avoid making an if else ladder.
+        #View the enormously large if else aldder at: https://github.com/tarikuzuma/RamFit/commit/7b4bc9d98e81605c300423242bf2e75d744254e2
+        difficulty_mapping = {
+            1: "beginner",      #For Beginner Workouts
+            2: "intermediate",  #For Intermediate Workouts
+            3: "advanced"       #For Advanced Workouts
+        }
 
-        #For Intermediate Difficulty
-        elif self.difficulty == 2 and self.program =="arms":
-            print("Intermediate, arms day")
-            workout_type = f"intermediate_{self.program}"
-            filepath = f"program_files/intermediate/{self.program}.json"
-        elif self.difficulty == 2 and self.program =="legs":
-            print("Intermediate, legs day")
-            workout_type = f"intermediate_{self.program}"
-            filepath = f"program_files/intermediate/{self.program}.json"
-        elif self.difficulty == 2 and self.program =="core":
-            print("Intermediate, core day")
-            workout_type = f"intermediate_{self.program}"
-            filepath = f"program_files/intermediate/{self.program}.json"
-        elif self.difficulty == 2 and self.program =="cardio":
-            print("Intermediate, cardio day")
-            workout_type = f"intermediate_{self.program}"
-            filepath = f"program_files/intermediate/{self.program}.json"
+        #Check if the difficulty level is valid
+        if self.difficulty in difficulty_mapping:
+            #Construct the workout type
+            workout_type = f"{difficulty_mapping[self.difficulty]}_{self.program}"
 
-        #For Advanced Difficulty
-        elif self.difficulty == 3 and self.program == "arms":
-            print("Advanced, arms day")
-            workout_type = f"advanced_{self.program}"
-            filepath = f"program_files/advanced/{self.program}.json"
-        elif self.difficulty == 3 and self.program == "legs":
-            print("Advanced, legs day")
-            workout_type = f"advanced_{self.program}"
-            filepath = f"program_files/advanced/{self.program}.json"
-        elif self.difficulty == 3 and self.program == "core":
-            print("Advanced, core day")
-            workout_type = f"advanced_{self.program}"
-            filepath = f"program_files/advanced/{self.program}.json"
-        elif self.difficulty == 3 and self.program == "cardio":
-            print("Advanced, cardio day")
-            workout_type = f"advanced_{self.program}"
-            filepath = f"program_files/advanced/{self.program}.json"
-
+            #Construct the file path
+            #Stored in self to keep it as a persistent datatype. For Inter Module Commmunication
+            self.filepath = f"program_files/{difficulty_mapping[self.difficulty]}/{self.program}.json"
+            #Print the appropriate message based on the difficulty level and program
+            print(f"{difficulty_mapping[self.difficulty].capitalize()}, {self.program} day")
         else:
             print("Unreadable")
             return
 
-        print ("File path: ", filepath, "\nKey:", workout_type)
+        print ("File path: ", self.filepath, "\nKey:", workout_type)
 
         try:
-            with open(filepath, "r") as f:
+            with open(self.filepath, "r") as f:
                 json_object = json.load(f)
                 #print ("\n",json_object,"\n") #Debug to read what JSON read.
                 workout = json_object[workout_type]
@@ -167,30 +133,36 @@ class Ui_view_routine(object):
         except FileNotFoundError:
             #Code to crash view_routine to display file error not found.
             #Temporary Solution. If file not found, annd user presses "Let's Go," program will crash.
-            print("File not found:", filepath)
+            print("File not found:", self.filepath)
             print("It has either been deleted or data has not been created yet.")
             x = 5/0
             print(x)
 
         except json.JSONDecodeError:
-            print("Invalid JSON format in file:", filepath)
+            print("Invalid JSON format in file:", self.filepath)
 
-        
         #Adds list of names into list_widget
         print ("Workouts include: ", *workout_names, sep=", ")
         self.list_widget.addItems([*workout_names])
     
-
     #Debugging purposes: Check if Button works. Check if dififculty and program is recorded
     def printBoth(self):
         self.read_program()
         print("Hello World: ", self.difficulty, self.program)
-    
+
+    def proceed_workout(self):
+        #self.read_program()
+        print("Hello World: ", self.difficulty, self.program)
+        self.window = QtWidgets.QMainWindow()
+        self.ui = Ui_main_workout()
+        self.ui.setupUi(self.window)
+        self.ui.run_window()
+        self.window.show()
+        
     def cancel(self):
         print("\nGoing back to main menu...\n")
         self.win.close()
         
-
     def retranslateUi(self, view_routine):
         _translate = QtCore.QCoreApplication.translate
         view_routine.setWindowTitle(_translate("view_routine", "MainWindow"))

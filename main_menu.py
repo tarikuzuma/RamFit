@@ -89,11 +89,10 @@ class Ui_MainWindow(object):
 
     #Opens choose_profile.py
     def open_choose_profile(self):
+        print ("Deactivating all profiles...")
         self.window = QtWidgets.QMainWindow()
         self.ui = Ui_choose_profile()
         self.ui.setupUi(self.window)
-
-        print ("Deactivating all profiles...")
 
         #Turns every profile status to "None" or "Not Editable" once clicked
         for i in range(1,5):

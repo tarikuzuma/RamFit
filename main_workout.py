@@ -148,7 +148,7 @@ class Ui_main_workout(object):
  
         filepath = "program_files/beginner/arms.json" #Dependent on workout_routine's filepath
         workout_type = "beginner_arms" #Dependent on workout_type of viewroutine
-        
+    
         #Calls read_workout
         self.read_workout(filepath, workout_type)
 
@@ -222,3 +222,4 @@ class Ui_main_workout(object):
 if __name__ == "__main__":
     ui = Ui_main_workout()
     ui.run_window()
+
