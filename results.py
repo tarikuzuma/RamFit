@@ -216,8 +216,9 @@ class Ui_results(object):
         self.button_main.setText(_translate("results", "Back to Main"))
 
     def back_main(self):
-        #self.win.close()
-        print(self.read_name())
+        self.win.close()
+        #self.add_workout_data()
+        
         
     #A more convenient way to read profiles. I forgot about return functions.
     #Finds profile with the status "active" and refers to it as editing mode.
@@ -268,7 +269,27 @@ class Ui_results(object):
 
         return weight, height, bmi, category
     
-        
+    def add_workout_data(self):
+        profile_path = f"profiles/{self.read_status()}"
+
+        workout_data = {
+            "date": "2023-06-24",
+            "exercise": "Running",
+            "duration": 30,
+            "distance": 5
+        }
+
+        with open(profile_path, 'r+') as f:
+            profile = json.load(f)
+            if "workout_data" not in profile:
+                profile["workout_data"] = workout_data
+            else:
+                profile["workout_data"].update(workout_data)
+            f.seek(0)  # Move the file pointer to the beginning
+            json.dump(profile, f, indent=4)
+            f.truncate()  # Truncate the file to remove any remaining content
+            
+
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)

@@ -92,7 +92,7 @@ class Ui_view_routine(object):
         #Stores 'names' data in list workout_names
         workout_names = []
         self.filepath = None #Flag Case. File path of JSON. Example: "program_files/beginner/arms.json"
-        workout_type = None #Flag Case. Type of workout. Example: "beginner_arms"
+        self.workout_type = None #Flag Case. Type of workout. Example: "beginner_arms"
         
         #Define the mapping between difficulty levels and workout types.
         #I used a dictionary to avoid making an if else ladder.
@@ -106,7 +106,7 @@ class Ui_view_routine(object):
         #Check if the difficulty level is valid
         if self.difficulty in difficulty_mapping:
             #Construct the workout type
-            workout_type = f"{difficulty_mapping[self.difficulty]}_{self.program}"
+            self.workout_type = f"{difficulty_mapping[self.difficulty]}_{self.program}"
 
             #Construct the file path
             #Stored in self to keep it as a persistent datatype. For Inter Module Commmunication
@@ -117,13 +117,13 @@ class Ui_view_routine(object):
             print("Unreadable")
             return
 
-        print ("File path: ", self.filepath, "\nKey:", workout_type)
+        print ("File path: ", self.filepath, "\nKey:", self.workout_type)
 
         try:
             with open(self.filepath, "r") as f:
                 json_object = json.load(f)
                 #print ("\n",json_object,"\n") #Debug to read what JSON read.
-                workout = json_object[workout_type]
+                workout = json_object[self.workout_type]
 
                 #Print the name of each exercise in the workout
                 for exercise in workout:
@@ -155,9 +155,10 @@ class Ui_view_routine(object):
         print("Hello World: ", self.difficulty, self.program)
         self.window = QtWidgets.QMainWindow()
         self.ui = Ui_main_workout()
-        self.ui.setupUi(self.window)
-        self.ui.run_window()
+        self.ui.setupUi(self.window, 0, self.filepath, self.workout_type)
+        #self.ui.run_window()
         self.window.show()
+        self.win.close()
         
     def cancel(self):
         print("\nGoing back to main menu...\n")

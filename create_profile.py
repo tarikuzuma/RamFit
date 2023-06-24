@@ -296,9 +296,9 @@ class Ui_createProfile(object):
                     "height": result,
                     "weight": weight
                 },
-                "workout_data": {
-
-                }
+                "workout_data": [
+                    
+                ]
             }
             
             # Write the JSON string to the file
