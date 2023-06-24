@@ -80,6 +80,10 @@ class Ui_main_workout(object):
         self.description = QtWidgets.QPlainTextEdit(self.centralwidget)
         self.description.setGeometry(QtCore.QRect(20, 470, 381, 121))
         self.description.setObjectName("description")
+        font.setFamily("Poppins")
+        self.description.setFont(font)
+        #self.description.setPlainText("Hello Test") Old code to display value for description
+
         self.progressBar = QtWidgets.QProgressBar(self.centralwidget)
         self.progressBar.setGeometry(QtCore.QRect(40, 610, 361, 23))
         self.progressBar.setProperty("value", 24)
@@ -95,11 +99,11 @@ class Ui_main_workout(object):
     def retranslateUi(self, main_workout):
         _translate = QtCore.QCoreApplication.translate
         main_workout.setWindowTitle(_translate("main_workout", "MainWindow"))
-        self.number.setText(_translate("main_workout", "10"))
+        #self.number.setText(_translate("main_workout", "10")) #Old code to set the total number of exercises to default
         self.left.setText(_translate("main_workout", "Exercises Left"))
         self.finish_workout.setText(_translate("main_workout", "> Finish Workout"))
-        self.exercise_name.setText(_translate("main_workout", "Exercise Name"))
-        self.reps.setText(_translate("main_workout", "Repetition"))
+        #self.exercise_name.setText(_translate("main_workout", "Exercise Name")) Old code to set name to default
+        #self.reps.setText(_translate("main_workout", "Repetition")) Old code to set reps to default
         self.completed.setText(_translate("main_workout", "Completed"))
 
     def workout_complete(self):
@@ -134,13 +138,12 @@ class Ui_main_workout(object):
                 self.workout_image.append(exercise_image)
                 self.workout_description.append(exercise_description)
 
-    #This is where we're gonna put all of the interchangabled ata
-    #Method uses recursion to loop through window 10 times. Count is equal to the number of workouts.
+    #This is where we're gonna put all of the interchangable data
+    #Method uses recursion to loop through window n times. Count is equal to the number of workouts.
     def run_window(self, count=0):
         import sys
         app = QtWidgets.QApplication(sys.argv)
-        ui = Ui_main_workout()
-
+ 
         filepath = "program_files/beginner/arms.json" #Dependent on workout_routine's filepath
         workout_type = "beginner_arms" #Dependent on workout_type of viewroutine
         
@@ -155,13 +158,23 @@ class Ui_main_workout(object):
         print (self.workout_description)
         '''
 
-        #If count is greater than the length of the length, we stop the recursion.
-        #It is ASSUMED that length of each data per key is the name as each other.
-        #That is the logic of my program. So essentially, length of workout_names = length of workout_image location.
-        #I used recursion to breakdown the program to easier bits.
+        #If the value of count is greater than the number of items in the workout_names list, then we stop the recursive loop.
+        #It is ASSUMED that the length of each list of data per key is the same as the length of the other lists.
+        #For example, the length of the `workout_names` list is the same as the length of the `workout_reps` list, the `workout_image` list, and so on.
+        #This is because the program assumes that each exercise in the workout session has the same amount of data associated with it.
+        #I used recursion to break down the program into smaller, easier-to-understand bits since I still struggle understanding the for loop syntax in python.
         if count < len(self.workout_names): #Base Case
             main_workout = QtWidgets.QMainWindow()
             self.setupUi(main_workout)
+
+            #Sets value of labels
+            number = len(self.workout_names) - count
+            number_string = str(number)
+
+            self.number.setText(number_string) #Change the number of exercises left each recursive loop by deducting with 1
+            self.exercise_name.setText(self.workout_names[count]) #Access exercise_name from self
+            self.reps.setText(self.workout_reps[count]) #Access workout_reps from self
+            self.description.setPlainText(self.workout_description[count]) #Access workout_description from self
             main_workout.show()
 
             #Debugging, prints value of lists per index flagdown dependent to value of count
@@ -169,6 +182,7 @@ class Ui_main_workout(object):
             print (self.workout_reps[count])
             print (self.workout_image[count])
             print (self.workout_description[count])
+            
             app.exec_()
 
             if self.workout_finished: #Value will only be true when user clicks "Finish Workout."
@@ -177,7 +191,7 @@ class Ui_main_workout(object):
 
             self.run_window(count + 1) #Add +1 to count
 
-        else: #If count condition has been sufficed, we stop the loop
+        else: #Recursive Step. If count condition has been sufficed, we stop the loop
             print("Workout Session Done With Completion! Well Done.")
             sys.exit()
 
