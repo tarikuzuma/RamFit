@@ -10,11 +10,15 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from results_error import Ui_results_error
+from datetime import datetime
 import json
 import os
 
 class Ui_results(object):
-    def setupUi(self, results):
+    def setupUi(self, results, filepath, workout_type):
+        
+        self.filepath = filepath
+        self.workout_type = workout_type
 
         self.win = results
         weight, height, bmi, category = self.edit_bmi()
@@ -196,6 +200,10 @@ class Ui_results(object):
         self.statusbar.setObjectName("statusbar")
         results.setStatusBar(self.statusbar)
 
+        self.edit_workout_data(self.filepath, self.workout_type)
+
+        print("\n Workout Data is as shown: \n")
+
         self.retranslateUi(results)
         QtCore.QMetaObject.connectSlotsByName(results)
 
@@ -219,10 +227,12 @@ class Ui_results(object):
     def back_main(self):
         self.win.close()
         #self.add_workout_data()
+        #self.edit_workout_data(self.filepath, self.workout_type)
         
         
     #A more convenient way to read profiles. I forgot about return functions.
     #Finds profile with the status "active" and refers to it as editing mode.
+    #https://python.hotexamples.com/examples/ui_mainwindow/Ui_MainWindow/setupUi/python-ui_mainwindow-setupui-method-examples.html
     def read_status(self):
         file_path = "profiles"
         active_profile = None
@@ -270,26 +280,37 @@ class Ui_results(object):
 
         return weight, height, bmi, category
     
-    def add_workout_data(self):
-        profile_path = f"profiles/{self.read_status()}"
+    def write(self, data, filename):
+        with open(filename, "w") as f:
+            json.dump(data, f, indent=4)
 
-        workout_data = {
-            "date": "2023-06-24",
-            "exercise": "Running",
-            "duration": 30,
-            "distance": 5
-        }
+    def edit_workout_data(self, filepath, workout_type):
+        filename = f"profiles/{self.read_status()}"
+        filepath = self.filepath
+        workout_type = self.workout_type
 
-        with open(profile_path, 'r+') as f:
-            profile = json.load(f)
-            if "workout_data" not in profile:
-                profile["workout_data"] = workout_data
-            else:
-                profile["workout_data"].update(workout_data)
-            f.seek(0)  # Move the file pointer to the beginning
-            json.dump(profile, f, indent=4)
-            f.truncate()  # Truncate the file to remove any remaining content
-            
+        with open(filename) as json_file:
+            data = json.load(json_file)
+            temp = data["workout_data"]
+
+            #Formats the datetime object into a string with the specified format
+            current_date_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S") #Years, Months, Date, Hours, Mins, Second
+            current_date = current_date_time.split()[0] #Assigns the first substring
+            current_time = current_date_time.split()[1] #Assigns the second substring
+
+            new_data = {
+                current_date: {
+                    "Time": current_time,
+                    "Type": f"{workout_type}",
+                    "Duration": "10 - 15 Minutes",
+                    "Calories Burnt": "100 Calories"
+                }
+            }
+
+            temp.append(new_data)
+            data["workout_data"] = temp
+
+            self.write(data, filename)            
 
 if __name__ == "__main__":
     try:

@@ -1,5 +1,5 @@
 {
-    "status": "None",
+    "status": "active",
     "info": {
         "name": "John Doe",
         "age": 19,
@@ -7,5 +7,38 @@
         "height": 167.64000000000001,
         "weight": 56.0
     },
-    "workout_data": []
+    "workout_data": [
+        {
+            "2023-06-25": {
+                "Time": "01:30:33",
+                "Type": "beginner_arms",
+                "Duration": "10 - 15 Minutes",
+                "Calories Burnt": "100 Calories"
+            }
+        },
+        {
+            "2023-06-25": {
+                "Time": "01:31:29",
+                "Type": "beginner_legs",
+                "Duration": "10 - 15 Minutes",
+                "Calories Burnt": "100 Calories"
+            }
+        },
+        {
+            "2023-06-25": {
+                "Time": "01:32:36",
+                "Type": "beginner_arms",
+                "Duration": "10 - 15 Minutes",
+                "Calories Burnt": "100 Calories"
+            }
+        },
+        {
+            "2023-06-25": {
+                "Time": "01:33:48",
+                "Type": "beginner_core",
+                "Duration": "10 - 15 Minutes",
+                "Calories Burnt": "100 Calories"
+            }
+        }
+    ]
 }

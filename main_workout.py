@@ -122,7 +122,7 @@ class Ui_main_workout(object):
             #Opens results.py window
             self.window = QtWidgets.QMainWindow()
             self.ui = Ui_results()
-            self.ui.setupUi(self.window)
+            self.ui.setupUi(self.window, self.filepath, self.workout_type)
             self.window.show()
             #sys.exit() # FIXME: Is this the right behavior?
             self.win.close()
