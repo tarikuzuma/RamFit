@@ -3,31 +3,31 @@
         {
             "name":"NameTest",
             "reps":"RepTest",
-            "image":"ImageTest",
+            "image":"program_files/images/dog.jpg",
             "description":"Lorem Ipsum"
         },
         {
             "name":"NameTest1",
             "reps":"RepTest1",
-            "image":"ImageTest1",
+            "image":"program_files/images/cat.jpg",
             "description":"Lorem Ipsum1"
         },
         {
             "name":"NameTest2",
             "reps":"RepTest2",
-            "image":"ImageTest2",
+            "image":"program_files/images/rabbit.jpg",
             "description":"Lorem Ipsum2"
         },
         {
             "name":"NameTes3t",
             "reps":"RepTest3",
-            "image":"ImageTest3",
+            "image":"program_files/images/fish.jpg",
             "description":"Lorem Ipsum3"
         },
         {
             "name":"NameTest4",
             "reps":"RepTest4",
-            "image":"ImageTest4",
+            "image":"program_files/images/bird.jpg",
             "description":"Lorem Ipsum4"
         }
     ]

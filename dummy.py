@@ -9,6 +9,7 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtGui import QPixmap
 import json
 
 class Ui_main_workout(object):
@@ -54,6 +55,7 @@ class Ui_main_workout(object):
         self.graphicsView = QtWidgets.QGraphicsView(self.centralwidget)
         self.graphicsView.setGeometry(QtCore.QRect(10, 100, 391, 311))
         self.graphicsView.setObjectName("graphicsView")
+
         self.exercise_name = QtWidgets.QLabel(self.centralwidget)
         self.exercise_name.setGeometry(QtCore.QRect(30, 430, 141, 31))
         font = QtGui.QFont()
@@ -100,10 +102,10 @@ class Ui_main_workout(object):
         _translate = QtCore.QCoreApplication.translate
         main_workout.setWindowTitle(_translate("main_workout", "MainWindow"))
         #self.number.setText(_translate("main_workout", "10")) #Old code to set the total number of exercises to default
-        self.left.setText(_translate("main_workout", "Exercises Left"))
+        #self.left.setText(_translate("main_workout", "Exercises Left")) #Old code to set exercises to left
         self.finish_workout.setText(_translate("main_workout", "> Finish Workout"))
-        #self.exercise_name.setText(_translate("main_workout", "Exercise Name")) Old code to set name to default
-        #self.reps.setText(_translate("main_workout", "Repetition")) Old code to set reps to default
+        #self.exercise_name.setText(_translate("main_workout", "Exercise Name")) #Old code to set name to default
+        #self.reps.setText(_translate("main_workout", "Repetition")) #Old code to set reps to default
         self.completed.setText(_translate("main_workout", "Completed"))
 
     def workout_complete(self):
@@ -167,14 +169,35 @@ class Ui_main_workout(object):
             main_workout = QtWidgets.QMainWindow()
             self.setupUi(main_workout)
 
-            #Sets value of labels
+            #Block of code to deduct the number of exercises left depenigng on the length of list workout_names
             number = len(self.workout_names) - count
             number_string = str(number)
 
+            #See if iamge can be loaded or exist
+            try:
+                #Load the image file
+                image_path = self.workout_image[count]
+                pixmap = QPixmap(image_path)
+
+                #Set the loaded image as the background of the QGraphicsView
+                scene = QtWidgets.QGraphicsScene()
+                scene.addPixmap(pixmap)
+                self.graphicsView.setScene(scene)
+
+            except Exception as e:
+                print("Error loading image:", str(e))
+
+            #Sets value of labels
             self.number.setText(number_string) #Change the number of exercises left each recursive loop by deducting with 1
             self.exercise_name.setText(self.workout_names[count]) #Access exercise_name from self
             self.reps.setText(self.workout_reps[count]) #Access workout_reps from self
             self.description.setPlainText(self.workout_description[count]) #Access workout_description from self
+            
+            if number != 1:
+                self.left.setText("Exercises Left")
+            else:
+                self.left.setText("Exercise Left")
+
             main_workout.show()
 
             #Debugging, prints value of lists per index flagdown dependent to value of count
