@@ -16,6 +16,13 @@ import json
 import sys
 
 class Ui_main_workout(object):
+    '''
+        Accepts the arguments count, which is the number of times the program needs to keep changing the screen.
+            - Count is Equal to the total number of workouts.
+            - Filepath stores path where data should go 
+            - Workout type (arms, legs, core, cardio)
+            - Start_time is the persistent value that will keep running at the background to measure time.
+    '''
     def setupUi(self, main_workout, count, filepath, workout_type, start_time):
         self.count = count #Count as persistent
         self.filepath = filepath
@@ -23,7 +30,7 @@ class Ui_main_workout(object):
         self.start_time = start_time #start_time value as persistent
 
         self.win = main_workout
-        self.workout_finished = False
+        self.workout_finished = False 
         self.timer_stop = False
 
         main_workout.setObjectName("main_workout")
@@ -117,11 +124,12 @@ class Ui_main_workout(object):
         #self.reps.setText(_translate("main_workout", "Repetition")) #Old code to set reps to default
         self.completed.setText(_translate("main_workout", "Completed"))
     
-    #Method to start and stop timer.
+    #Method to start timer
     def start_timer(self):
         print("Timer Started...")
         self.start_time = timer.time()
 
+    #Method to end timer IF self.timer_stop is TRUE
     def end_timer(self):
         if self.timer_stop:
             print(" \n PASSES \n")
@@ -129,13 +137,17 @@ class Ui_main_workout(object):
             elapsed_time = end_time - self.start_time
 
             print (f"Timer stopped. Elapsed time: {elapsed_time} seconds.")
-            #return elapsed_time
 
+            return elapsed_time
+
+    #Open and close window while changing the values depending on count.
     def workout_complete(self):
         self.count += 1
+        
+        #Stops the program with completion.
         if self.count >= len(self.workout_names): #True Stop
             self.timer_stop = True
-            self.end_timer()
+            self.time = self.end_timer()
 
             print("Timer stop: ", self.timer_stop)
             print("Workout Session Done With Completion! Well Done.")
@@ -143,7 +155,7 @@ class Ui_main_workout(object):
             #Opens results.py window
             self.window = QtWidgets.QMainWindow()
             self.ui = Ui_results()
-            self.ui.setupUi(self.window, self.filepath, self.workout_type)
+            self.ui.setupUi(self.window, self.filepath, self.workout_type, self.time)
             self.window.show()
             #sys.exit() # FIXME: Is this the right behavior?
             self.win.close()
@@ -161,12 +173,14 @@ class Ui_main_workout(object):
         self.workout_finished = True
         self.timer_stop = True
         print("Timer stop: ", self.timer_stop)
-        self.end_timer()
+
+        self.time = self.end_timer()
+
         if self.workout_finished: #Value will only be true when user clicks "Finish Workout."
             print("\nForced Stop...\nWorkout Session Done!")
             self.window = QtWidgets.QMainWindow()
             self.ui = Ui_results()
-            self.ui.setupUi(self.window, self.filepath,self.workout_type)
+            self.ui.setupUi(self.window, self.filepath,self.workout_type, self.time)
             self.window.show()
             #sys.exit() # FIXME: Is this the right behavior?
             self.win.close()
@@ -200,6 +214,7 @@ class Ui_main_workout(object):
     def init_info(self, count, filepath, workout_type):
         print("{" + str(count) + "}")
 
+        #If self count is 0 or just started, initialize timer.
         if self.count == 0:
             self.start_timer()
 

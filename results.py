@@ -15,14 +15,30 @@ import json
 import os
 
 class Ui_results(object):
-    def setupUi(self, results, filepath, workout_type):
+
+    '''
+        Accepts the arguments filepath, workout_type, and time.
+            -Filepath is where the workout is
+            -Workout type is what workout type is in that filepath
+            -Time is dependent on the final result of main_workout.py once it was finished.
+    '''
+
+    def setupUi(self, results, filepath, workout_type, time):
         
         self.filepath = filepath
         self.workout_type = workout_type
+        self.time = time
 
-        self.win = results
+        self.win = results #Window of results
+
+        minutes, seconds = self.convert_seconds(self.time)
+        print ("\nTime in seconds: ",self.time)
+        print (minutes, seconds)
+        self.minutes_str = str(minutes)
+        self.seconds_str = str(seconds)
+
         weight, height, bmi, category = self.edit_bmi()
-
+        #time_str = str(self.time)
         weight_str = str(weight)
         height_str = str(height)
         bmi_str = f"= {str(bmi)}"
@@ -59,7 +75,7 @@ class Ui_results(object):
         self.total_time.setFont(font)
         self.total_time.setObjectName("total_time")
         self.total_time_editable = QtWidgets.QLabel(self.centralwidget)
-        self.total_time_editable.setGeometry(QtCore.QRect(250, 100, 91, 20))
+        self.total_time_editable.setGeometry(QtCore.QRect(250, 100, 200, 20))
         font = QtGui.QFont()
         font.setFamily("Poppins")
         font.setPointSize(10)
@@ -67,6 +83,9 @@ class Ui_results(object):
         font.setWeight(75)
         self.total_time_editable.setFont(font)
         self.total_time_editable.setObjectName("total_time_editable")
+
+        self.total_time_editable.setText(f"{self.minutes_str} Mins {self.seconds_str} Secs")
+
         self.calendarWidget = QtWidgets.QCalendarWidget(self.centralwidget)
         self.calendarWidget.setGeometry(QtCore.QRect(20, 260, 376, 218))
         self.calendarWidget.setObjectName("calendarWidget")
@@ -152,7 +171,7 @@ class Ui_results(object):
         self.bmi_final.setText(bmi_str + " / " + category_str)
 
         self.height_editable = QtWidgets.QLabel(self.centralwidget)
-        self.height_editable.setGeometry(QtCore.QRect(190, 550, 100, 16))
+        self.height_editable.setGeometry(QtCore.QRect(190, 550, 150, 16))
         font = QtGui.QFont()
         font.setPointSize(10)
         font.setBold(False)
@@ -161,10 +180,10 @@ class Ui_results(object):
         self.height_editable.setFont(font)
         self.height_editable.setObjectName("height_editable")
 
-        self.height_editable.setText(height_str)
+        self.height_editable.setText(f"{height_str} cm")
 
         self.weight_editable = QtWidgets.QLabel(self.centralwidget)
-        self.weight_editable.setGeometry(QtCore.QRect(190, 580, 55, 16))
+        self.weight_editable.setGeometry(QtCore.QRect(190, 580, 150, 16))
         font = QtGui.QFont()
         font.setPointSize(10)
         font.setBold(False)
@@ -173,7 +192,7 @@ class Ui_results(object):
         self.weight_editable.setFont(font)
         self.weight_editable.setObjectName("weight_editable")
 
-        self.weight_editable.setText(weight_str)
+        self.weight_editable.setText(f"{weight_str} KG")
 
         self.button_main = QtWidgets.QPushButton(self.centralwidget)
         self.button_main.setGeometry(QtCore.QRect(262, 660, 121, 28))
@@ -203,7 +222,7 @@ class Ui_results(object):
         self.statusbar.setObjectName("statusbar")
         results.setStatusBar(self.statusbar)
 
-        self.edit_workout_data(self.filepath, self.workout_type)
+        self.edit_workout_data(self.filepath, self.workout_type, self.minutes_str, self.seconds_str)
 
         print("\n Workout Data is as shown: \n")
 
@@ -215,7 +234,7 @@ class Ui_results(object):
         results.setWindowTitle(_translate("results", "MainWindow"))
         self.synopsis.setText(_translate("results", "Workout Synopsis"))
         self.total_time.setText(_translate("results", "Total time of Workout:"))
-        self.total_time_editable.setText(_translate("results", "10 Minutes"))
+        #self.total_time_editable.setText(_translate("results", "10 Minutes"))
         self.total_calories.setText(_translate("results", "Potential Calories Lost:"))
         self.total_calories_editable.setText(_translate("results", "100 Calories"))
         self.height_label.setText(_translate("results", "Your Height:"))
@@ -231,8 +250,6 @@ class Ui_results(object):
         self.win.close()
         #self.add_workout_data()
         #self.edit_workout_data(self.filepath, self.workout_type)
-
-
         
     #A more convenient way to read profiles. I forgot about return functions.
     #Finds profile with the status "active" and refers to it as editing mode.
@@ -255,6 +272,17 @@ class Ui_results(object):
             name = json_object["info"]["name"]
         return name
     
+    #Accepts the argument "seconds" which is dependent to the seconds last main_workout.py
+    def convert_seconds(self, seconds):
+        minutes = seconds // 60
+        seconds = seconds % 60
+
+        #Round to the nearest whole number
+        minutes = round(minutes)
+        seconds = round(seconds)
+
+        return minutes, seconds #returns in the form of {value} minutes and {value} seconds
+
     #A method to edit BMI and get attributes from JSON
     def edit_bmi(self):
         profile = f"profiles/{self.read_status()}" #Gets the profile with active status
@@ -288,11 +316,13 @@ class Ui_results(object):
         with open(filename, "w") as f:
             json.dump(data, f, indent=4)
 
-    def edit_workout_data(self, filepath, workout_type):
+    def edit_workout_data(self, filepath, workout_type, minutes, seconds):
         filename = f"profiles/{self.read_status()}"
         self.filename = filename
         filepath = self.filepath
         workout_type = self.workout_type
+        self.minutes = minutes
+        self.seconds = seconds
 
         with open(filename) as json_file:
             data = json.load(json_file)
@@ -307,7 +337,7 @@ class Ui_results(object):
                 current_date: {
                     "Time": current_time,
                     "Type": f"{workout_type}",
-                    "Duration": "10 - 15 Minutes",
+                    "Duration": f"{self.minutes_str} Mins {self.seconds_str} Secs",
                     "Calories Burnt": "100 Calories"
                 }
             }

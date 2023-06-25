@@ -84,10 +84,10 @@ class Ui_difficulty_choose(object):
         self.advanced_button.setText(_translate("difficulty_choose", "Advanced"))
 
     """
-    Accepts the argument "difficulty" which is dependent on what intenisity the exercise the user chose.
-    This method stores difficulty.choose and opens program_choose while saving the user's chosen difficulty.
-    The concept is called "Inter Module Communication."
-    https://www.sdcc.bnl.gov/phobos/Phat/PhatDocumentation/Phat5/node16.html
+        Accepts the argument "difficulty" which is dependent on what intenisity the exercise the user chose.
+        This method stores difficulty.choose and opens program_choose while saving the user's chosen difficulty.
+        The concept is called "Inter Module Communication."
+        https://www.sdcc.bnl.gov/phobos/Phat/PhatDocumentation/Phat5/node16.html
     """
 
     def intensity(self, difficulty):
