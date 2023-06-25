@@ -8,11 +8,11 @@ def read_theme():
         data = json.load(f)
         theme = data['theme']
         if theme == "light":
-            return "#F5F5F5", "#67B678", "#C34C4C", "#7EDBB4", "#DCB349", "#A25EC3"
+            return "#F5F5F5", "#67B678", "#C34C4C", "#7EDBB4", "#DCB349", "#A25EC3", "#ffffff", "#cccccc"
         elif theme == "dark":
-            return "#2c4c3b", "#516f55", "#885a57", "#455a50", "#9f8f6f", "#b1a1b7"
+            return "#2c4c3b", "#516f55", "#885a57", "#455a50", "#9f8f6f", "#b1a1b7", "#427258", "#243f30"
         
-THEME_COLOR, BUTTON_COLOR, BUTTON_COLOR1, BUTTON_COLOR2,  BUTTON_COLOR3, BUTTON_COLOR4 = read_theme()
+THEME_COLOR, BUTTON_COLOR, BUTTON_COLOR1, BUTTON_COLOR2,  BUTTON_COLOR3, BUTTON_COLOR4, LIST_COLOR, LIST_HIGHLIGHT = read_theme()
 
 '''
 THEME_COLOR = "#F5F5F5"    #Sets background color

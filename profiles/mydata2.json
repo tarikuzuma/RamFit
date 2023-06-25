@@ -23,6 +23,30 @@
                 "Duration": "0 Mins 3 Secs",
                 "Calories Burnt": "100 Calories"
             }
+        },
+        {
+            "2023-06-26": {
+                "Time": "01:02:32",
+                "Type": "beginner_arms",
+                "Duration": "0 Mins 14 Secs",
+                "Calories Burnt": "100 Calories"
+            }
+        },
+        {
+            "2023-06-26": {
+                "Time": "01:04:07",
+                "Type": "beginner_legs",
+                "Duration": "0 Mins 1 Secs",
+                "Calories Burnt": "100 Calories"
+            }
+        },
+        {
+            "2023-06-26": {
+                "Time": "01:23:16",
+                "Type": "beginner_arms",
+                "Duration": "0 Mins 6 Secs",
+                "Calories Burnt": "100 Calories"
+            }
         }
     ]
 }

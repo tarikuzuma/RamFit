@@ -11,6 +11,7 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from main_workout import Ui_main_workout
+from defaults import *
 import json
 
 class Ui_view_routine(object):
@@ -24,6 +25,12 @@ class Ui_view_routine(object):
         self.win = view_routine
 
         view_routine.setObjectName("view_routine")
+        view_routine.resize(WIDTH, HEIGHT)
+        view_routine.setFixedWidth(WIDTH)
+        view_routine.setFixedHeight(HEIGHT)
+        view_routine.setMaximumWidth(WIDTH)
+        view_routine.setMaximumHeight(HEIGHT)
+
         view_routine.setWindowModality(QtCore.Qt.WindowModal)
         view_routine.resize(412, 732)
         self.centralwidget = QtWidgets.QWidget(view_routine)
@@ -46,6 +53,30 @@ class Ui_view_routine(object):
         self.list_widget.setGeometry(QtCore.QRect(0, 60, 412, 561))
         self.list_widget.setObjectName("list_widget")
 
+        #Set the background color
+        self.list_widget.setStyleSheet("background-color: {};".format(LIST_COLOR))
+
+        # Set additional styling options
+        self.list_widget.setStyleSheet("""
+            QListWidget {
+                background-color: %s;
+                border: none;
+            }
+            
+            QListWidget::item {
+                padding: 10px;
+            }
+
+            QListWidget::item:alternate {
+                background-color: #EAEAEA;
+            }
+            
+            QListWidget::item:selected {
+                background-color: %s;
+                color: white;
+            }
+        """ % (LIST_COLOR, LIST_HIGHLIGHT))
+
         try:
             self.list_widget.addItems([self.read_program()])
         except:
@@ -66,6 +97,7 @@ class Ui_view_routine(object):
         self.proceed.setFont(font)
         self.proceed.setObjectName("proceed")
 
+        self.proceed.setStyleSheet("background-color: {};".format(BUTTON_COLOR))
         self.proceed.clicked.connect(self.proceed_workout)
 
         self.back_button = QtWidgets.QPushButton(self.centralwidget)
@@ -76,12 +108,15 @@ class Ui_view_routine(object):
         self.back_button.setFont(font)
         self.back_button.setObjectName("back_button")
 
+        self.back_button.setStyleSheet("background-color: {};".format(BUTTON_COLOR1))
         self.back_button.clicked.connect(self.cancel)
 
         view_routine.setCentralWidget(self.centralwidget)
         self.statusbar = QtWidgets.QStatusBar(view_routine)
         self.statusbar.setObjectName("statusbar")
         view_routine.setStatusBar(self.statusbar)
+
+        view_routine.setStyleSheet("background-color: {};".format(THEME_COLOR))
 
         self.retranslateUi(view_routine)
         QtCore.QMetaObject.connectSlotsByName(view_routine)

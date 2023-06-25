@@ -84,7 +84,7 @@ class Ui_MainWindow(object):
         self.statusbar.setObjectName("statusbar")
         MainWindow.setStatusBar(self.statusbar)
 
-        #Theme of screen is dependent on json file data.
+        #Theme of screen is dependent on theme file data.
         #MainWindow.setStyleSheet("background-color: yellow;")
         MainWindow.setStyleSheet("background-color: {};".format(THEME_COLOR))
 
