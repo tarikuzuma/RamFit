@@ -12,6 +12,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from settings import Ui_settings_2
 from create_profile import Ui_createProfile
 from choose_profile import Ui_choose_profile
+from defaults import *
 import json
 
 #Initailizes Main Menu Screen for application.
@@ -22,35 +23,43 @@ class Ui_MainWindow(object):
         MainWindow.setObjectName("MainWindow")
 
         #Height is based off Nexus 5X viewport
-        height = 732
-        width = 412
-        MainWindow.resize(width, height)
-        MainWindow.setFixedWidth(width)
-        MainWindow.setFixedHeight(height)
-        MainWindow.setMaximumWidth(width)
-        MainWindow.setMaximumHeight(height)
+        MainWindow.resize(WIDTH, HEIGHT)
+        MainWindow.setFixedWidth(WIDTH)
+        MainWindow.setFixedHeight(HEIGHT)
+        MainWindow.setMaximumWidth(WIDTH)
+        MainWindow.setMaximumHeight(HEIGHT)
 
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.test1_button = QtWidgets.QPushButton(self.centralwidget)
         self.test1_button.setEnabled(True)
         self.test1_button.setGeometry(QtCore.QRect(60, 220, 301, 91))
+        self.test1_button.setStyleSheet("background-color: {};".format(BUTTON_COLOR))
         self.test1_button.setObjectName("test1_button")
+        font = QtGui.QFont()
+        font.setFamily("Poppins")
+        font.setPointSize(12)
+        self.test1_button.setFont(font)
 
         self.test1_button.clicked.connect(self.open_choose_profile)
 
         self.main_menu = QtWidgets.QLabel(self.centralwidget)
-        self.main_menu.setGeometry(QtCore.QRect(130, 100, 151, 61))
+        self.main_menu.setGeometry(QtCore.QRect(130, 100, 200, 61))
         font = QtGui.QFont()
+        font.setFamily("Poppins")
         font.setPointSize(28)
-
+        self.main_menu.setFont(font)
         #Button to create profile
         self.main_menu.setFont(font)
         self.main_menu.setObjectName("main_menu")
+
         self.test1_button_2 = QtWidgets.QPushButton(self.centralwidget)
         self.test1_button_2.setEnabled(True)
         self.test1_button_2.setGeometry(QtCore.QRect(60, 360, 301, 91))
+        self.test1_button_2.setStyleSheet("background-color: {};".format(BUTTON_COLOR))
         self.test1_button_2.setObjectName("test1_button_2")
+        font.setPointSize(12)
+        self.test1_button_2.setFont(font)
 
         #When Clicked, a new window will pop-up.
         self.test1_button_2.clicked.connect(self.open_create_profile)
@@ -60,6 +69,8 @@ class Ui_MainWindow(object):
         self.settings_button.setEnabled(True)
         self.settings_button.setGeometry(QtCore.QRect(60, 500, 301, 91))
         self.settings_button.setObjectName("test1_button_3")
+        self.settings_button.setStyleSheet("background-color: {};".format(BUTTON_COLOR))
+        self.settings_button.setFont(font)
 
         #When Clicked, a new window will pop up.
         self.settings_button.clicked.connect(self.open_settings)
@@ -75,6 +86,7 @@ class Ui_MainWindow(object):
 
         #Theme of screen is dependent on json file data.
         #MainWindow.setStyleSheet("background-color: yellow;")
+        MainWindow.setStyleSheet("background-color: {};".format(THEME_COLOR))
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
