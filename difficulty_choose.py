@@ -10,6 +10,7 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from program_choose import Ui_program_choose
+from defaults import *
 
 #A class where the user can chosoe their difficulty. Indeoendent to "program_choose"
 class Ui_difficulty_choose(object):
@@ -19,11 +20,18 @@ class Ui_difficulty_choose(object):
         self.win = difficulty_choose
 
         difficulty_choose.setObjectName("difficulty_choose")
+        difficulty_choose.resize(WIDTH, HEIGHT)
+        difficulty_choose.setFixedWidth(WIDTH)
+        difficulty_choose.setFixedHeight(HEIGHT)
+        difficulty_choose.setMaximumWidth(WIDTH)
+        difficulty_choose.setMaximumHeight(HEIGHT)
+
         difficulty_choose.resize(412, 732)
         self.centralwidget = QtWidgets.QWidget(difficulty_choose)
         self.centralwidget.setObjectName("centralwidget")
         self.easy_button = QtWidgets.QPushButton(self.centralwidget)
         self.easy_button.setGeometry(QtCore.QRect(80, 140, 251, 81))
+        self.easy_button.setStyleSheet("background-color: {};".format(BUTTON_COLOR2))
         font = QtGui.QFont()
         font.setFamily("Poppins Light")
         font.setPointSize(13)
@@ -39,6 +47,7 @@ class Ui_difficulty_choose(object):
 
         self.intermediate_button = QtWidgets.QPushButton(self.centralwidget)
         self.intermediate_button.setGeometry(QtCore.QRect(80, 310, 251, 81))
+        self.intermediate_button.setStyleSheet("background-color: {};".format(BUTTON_COLOR3))
         font = QtGui.QFont()
         font.setFamily("Poppins Light")
         font.setPointSize(13)
@@ -54,6 +63,7 @@ class Ui_difficulty_choose(object):
 
         self.advanced_button = QtWidgets.QPushButton(self.centralwidget)
         self.advanced_button.setGeometry(QtCore.QRect(80, 480, 251, 81))
+        self.advanced_button.setStyleSheet("background-color: {};".format(BUTTON_COLOR1))
         font = QtGui.QFont()
         font.setFamily("Poppins Light")
         font.setPointSize(13)
@@ -71,6 +81,8 @@ class Ui_difficulty_choose(object):
         self.statusbar = QtWidgets.QStatusBar(difficulty_choose)
         self.statusbar.setObjectName("statusbar")
         difficulty_choose.setStatusBar(self.statusbar)
+
+        difficulty_choose.setStyleSheet("background-color: {};".format(THEME_COLOR))
 
         self.retranslateUi(difficulty_choose)
         QtCore.QMetaObject.connectSlotsByName(difficulty_choose)

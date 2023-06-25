@@ -10,6 +10,7 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from confirmation import Ui_confirm
+from defaults import *
 import json
 
 #Settings class for defaults modification and profile deletions.
@@ -22,16 +23,30 @@ class Ui_settings_2(object):
         self.win = settings_2
 
         settings_2.setObjectName("settings_2")
-        settings_2.resize(412, 732)
+
+        settings_2.resize(WIDTH, HEIGHT)
+        settings_2.setFixedWidth(WIDTH)
+        settings_2.setFixedHeight(HEIGHT)
+        settings_2.setMaximumWidth(WIDTH)
+        settings_2.setMaximumHeight(HEIGHT)
+
+
+        font = QtGui.QFont()
+        font.setFamily(FONT)
+        font.setPointSize(28)
+
         self.centralwidget = QtWidgets.QWidget(settings_2)
         self.centralwidget.setObjectName("centralwidget")
-        self.theme_chager = QtWidgets.QPushButton(self.centralwidget)
-        self.theme_chager.setEnabled(True)
-        self.theme_chager.setGeometry(QtCore.QRect(60, 140, 301, 91))
-        self.theme_chager.setObjectName("theme_chager")
+        self.theme_changer = QtWidgets.QPushButton(self.centralwidget)
+        self.theme_changer.setEnabled(True)
+        self.theme_changer.setGeometry(QtCore.QRect(60, 140, 301, 91))
+        self.theme_changer.setObjectName("theme_changer")
+        font.setPointSize(11)
+        self.theme_changer.setFont(font)
+        self.theme_changer.setStyleSheet("background-color: {};".format(BUTTON_COLOR))
 
         #When CLicked, changes the theme of the applciation.
-        self.theme_chager.clicked.connect(self.edit_theme)
+        self.theme_changer.clicked.connect(self.edit_theme)
 
         self.settings = QtWidgets.QLabel(self.centralwidget)
         self.settings.setGeometry(QtCore.QRect(120, 40, 171, 61))
@@ -39,10 +54,15 @@ class Ui_settings_2(object):
         font.setPointSize(28)
         self.settings.setFont(font)
         self.settings.setObjectName("settings")
+
+        
         self.delete_data = QtWidgets.QPushButton(self.centralwidget)
         self.delete_data.setEnabled(True)
         self.delete_data.setGeometry(QtCore.QRect(60, 270, 301, 91))
         self.delete_data.setObjectName("delete_data")
+        font.setPointSize(12)
+        self.delete_data.setFont(font)
+        self.delete_data.setStyleSheet("background-color: {};".format(BUTTON_COLOR1))
 
         #When Clicked, a pop-up will appear that will ask for confirmation.
         self.delete_data.clicked.connect(self.delete_content)
@@ -51,10 +71,18 @@ class Ui_settings_2(object):
         self.about_us.setEnabled(True)
         self.about_us.setGeometry(QtCore.QRect(60, 400, 301, 91))
         self.about_us.setObjectName("about_us")
+        font.setPointSize(12)
+        self.about_us.setFont(font)
+        self.about_us.setStyleSheet("background-color: {};".format(BUTTON_COLOR))
+
+
         self.back_main = QtWidgets.QPushButton(self.centralwidget)
         self.back_main.setEnabled(True)
         self.back_main.setGeometry(QtCore.QRect(60, 530, 301, 91))
         self.back_main.setObjectName("back_main")
+        font.setPointSize(12)
+        self.back_main.setFont(font)
+        self.back_main.setStyleSheet("background-color: {};".format(BUTTON_COLOR1))
 
         #When Clicked, goes back to main
         self.back_main.clicked.connect(self.open_main)
@@ -68,13 +96,15 @@ class Ui_settings_2(object):
         self.statusbar.setObjectName("statusbar")
         settings_2.setStatusBar(self.statusbar)
 
+        settings_2.setStyleSheet("background-color: {};".format(THEME_COLOR))
+
         self.retranslateUi(settings_2)
         QtCore.QMetaObject.connectSlotsByName(settings_2)
 
     def retranslateUi(self, settings_2):
         _translate = QtCore.QCoreApplication.translate
         settings_2.setWindowTitle(_translate("settings_2", "Settings"))
-        self.theme_chager.setText(_translate("settings_2", "Change Light and Dark Mode"))
+        self.theme_changer.setText(_translate("settings_2", "Change Light and Dark Mode"))
         self.settings.setText(_translate("settings_2", "Settings"))
         self.delete_data.setText(_translate("settings_2", "Delete All Data"))
         self.about_us.setText(_translate("settings_2", "About Us"))

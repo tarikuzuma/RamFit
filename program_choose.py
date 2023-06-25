@@ -10,15 +10,16 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from view_routine import Ui_view_routine
+from defaults import *
 
 #Screen will not open unless choose a difficulty first
 class Ui_program_choose(object):
     def setupUi(self, program_choose, difficulty):
-        #Stores the difficulty level from difficulty_choose.py!
+        #Stores the difficulty level from program_choose.py!
 
         '''
         The line self.difficulty = difficulty stores the selected difficulty value in 
-        the Ui_program_choose class's self.difficulty attribute from difficulty_choose.py
+        the Ui_program_choose class's self.difficulty attribute from program_choose.py
         The difficulty value is now accessible in the program_choose.py module.
         '''
         self.difficulty = difficulty
@@ -27,6 +28,12 @@ class Ui_program_choose(object):
         self.win = program_choose
 
         program_choose.setObjectName("program_choose")
+        program_choose.resize(WIDTH, HEIGHT)
+        program_choose.setFixedWidth(WIDTH)
+        program_choose.setFixedHeight(HEIGHT)
+        program_choose.setMaximumWidth(WIDTH)
+        program_choose.setMaximumHeight(HEIGHT)
+
         program_choose.resize(412, 732)
         self.centralwidget = QtWidgets.QWidget(program_choose)
         self.centralwidget.setObjectName("centralwidget")
@@ -41,6 +48,7 @@ class Ui_program_choose(object):
         self.arms_button.setIconSize(QtCore.QSize(16, 16))
         self.arms_button.setAutoRepeatDelay(300)
         self.arms_button.setObjectName("arms_button")
+        self.arms_button.setStyleSheet("background-color: {};".format(BUTTON_COLOR4))
 
         self.arms_button.clicked.connect(lambda:self.program("arms"))
 
@@ -55,6 +63,7 @@ class Ui_program_choose(object):
         self.legs_button.setIconSize(QtCore.QSize(16, 16))
         self.legs_button.setAutoRepeatDelay(300)
         self.legs_button.setObjectName("legs_button")
+        self.legs_button.setStyleSheet("background-color: {};".format(BUTTON_COLOR3))
 
         self.legs_button.clicked.connect(lambda:self.program("legs"))
 
@@ -69,6 +78,7 @@ class Ui_program_choose(object):
         self.core_button.setIconSize(QtCore.QSize(16, 16))
         self.core_button.setAutoRepeatDelay(300)
         self.core_button.setObjectName("core_button")
+        self.core_button.setStyleSheet("background-color: {};".format(BUTTON_COLOR2))
 
         self.core_button.clicked.connect(lambda:self.program("core"))
 
@@ -83,6 +93,7 @@ class Ui_program_choose(object):
         self.cardio_button.setIconSize(QtCore.QSize(16, 16))
         self.cardio_button.setAutoRepeatDelay(300)
         self.cardio_button.setObjectName("cardio_button")
+        self.cardio_button.setStyleSheet("background-color: {};".format(BUTTON_COLOR1))
 
         self.cardio_button.clicked.connect(lambda:self.program("cardio"))
 
@@ -90,6 +101,8 @@ class Ui_program_choose(object):
         self.statusbar = QtWidgets.QStatusBar(program_choose)
         self.statusbar.setObjectName("statusbar")
         program_choose.setStatusBar(self.statusbar)
+
+        program_choose.setStyleSheet("background-color: {};".format(THEME_COLOR))
 
         self.retranslateUi(program_choose)
         QtCore.QMetaObject.connectSlotsByName(program_choose)

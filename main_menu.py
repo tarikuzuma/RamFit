@@ -37,7 +37,7 @@ class Ui_MainWindow(object):
         self.test1_button.setStyleSheet("background-color: {};".format(BUTTON_COLOR))
         self.test1_button.setObjectName("test1_button")
         font = QtGui.QFont()
-        font.setFamily("Poppins")
+        font.setFamily(FONT)
         font.setPointSize(12)
         self.test1_button.setFont(font)
 
@@ -46,7 +46,7 @@ class Ui_MainWindow(object):
         self.main_menu = QtWidgets.QLabel(self.centralwidget)
         self.main_menu.setGeometry(QtCore.QRect(130, 100, 200, 61))
         font = QtGui.QFont()
-        font.setFamily("Poppins")
+        font.setFamily(FONT)
         font.setPointSize(28)
         self.main_menu.setFont(font)
         #Button to create profile

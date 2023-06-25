@@ -10,15 +10,20 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from difficulty_choose import Ui_difficulty_choose
+from defaults import *
 import json
 
 class Ui_choose_profile(object):
     def setupUi(self, choose_profile):
-
         self.win = choose_profile
 
         choose_profile.setObjectName("choose_profile")
-        choose_profile.resize(412, 732)
+        choose_profile.resize(WIDTH, HEIGHT)
+        choose_profile.setFixedWidth(WIDTH)
+        choose_profile.setFixedHeight(HEIGHT)
+        choose_profile.setMaximumWidth(WIDTH)
+        choose_profile.setMaximumHeight(HEIGHT)
+
         font = QtGui.QFont()
         font.setFamily("MS Sans Serif")
         choose_profile.setFont(font)
@@ -41,6 +46,7 @@ class Ui_choose_profile(object):
         self.line_2.setObjectName("line_2")
         self.pushButton = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton.setGeometry(QtCore.QRect(30, 190, 151, 121))
+        self.pushButton.setStyleSheet("background-color: {};".format(BUTTON_COLOR1))
         font = QtGui.QFont()
         font.setFamily("Poppins Light")
         font.setPointSize(20)
@@ -49,6 +55,7 @@ class Ui_choose_profile(object):
         self.pushButton.setObjectName("pushButton")
         self.pushButton_2 = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton_2.setGeometry(QtCore.QRect(230, 190, 151, 121))
+        self.pushButton_2.setStyleSheet("background-color: {};".format(BUTTON_COLOR))
         font = QtGui.QFont()
         font.setFamily("Poppins Light")
         font.setPointSize(20)
@@ -57,6 +64,7 @@ class Ui_choose_profile(object):
         self.pushButton_2.setObjectName("pushButton_2")
         self.pushButton_3 = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton_3.setGeometry(QtCore.QRect(30, 380, 151, 121))
+        self.pushButton_3.setStyleSheet("background-color: {};".format(BUTTON_COLOR))
         font = QtGui.QFont()
         font.setFamily("Poppins Light")
         font.setPointSize(20)
@@ -65,6 +73,7 @@ class Ui_choose_profile(object):
         self.pushButton_3.setObjectName("pushButton_3")
         self.pushButton_4 = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton_4.setGeometry(QtCore.QRect(230, 380, 151, 121))
+        self.pushButton_4.setStyleSheet("background-color: {};".format(BUTTON_COLOR1))
         font = QtGui.QFont()
         font.setFamily("Poppins Light")
         font.setPointSize(20)
@@ -75,6 +84,8 @@ class Ui_choose_profile(object):
         self.statusbar = QtWidgets.QStatusBar(choose_profile)
         self.statusbar.setObjectName("statusbar")
         choose_profile.setStatusBar(self.statusbar)
+
+        choose_profile.setStyleSheet("background-color: {};".format(THEME_COLOR))
 
         self.retranslateUi(choose_profile)
         QtCore.QMetaObject.connectSlotsByName(choose_profile)
