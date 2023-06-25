@@ -11,8 +11,9 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from confirmation_create import Ui_profile_created
 from confirmation_create2 import Ui_profile_createdpy
-import json
 from pathlib import Path
+from defaults import *
+import json
 
 #Profile Create Class
 class Ui_createProfile(object):
@@ -140,7 +141,9 @@ class Ui_createProfile(object):
         font.setPointSize(10)
         self.btn_clear.setFont(font)
         self.btn_clear.setObjectName("btn_clear")
-
+        self.btn_clear.setStyleSheet("background-color: {};".format(BUTTON_COLOR1))
+        self.btn_create.setStyleSheet("background-color: {};".format(BUTTON_COLOR))
+        self.btn_back.setStyleSheet("background-color: {};".format(BUTTON_COLOR2))
         # Instance when the button clear is clicked
         self.btn_clear.clicked.connect(self.clear_all)
 
@@ -156,6 +159,8 @@ class Ui_createProfile(object):
         self.statusbar.setObjectName("statusbar")
         createProfile.setStatusBar(self.statusbar)
 
+        createProfile.setStyleSheet("background-color: {};".format(THEME_COLOR))
+        
         self.retranslateUi(createProfile)
         QtCore.QMetaObject.connectSlotsByName(createProfile)
 

@@ -11,7 +11,10 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from confirmation import Ui_confirm
 from defaults import *
+import webbrowser
+import subprocess
 import json
+import sys
 
 #Settings class for defaults modification and profile deletions.
 #Named ui_settings_2 because it's a duplicate of an old class that I didn't delete in bin
@@ -75,6 +78,7 @@ class Ui_settings_2(object):
         self.about_us.setFont(font)
         self.about_us.setStyleSheet("background-color: {};".format(BUTTON_COLOR))
 
+        self.about_us.clicked.connect(self.open_link)
 
         self.back_main = QtWidgets.QPushButton(self.centralwidget)
         self.back_main.setEnabled(True)
@@ -130,6 +134,9 @@ class Ui_settings_2(object):
             with open("settings/theme.json", 'w') as f:
                 json.dump(json_object, f)
 
+        subprocess.Popen(["python", "main_menu.py"])
+        sys.exit()
+
     #Method to delete all profile data
     def delete_content(self):
         #open window delete content
@@ -139,6 +146,9 @@ class Ui_settings_2(object):
         self.ui.setupUi(self.window)
         self.window.show()
         #settings_2.hide()
+
+    def open_link(self):
+        webbrowser.open("https://github.com/tarikuzuma/RamFit")
         
     #Method to close settings
     def open_main(self):
