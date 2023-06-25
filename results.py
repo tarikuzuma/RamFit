@@ -11,6 +11,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from workout_data import Ui_list_workout_data
 from datetime import datetime
+from defaults import *
 import json
 import os
 
@@ -47,7 +48,12 @@ class Ui_results(object):
         name = self.read_name()
 
         results.setObjectName("results")
-        results.resize(412, 732)
+        results.resize(WIDTH, HEIGHT)
+        results.setFixedWidth(WIDTH)
+        results.setFixedHeight(HEIGHT)
+        results.setMaximumWidth(WIDTH)
+        results.setMaximumHeight(HEIGHT)
+
         self.centralwidget = QtWidgets.QWidget(results)
         self.centralwidget.setObjectName("centralwidget")
         self.line = QtWidgets.QFrame(self.centralwidget)
@@ -201,7 +207,7 @@ class Ui_results(object):
         font.setPointSize(10)
         self.button_main.setFont(font)
         self.button_main.setObjectName("button_main")
-
+        self.button_main.setStyleSheet("background-color: {};".format(BUTTON_COLOR2))
         self.button_main.clicked.connect(self.back_main)
 
         self.greet = QtWidgets.QLabel(self.centralwidget)
@@ -221,6 +227,7 @@ class Ui_results(object):
         self.statusbar = QtWidgets.QStatusBar(results)
         self.statusbar.setObjectName("statusbar")
         results.setStatusBar(self.statusbar)
+        results.setStyleSheet("background-color: {};".format(THEME_COLOR))
 
         self.edit_workout_data(self.filepath, self.workout_type, self.minutes_str, self.seconds_str)
 

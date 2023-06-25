@@ -10,6 +10,7 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from workout_data import Ui_list_workout_data
+from defaults import *
 
 
 class Ui_results_error(object):
@@ -18,6 +19,12 @@ class Ui_results_error(object):
         self.win = results
 
         results.setObjectName("results")
+        results.resize(WIDTH, HEIGHT)
+        results.setFixedWidth(WIDTH)
+        results.setFixedHeight(HEIGHT)
+        results.setMaximumWidth(WIDTH)
+        results.setMaximumHeight(HEIGHT)
+
         results.resize(412, 732)
         self.centralwidget = QtWidgets.QWidget(results)
         self.centralwidget.setObjectName("centralwidget")
@@ -160,13 +167,14 @@ class Ui_results_error(object):
         font.setPointSize(10)
         self.button_main.setFont(font)
         self.button_main.setObjectName("button_main")
-
+        self.button_main.setStyleSheet("background-color: {};".format(BUTTON_COLOR2))
         self.button_main.clicked.connect(self.back_main)
 
         results.setCentralWidget(self.centralwidget)
         self.statusbar = QtWidgets.QStatusBar(results)
         self.statusbar.setObjectName("statusbar")
         results.setStatusBar(self.statusbar)
+        results.setStyleSheet("background-color: {};".format(THEME_COLOR))
 
         self.retranslateUi(results)
         QtCore.QMetaObject.connectSlotsByName(results)

@@ -64,6 +64,7 @@ class Ui_difficulty_choose(object):
         self.advanced_button = QtWidgets.QPushButton(self.centralwidget)
         self.advanced_button.setGeometry(QtCore.QRect(80, 480, 251, 81))
         self.advanced_button.setStyleSheet("background-color: {};".format(BUTTON_COLOR1))
+
         font = QtGui.QFont()
         font.setFamily("Poppins Light")
         font.setPointSize(13)

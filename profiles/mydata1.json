@@ -1,5 +1,5 @@
 {
-    "status": "active",
+    "status": "None",
     "info": {
         "name": "John Doe",
         "age": 19,
@@ -93,6 +93,14 @@
                 "Time": "02:52:15",
                 "Type": "beginner_core",
                 "Duration": "10 - 15 Minutes",
+                "Calories Burnt": "100 Calories"
+            }
+        },
+        {
+            "2023-06-26": {
+                "Time": "01:46:24",
+                "Type": "beginner_arms",
+                "Duration": "0 Mins 17 Secs",
                 "Calories Burnt": "100 Calories"
             }
         }

@@ -9,6 +9,7 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from defaults import *
 import json
 
 class Ui_list_workout_data(object):
@@ -18,6 +19,7 @@ class Ui_list_workout_data(object):
         self.win = list_workout_data
 
         list_workout_data.setObjectName("list_workout_data")
+        
         list_workout_data.resize(412, 612)
         self.centralwidget = QtWidgets.QWidget(list_workout_data)
         self.centralwidget.setObjectName("centralwidget")
@@ -28,6 +30,29 @@ class Ui_list_workout_data(object):
         font = QtGui.QFont("Poppins")
         self.listWidget.setFont(font)
 
+        self.listWidget.setStyleSheet("""
+                QListWidget {
+                    background-color: %s; /* Set the background color of the list */
+                    border: none; /* Remove the border */
+                    padding: 10px; /* Add padding to the list */
+                }
+
+                QListWidget::item {
+                    background-color: %s; /* Set the background color of each item */
+                    padding: 10px; /* Add padding to each item */
+                    border-radius: 5px; /* Add border radius to round the corners */
+                }
+
+                QListWidget::item:alternate {
+                    background-color: %s; /* Set the alternate background color of each item */
+                }
+
+                QListWidget::item:selected {
+                    background-color: %s; /* Set the background color of the selected item */
+                    color: white; /* Set the text color of the selected item */
+                }
+            """ % (LIST_COLOR,LIST_COLOR, LIST_COLOR, LIST_HIGHLIGHT))
+
         workout_data_list = self.append_data(self.filename)
         self.display_workout_data(workout_data_list)
 
@@ -37,7 +62,7 @@ class Ui_list_workout_data(object):
         font.setFamily("Poppins")
         self.main_back.setFont(font)
         self.main_back.setObjectName("main_back")
-
+        self.main_back.setStyleSheet("background-color: {};".format(BUTTON_COLOR))
         self.main_back.clicked.connect(self.back_main)
 
         self.label = QtWidgets.QLabel(self.centralwidget)
@@ -51,6 +76,8 @@ class Ui_list_workout_data(object):
         self.statusbar = QtWidgets.QStatusBar(list_workout_data)
         self.statusbar.setObjectName("statusbar")
         list_workout_data.setStatusBar(self.statusbar)
+
+        list_workout_data.setStyleSheet("background-color: {};".format(THEME_COLOR))
 
         print(self.append_data(self.filename))
 

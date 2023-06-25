@@ -32,7 +32,7 @@ class Ui_view_routine(object):
         view_routine.setMaximumHeight(HEIGHT)
 
         view_routine.setWindowModality(QtCore.Qt.WindowModal)
-        view_routine.resize(412, 732)
+        
         self.centralwidget = QtWidgets.QWidget(view_routine)
         self.centralwidget.setObjectName("centralwidget")
         self.line = QtWidgets.QFrame(self.centralwidget)

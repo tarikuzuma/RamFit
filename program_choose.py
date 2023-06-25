@@ -34,7 +34,6 @@ class Ui_program_choose(object):
         program_choose.setMaximumWidth(WIDTH)
         program_choose.setMaximumHeight(HEIGHT)
 
-        program_choose.resize(412, 732)
         self.centralwidget = QtWidgets.QWidget(program_choose)
         self.centralwidget.setObjectName("centralwidget")
         self.arms_button = QtWidgets.QPushButton(self.centralwidget)
@@ -48,7 +47,7 @@ class Ui_program_choose(object):
         self.arms_button.setIconSize(QtCore.QSize(16, 16))
         self.arms_button.setAutoRepeatDelay(300)
         self.arms_button.setObjectName("arms_button")
-        self.arms_button.setStyleSheet("background-color: {};".format(BUTTON_COLOR4))
+        self.arms_button.setStyleSheet("background-color: {};".format(BUTTON_COLOR2))
 
         self.arms_button.clicked.connect(lambda:self.program("arms"))
 
@@ -63,7 +62,7 @@ class Ui_program_choose(object):
         self.legs_button.setIconSize(QtCore.QSize(16, 16))
         self.legs_button.setAutoRepeatDelay(300)
         self.legs_button.setObjectName("legs_button")
-        self.legs_button.setStyleSheet("background-color: {};".format(BUTTON_COLOR3))
+        self.legs_button.setStyleSheet("background-color: {};".format(BUTTON_COLOR1))
 
         self.legs_button.clicked.connect(lambda:self.program("legs"))
 
@@ -78,7 +77,7 @@ class Ui_program_choose(object):
         self.core_button.setIconSize(QtCore.QSize(16, 16))
         self.core_button.setAutoRepeatDelay(300)
         self.core_button.setObjectName("core_button")
-        self.core_button.setStyleSheet("background-color: {};".format(BUTTON_COLOR2))
+        self.core_button.setStyleSheet("background-color: {};".format(BUTTON_COLOR4))
 
         self.core_button.clicked.connect(lambda:self.program("core"))
 
@@ -93,7 +92,7 @@ class Ui_program_choose(object):
         self.cardio_button.setIconSize(QtCore.QSize(16, 16))
         self.cardio_button.setAutoRepeatDelay(300)
         self.cardio_button.setObjectName("cardio_button")
-        self.cardio_button.setStyleSheet("background-color: {};".format(BUTTON_COLOR1))
+        self.cardio_button.setStyleSheet("background-color: {};".format(BUTTON_COLOR3))
 
         self.cardio_button.clicked.connect(lambda:self.program("cardio"))
 

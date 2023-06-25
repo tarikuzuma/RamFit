@@ -11,6 +11,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtGui import QPixmap
 from results import Ui_results 
+from defaults import *
 import time as timer
 import json
 import sys
@@ -34,7 +35,12 @@ class Ui_main_workout(object):
         self.timer_stop = False
 
         main_workout.setObjectName("main_workout")
-        main_workout.resize(412, 732)
+        main_workout.resize(WIDTH, HEIGHT)
+        main_workout.setFixedWidth(WIDTH)
+        main_workout.setFixedHeight(HEIGHT)
+        main_workout.setMaximumWidth(WIDTH)
+        main_workout.setMaximumHeight(HEIGHT)
+
         self.centralwidget = QtWidgets.QWidget(main_workout)
         self.centralwidget.setObjectName("centralwidget")
         self.line = QtWidgets.QFrame(self.centralwidget)
@@ -60,6 +66,7 @@ class Ui_main_workout(object):
         self.left.setObjectName("left")
         self.finish_workout = QtWidgets.QPushButton(self.centralwidget)
         self.finish_workout.setGeometry(QtCore.QRect(270, 20, 121, 41))
+        self.finish_workout.setStyleSheet("background-color: {};".format(BUTTON_COLOR2))
         font = QtGui.QFont()
         font.setFamily("Poppins")
         self.finish_workout.setFont(font)
@@ -87,6 +94,7 @@ class Ui_main_workout(object):
         self.reps.setObjectName("reps")
         self.completed = QtWidgets.QPushButton(self.centralwidget)
         self.completed.setGeometry(QtCore.QRect(30, 650, 351, 41))
+        self.completed.setStyleSheet("background-color: {};".format(BUTTON_COLOR3))
         font = QtGui.QFont()
         font.setFamily("Poppins")
         self.completed.setFont(font)
@@ -110,6 +118,8 @@ class Ui_main_workout(object):
         self.statusbar.setObjectName("statusbar")
         main_workout.setStatusBar(self.statusbar)
         self.init_info(count, filepath, workout_type)
+
+        main_workout.setStyleSheet("background-color: {};".format(THEME_COLOR))
 
         self.retranslateUi(main_workout)
         QtCore.QMetaObject.connectSlotsByName(main_workout)
