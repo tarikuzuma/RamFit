@@ -23,6 +23,22 @@
                 "Duration": "10 - 15 Minutes",
                 "Calories Burnt": "100 Calories"
             }
+        },
+        {
+            "2023-06-25": {
+                "Time": "14:40:39",
+                "Type": "beginner_legs",
+                "Duration": "10 - 15 Minutes",
+                "Calories Burnt": "100 Calories"
+            }
+        },
+        {
+            "2023-06-25": {
+                "Time": "14:42:25",
+                "Type": "beginner_legs",
+                "Duration": "10 - 15 Minutes",
+                "Calories Burnt": "100 Calories"
+            }
         }
     ]
 }

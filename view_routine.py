@@ -155,7 +155,7 @@ class Ui_view_routine(object):
         print("Hello World: ", self.difficulty, self.program)
         self.window = QtWidgets.QMainWindow()
         self.ui = Ui_main_workout()
-        self.ui.setupUi(self.window, 0, self.filepath, self.workout_type)
+        self.ui.setupUi(self.window, 0, self.filepath, self.workout_type, 0)
         #self.ui.run_window()
         self.window.show()
         self.win.close()

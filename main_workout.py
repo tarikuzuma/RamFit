@@ -10,18 +10,21 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtGui import QPixmap
-from results import Ui_results
+from results import Ui_results 
+import time as timer
 import json
 import sys
 
 class Ui_main_workout(object):
-    def setupUi(self, main_workout, count, filepath, workout_type):
-        self.count = count
+    def setupUi(self, main_workout, count, filepath, workout_type, start_time):
+        self.count = count #Count as persistent
         self.filepath = filepath
-        self.workout_type = workout_type
+        self.workout_type = workout_type 
+        self.start_time = start_time #start_time value as persistent
 
         self.win = main_workout
         self.workout_finished = False
+        self.timer_stop = False
 
         main_workout.setObjectName("main_workout")
         main_workout.resize(412, 732)
@@ -113,10 +116,28 @@ class Ui_main_workout(object):
         #self.exercise_name.setText(_translate("main_workout", "Exercise Name")) #Old code to set name to default
         #self.reps.setText(_translate("main_workout", "Repetition")) #Old code to set reps to default
         self.completed.setText(_translate("main_workout", "Completed"))
+    
+    #Method to start and stop timer.
+    def start_timer(self):
+        print("Timer Started...")
+        self.start_time = timer.time()
+
+    def end_timer(self):
+        if self.timer_stop:
+            print(" \n PASSES \n")
+            end_time = timer.time()
+            elapsed_time = end_time - self.start_time
+
+            print (f"Timer stopped. Elapsed time: {elapsed_time} seconds.")
+            #return elapsed_time
 
     def workout_complete(self):
         self.count += 1
-        if self.count >= len(self.workout_names):
+        if self.count >= len(self.workout_names): #True Stop
+            self.timer_stop = True
+            self.end_timer()
+
+            print("Timer stop: ", self.timer_stop)
             print("Workout Session Done With Completion! Well Done.")
 
             #Opens results.py window
@@ -132,11 +153,15 @@ class Ui_main_workout(object):
         self.win = QtWidgets.QMainWindow()
         self.ui = Ui_main_workout()
         print(self.count)
-        self.ui.setupUi(self.win, self.count, self.filepath, self.workout_type)
+        self.ui.setupUi(self.win, self.count, self.filepath, self.workout_type, self.start_time)
         self.win.show()
 
+    #Method to forcefully stop workout
     def workout_finish(self):
         self.workout_finished = True
+        self.timer_stop = True
+        print("Timer stop: ", self.timer_stop)
+        self.end_timer()
         if self.workout_finished: #Value will only be true when user clicks "Finish Workout."
             print("\nForced Stop...\nWorkout Session Done!")
             self.window = QtWidgets.QMainWindow()
@@ -174,6 +199,12 @@ class Ui_main_workout(object):
     #This is where we're gonna put all of the interchangable data
     def init_info(self, count, filepath, workout_type):
         print("{" + str(count) + "}")
+
+        if self.count == 0:
+            self.start_timer()
+
+        print("Timer stop: ", self.timer_stop)
+
         filepath = self.filepath # Dependent on workout_routine's filepath
         workout_type = self.workout_type # Dependent on workout_type of viewroutine
 
@@ -226,4 +257,3 @@ class Ui_main_workout(object):
 if __name__ == "__main__":
     ui = Ui_main_workout()
     ui.run_window()
-
