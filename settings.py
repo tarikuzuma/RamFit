@@ -121,7 +121,7 @@ class Ui_settings_2(object):
             json_object = json.load(f) 
             theme = json_object['theme']
 
-            #if condition to see if theme is dark or light, and then converts it to its oppostie
+            #If condition to see if theme is dark or light, and then converts it to its opposite.
             if theme == "light":
                 json_object["theme"] = "dark"
             elif theme == "dark":
@@ -134,6 +134,7 @@ class Ui_settings_2(object):
             with open("settings/theme.json", 'w') as f:
                 json.dump(json_object, f)
 
+        #Reopens main menu but with different theme
         subprocess.Popen(["python", "main_menu.py"])
         sys.exit()
 

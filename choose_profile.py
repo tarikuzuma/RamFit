@@ -118,9 +118,8 @@ class Ui_choose_profile(object):
         self.pushButton_3.setText(_translate("choose_profile", "profile3"))
         self.pushButton_4.setText(_translate("choose_profile", "profile4"))
 
-    #Not gonna lie, I just used chatgpt to generate the method
-    #I only know 35% of the concept in this method HAHA
-    #But essentially it stores IDs or name numbers in a dictionary outside of the loop.
+
+    #Essentially it stores IDs or name numbers in a dictionary outside of the loop.
     #Easy method for global naming (well, not totally)
     def read_profile(self):
         name_numbers = {}

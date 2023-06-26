@@ -232,7 +232,7 @@ class Ui_createProfile(object):
                         print("Limit reached")
                         self.confirm2()
                         return
-                    else:
+                    else: #File name convention. mydata{counter}
                         return create_json_file(data, directory, base_file_name, counter + 1)
 
                 # Convert data to JSON string
