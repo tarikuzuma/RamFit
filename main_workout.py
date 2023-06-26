@@ -167,7 +167,7 @@ class Ui_main_workout(object):
             self.ui = Ui_results()
             self.ui.setupUi(self.window, self.filepath, self.workout_type, self.time)
             self.window.show()
-            #sys.exit() # FIXME: Is this the right behavior?
+            #sys.exit() 
             self.win.close()
             return
 
@@ -244,11 +244,12 @@ class Ui_main_workout(object):
         print (self.workout_description)
         '''
 
-        # Block of code to deduct the number of exercises left depending on the length of list workout_names
+        #Block of code to deduct the number of exercises left depending on the length of list workout_names
+        #The Logic of my program suggests that the length of workout_names will have the same length as the other lists.
         number = len(self.workout_names) - count
         number_string = str(number)
 
-        # See if image can be loaded or exist
+        #See if image can be loaded or exist
         try:
             # Load the image file
             image_path = self.workout_image[count]
@@ -273,7 +274,7 @@ class Ui_main_workout(object):
         else:
             self.left.setText("Exercise Left")
 
-        # Debugging, prints value of lists per index flagged down dependent to value of count
+        #Debugging, prints value of lists per index flagged down dependent to value of count
         print (self.workout_names[count])
         print (self.workout_reps[count])
         print (self.workout_image[count])

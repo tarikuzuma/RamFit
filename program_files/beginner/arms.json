@@ -1,64 +1,64 @@
 {
     "beginner_arms":[
         {
-            "name":"NameTest",
-            "reps":"RepTest",
-            "image":"program_files/images/dog.jpg",
-            "description":"Lorem Ipsum"
+            "name":"Bicep Curls",
+            "reps":"2 x 10",
+            "image":"program_files/images/bicep_curl.png",
+            "description":"A bicep curl is a weight training exercise that works the biceps muscles at the front of the upper arm. To do a bicep curl, stand with your feet shoulder-width apart and hold a dumbbell in each hand, with your palms facing up. Bend your elbows and curl the dumbbells up towards your shoulders, keeping your upper arms stationary. Once the dumbbells are at shoulder level, slowly lower them back down to the starting position. Repeat for the desired number of repetitions."
         },
         {
-            "name":"NameTest1",
-            "reps":"RepTest1",
-            "image":"program_files/images/cat.jpg",
-            "description":"Lorem Ipsum1"
+            "name":"Hammer Curls",
+            "reps":"2 x 10",
+            "image":"program_files/images/hammer_curl.png",
+            "description":"A hammer curl is a weight training exercise that works the biceps and brachialis muscles in the upper arm. It is a variation of the bicep curl, but the palms of the hands are facing each other throughout the movement. This neutral grip helps to target the brachialis muscle, which is often neglected in traditional bicep curls. \n \n To do a hammer curl, stand with your feet shoulder-width apart and hold a dumbbell in each hand, with your palms facing each other. Bend your elbows and curl the dumbbells up towards your shoulders, keeping your upper arms stationary. Once the dumbbells are at shoulder level, slowly lower them back down to the starting position. Repeat for the desired number of repetitions."
         },
         {
-            "name":"NameTest2",
-            "reps":"RepTest2",
-            "image":"program_files/images/rabbit.jpg",
-            "description":"Lorem Ipsum2"
+            "name":"Barbell Rows",
+            "reps":"1 x 10",
+            "image":"program_files/images/barbell_row.png",
+            "description":"The barbell row is a compound exercise that works the back muscles, including the latissimus dorsi, trapezius, rhomboids, and erector spinae. It also works the biceps, forearms, and shoulders. \n \nTo do a barbell row, stand with your feet shoulder-width apart and bend over at the waist so that your torso is almost parallel to the floor. Your knees should be slightly bent. Grip the barbell with an overhand grip, with your hands slightly wider than shoulder-width apart."
         },
         {
-            "name":"NameTes3t",
-            "reps":"RepTest3",
-            "image":"program_files/images/fish.jpg",
-            "description":"Lorem Ipsum3"
+            "name":"Tricep Extension",
+            "reps":"2 x 10",
+            "image":"program_files/images/tricep_extension.jpg",
+            "description":"A tricep extension is a weight training exercise that works the triceps muscles in the back of the upper arm. The triceps are responsible for extending the elbow joint, so tricep extensions are a great way to build strength and size in these muscles. \n \nTo do a tricep extension, you will need a weight bench and a weight, such as a dumbbell or barbell."
         },
         {
-            "name":"NameTest4",
-            "reps":"RepTest4",
-            "image":"program_files/images/bird.jpg",
-            "description":"Lorem Ipsum4"
+            "name":"Bent-Over Row",
+            "reps":"1 x 10",
+            "image":"program_files/images/bent_row.jpg",
+            "description":"The bent-over row is a compound exercise that works the back muscles, including the latissimus dorsi, trapezius, rhomboids, and erector spinae. It also works the biceps, forearms, and shoulders. \n \nTo do a bent-over row, you will need a barbell or dumbbells."
         },
         {
-            "name":"NameTest5",
-            "reps":"RepTest5",
-            "image":"program_files/images/bird.jpg",
-            "description":"Lorem Ipsum5"
+            "name":"Tricep Pullover",
+            "reps":"1 x 10",
+            "image":"program_files/images/tricep_pullover.jpg",
+            "description":"The tricep pullover is a versatile exercise that can be done with a variety of weights and variations. It is a great way to build strength and size in the triceps muscles, and it can also help to improve range of motion in the shoulders. If you are looking for a way to improve your triceps, the tricep pullover is a great option."
         },
         {
-            "name":"NameTest6",
-            "reps":"RepTest6",
-            "image":"program_files/images/bird.jpg",
-            "description":"Lorem Ipsum6"
+            "name":"Dumbell Bench Press",
+            "reps":"2 x 10",
+            "image":"program_files/images/dumbell_benchpress.jpg",
+            "description":"The dumbbell bench press is a weight training exercise that works the chest muscles, including the pectoralis major and pectoralis minor. It is a compound exercise that also works the triceps, shoulders, and stabilizing muscles of the upper body. "
         },
         {
-            "name":"NameTest7",
-            "reps":"RepTest7",
-            "image":"program_files/images/bird.jpg",
-            "description":"Lorem Ipsum7"
+            "name":"Barbell Overhead",
+            "reps":"2 x 5",
+            "image":"program_files/images/barbell_overhead.jpg",
+            "description":"The barbell overhead press is a compound exercise that works the shoulders, triceps, and upper back. It is a great way to build strength and size in these muscles."
         },
         {
-            "name":"NameTest8",
-            "reps":"RepTest8",
-            "image":"program_files/images/bird.jpg",
-            "description":"Lorem Ipsum8"
+            "name":"Knee Push-Ups",
+            "reps":"3 x 10",
+            "image":"program_files/images/knee_push.jpg",
+            "description":"Knee push-ups are a great way to build upper body strength and endurance, even if you are a beginner. They are a variation of push-ups that are done on your knees instead of your toes. This makes them easier than traditional push-ups, but they are still a challenging exercise. \n \nTo do a knee push-up, start in a plank position with your knees on the floor and your hands shoulder-width apart. Lower your body down until your chest almost touches the floor. Then, push yourself back up to the starting position. "
         },
         {
-            "name":"NameTest9",
-            "reps":"RepTest9",
-            "image":"program_files/images/bird.jpg",
-            "description":"Lorem Ipsum9"
+            "name":"Chest Fly",
+            "reps":"2 x 10",
+            "image":"program_files/images/chest_fly.jpg",
+            "description":"A chest fly is a weight training exercise that targets the pectoralis major muscles, which are the large muscles that make up the chest. The chest fly is a compound exercise, which means that it works multiple muscle groups at the same time. In addition to the pectoralis major, the chest fly also works the triceps, deltoids, and serratus anterior muscles."
         }
     ]
 }

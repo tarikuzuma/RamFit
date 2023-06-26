@@ -1,5 +1,5 @@
 {
-    "status": "active",
+    "status": "None",
     "info": {
         "name": "Jane Doe",
         "age": 56,
@@ -69,6 +69,46 @@
                 "Time": "02:47:58",
                 "Type": "beginner_arms",
                 "Duration": "0 Mins 1 Secs",
+                "Calories Burnt": "100 Calories"
+            }
+        },
+        {
+            "2023-06-26": {
+                "Time": "13:21:46",
+                "Type": "beginner_arms",
+                "Duration": "0 Mins 14 Secs",
+                "Calories Burnt": "100 Calories"
+            }
+        },
+        {
+            "2023-06-26": {
+                "Time": "13:39:22",
+                "Type": "beginner_arms",
+                "Duration": "0 Mins 23 Secs",
+                "Calories Burnt": "100 Calories"
+            }
+        },
+        {
+            "2023-06-26": {
+                "Time": "13:57:21",
+                "Type": "beginner_arms",
+                "Duration": "0 Mins 10 Secs",
+                "Calories Burnt": "100 Calories"
+            }
+        },
+        {
+            "2023-06-26": {
+                "Time": "14:55:51",
+                "Type": "beginner_arms",
+                "Duration": "0 Mins 15 Secs",
+                "Calories Burnt": "100 Calories"
+            }
+        },
+        {
+            "2023-06-26": {
+                "Time": "15:06:55",
+                "Type": "beginner_arms",
+                "Duration": "0 Mins 8 Secs",
                 "Calories Burnt": "100 Calories"
             }
         }
