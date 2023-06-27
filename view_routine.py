@@ -120,6 +120,7 @@ class Ui_view_routine(object):
 
         self.retranslateUi(view_routine)
         QtCore.QMetaObject.connectSlotsByName(view_routine)
+        view_routine.setWindowIcon(QtGui.QIcon(ICON))
 
     #Method to store the name of each workout in a program_JSON file and add it to list_widget
     def read_program(self):
@@ -201,7 +202,7 @@ class Ui_view_routine(object):
         
     def retranslateUi(self, view_routine):
         _translate = QtCore.QCoreApplication.translate
-        view_routine.setWindowTitle(_translate("view_routine", "MainWindow"))
+        view_routine.setWindowTitle(_translate("view_routine", "Your Routine"))
         self.main_label.setText(_translate("view_routine", "Workout"))
         self.proceed.setText(_translate("view_routine", "Let\'s Go!"))
         self.back_button.setText(_translate("view_routine", "Back"))

@@ -104,6 +104,7 @@ class Ui_settings_2(object):
 
         self.retranslateUi(settings_2)
         QtCore.QMetaObject.connectSlotsByName(settings_2)
+        settings_2.setWindowIcon(QtGui.QIcon(ICON))
 
     def retranslateUi(self, settings_2):
         _translate = QtCore.QCoreApplication.translate

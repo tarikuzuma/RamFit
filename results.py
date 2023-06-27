@@ -235,10 +235,11 @@ class Ui_results(object):
 
         self.retranslateUi(results)
         QtCore.QMetaObject.connectSlotsByName(results)
+        results.setWindowIcon(QtGui.QIcon(ICON))
 
     def retranslateUi(self, results):
         _translate = QtCore.QCoreApplication.translate
-        results.setWindowTitle(_translate("results", "MainWindow"))
+        results.setWindowTitle(_translate("results", "Results"))
         self.synopsis.setText(_translate("results", "Workout Synopsis"))
         self.total_time.setText(_translate("results", "Total time of Workout:"))
         #self.total_time_editable.setText(_translate("results", "10 Minutes"))

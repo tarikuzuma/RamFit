@@ -83,10 +83,11 @@ class Ui_list_workout_data(object):
 
         self.retranslateUi(list_workout_data)
         QtCore.QMetaObject.connectSlotsByName(list_workout_data)
+        list_workout_data.setWindowIcon(QtGui.QIcon(ICON))
 
     def retranslateUi(self, list_workout_data):
         _translate = QtCore.QCoreApplication.translate
-        list_workout_data.setWindowTitle(_translate("list_workout_data", "MainWindow"))
+        list_workout_data.setWindowTitle(_translate("list_workout_data", "Workout Data"))
         self.main_back.setText(_translate("list_workout_data", "Back to Results"))
         self.label.setText(_translate("list_workout_data", "Workout Data"))
 

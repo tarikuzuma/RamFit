@@ -14,6 +14,8 @@ def read_theme():
         
 THEME_COLOR, BUTTON_COLOR, BUTTON_COLOR1, BUTTON_COLOR2,  BUTTON_COLOR3, BUTTON_COLOR4, LIST_COLOR, LIST_HIGHLIGHT = read_theme()
 
+ICON = "program_files\images\logo.png"
+
 '''
 THEME_COLOR = "#F5F5F5"    #Sets background color
 BUTTON_COLOR = "#67B678"    #Sets button color

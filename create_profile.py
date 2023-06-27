@@ -163,6 +163,7 @@ class Ui_createProfile(object):
         
         self.retranslateUi(createProfile)
         QtCore.QMetaObject.connectSlotsByName(createProfile)
+        createProfile.setWindowIcon(QtGui.QIcon(ICON))
 
     def retranslateUi(self, createProfile):
         _translate = QtCore.QCoreApplication.translate

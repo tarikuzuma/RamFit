@@ -109,6 +109,7 @@ class Ui_choose_profile(object):
         self.pushButton_2.clicked.connect(lambda: self.handle_button_click(name_numbers.get("name_number2"), 2))
         self.pushButton_3.clicked.connect(lambda: self.handle_button_click(name_numbers.get("name_number3"), 3))
         self.pushButton_4.clicked.connect(lambda: self.handle_button_click(name_numbers.get("name_number4"), 4))
+        choose_profile.setWindowIcon(QtGui.QIcon(ICON))
 
     def retranslateUi(self, choose_profile):
         _translate = QtCore.QCoreApplication.translate
@@ -138,7 +139,7 @@ class Ui_choose_profile(object):
                 continue
             
         print ("")
-
+        #Utilizing Print statements for debugging!!
         # Named "None" for debugging purposes
         # Print all name_numbers
         for i in range(1, 5):

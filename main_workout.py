@@ -123,10 +123,11 @@ class Ui_main_workout(object):
 
         self.retranslateUi(main_workout)
         QtCore.QMetaObject.connectSlotsByName(main_workout)
+        main_workout.setWindowIcon(QtGui.QIcon(ICON))
 
     def retranslateUi(self, main_workout):
         _translate = QtCore.QCoreApplication.translate
-        main_workout.setWindowTitle(_translate("main_workout", "MainWindow"))
+        main_workout.setWindowTitle(_translate("main_workout", "Main Workout"))
         #self.number.setText(_translate("main_workout", "10")) #Old code to set the total number of exercises to default
         #self.left.setText(_translate("main_workout", "Exercises Left")) #Old code to set exercises to left
         self.finish_workout.setText(_translate("main_workout", "> Finish Workout"))

@@ -88,6 +88,8 @@ class Ui_MainWindow(object):
         #MainWindow.setStyleSheet("background-color: yellow;")
         MainWindow.setStyleSheet("background-color: {};".format(THEME_COLOR))
 
+        MainWindow.setWindowIcon(QtGui.QIcon(ICON))
+
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 

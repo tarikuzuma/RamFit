@@ -105,6 +105,7 @@ class Ui_program_choose(object):
 
         self.retranslateUi(program_choose)
         QtCore.QMetaObject.connectSlotsByName(program_choose)
+        program_choose.setWindowIcon(QtGui.QIcon(ICON))
 
     def retranslateUi(self, program_choose):
         _translate = QtCore.QCoreApplication.translate

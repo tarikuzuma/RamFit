@@ -87,6 +87,7 @@ class Ui_difficulty_choose(object):
 
         self.retranslateUi(difficulty_choose)
         QtCore.QMetaObject.connectSlotsByName(difficulty_choose)
+        difficulty_choose.setWindowIcon(QtGui.QIcon(ICON))
 
 
     def retranslateUi(self, difficulty_choose):
