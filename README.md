@@ -1,7 +1,7 @@
 # RamFit
 An application for tracking fitness goals
 
-As of now, it's pretty empty and sad. Will add the themes and design later on!
+"RamFit" is a comprehensive fitness application designed to cater to individuals at all fitness levels to conduct exercises, including beginners, intermediate users, and advanced workout fanatics.
 
 Access the User Manual at: https://shorturl.at/cgmFT
 
